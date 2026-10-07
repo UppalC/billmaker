@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Invoice & Receipt Studio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,300&family=Space+Grotesk:wght@400;600;700&family=Cinzel:wght@600;800&display=swap" rel="stylesheet">
+    <!-- JsBarcode & QRCode.js -->
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0284c7', 600: '#0369a1', 700: '#075985' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['"Courier Prime"', 'monospace'],
+                        serif: ['Merriweather', 'serif'],
+                        tech: ['"Space Grotesk"', 'sans-serif'],
+                        cinzel: ['Cinzel', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* PRINT SPECIFIC STYLES - Hides UI controls during Print & Thermal Printing */
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .no-print, header, sidebar, .edit-panel, button, .action-bar {
+                display: none !important;
+            }
+            .print-area-wrapper {
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+                border: none !important;
+            }
+            .receipt-container {
+                margin: 0 auto !important;
+                box-shadow: none !important;
+                border: none !important;
+                page-break-inside: avoid;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Stamp Shapes CSS */
+        .stamp-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            user-select: none;
+            border-style: double;
+        }
+        .stamp-approved { border-color: #16a34a; color: #16a34a; }
+        .stamp-paid { border-color: #2563eb; color: #2563eb; }
+        .stamp-draft { border-color: #dc2626; color: #dc2626; }
+        .stamp-verified { border-color: #7c3aed; color: #7c3aed; }
+
+        /* Custom Paper Templates Styling */
+        .tpl-thermal { font-family: 'Courier Prime', monospace; background-color: #fffef8; }
+        .tpl-corporate { font-family: 'Inter', sans-serif; border-top: 8px solid #0284c7; }
+        .tpl-elegant { font-family: 'Merriweather', serif; background-color: #faf9f6; }
+        .tpl-tech { font-family: 'Space Grotesk', sans-serif; background-color: #f8fafc; }
+        .tpl-bold { font-family: 'Inter', sans-serif; border: 3px solid #0f172a; }
+        .tpl-luxury { font-family: 'Cinzel', serif; background: #fffdf9; border: 1px solid #d4af37; }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen font-sans text-slate-800 antialiased flex flex-col">
+
+    <!-- Top Navigation / Header -->
+    <header class="no-print bg-slate-900 text-white shadow-lg border-b border-slate-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-brand-500 text-white p-2 rounded-lg font-bold text-lg shadow-md">
+                    <i class="fa-solid fa-receipt"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">Universal Invoice & Receipt Studio</h1>
+                    <p class="text-xs text-slate-400">Professional Thermal & Document Design Engine</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 shadow transition-all hover:scale-105">
+                    <i class="fa-solid fa-print"></i> Print / Save PDF
+                </button>
+                <button onclick="resetData()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-2 rounded-lg text-sm flex items-center gap-2 border border-slate-700">
+                    <i class="fa-solid fa-rotate-left"></i> Reset Demo
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Studio Workspace -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- LEFT PANEL: CONTROLS & FORM CONFIGURATOR -->
+        <div class="no-print lg:col-span-6 xl:col-span-5 space-y-5 overflow-y-auto max-h-[88vh] pr-1">
+            
+            <!-- 1. Document Type & Design Template Selection -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-palette text-brand-500"></i> 1. Document Type & Layout Design
+                </h2>
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="setTemplate('thermal')" class="tpl-btn p-2.5 rounded-lg border text-left flex flex-col gap-1 transition-all hover:border-brand-500 text-xs font-semibold bg-slate-50 active-tpl" id="btn-tpl-thermal">
+                        <span class="text-slate-900 font-mono"><i class="fa-solid fa-note-sticky mr-1"></i> Minimalist POS</span>
+                        <span class="text-[10px] text-slate-500 font-normal">Classic receipt / Mono font</span>
+                    </button>
+                    <button onclick="setTemplate('corporate')" class="tpl-btn p-2.5 rounded-lg border text-left flex flex-col gap-1 transition-all hover:border-brand-500 text-xs font-semibold bg-slate-50" id="btn-tpl-corporate">
+                        <span class="text-brand-600"><i class="fa-solid fa-building mr-1"></i> Modern Corporate</span>
+                        <span class="text-[10px] text-slate-500 font-normal">Sleek header banner</span>
+                    </button>
+                    <button onclick="setTemplate('elegant')" class="tpl-btn p-2.5 rounded-lg border text-left flex flex-col gap-1 transition-all hover:border-brand-500 text-xs font-semibold bg-slate-50" id="btn-tpl-elegant">
+                        <span class="text-amber-800 font-serif"><i class="fa-solid fa-crown mr-1"></i> Vintage Elegant</span>
+                        <span class="text-[10px] text-slate-500 font-normal">Serif, double borders</span>
+                    </button>
+                    <button onclick="setTemplate('tech')" class="tpl-btn p-2.5 rounded-lg border text-left flex flex-col gap-1 transition-all hover:border-brand-500 text-xs font-semibold bg-slate-50" id="btn-tpl-tech">
+                        <span class="text-purple-600 font-tech"><i class="fa-solid fa-microchip mr-1"></i> Creative Tech</span>
+                        <span class="text-[10px] text-slate-500 font-normal">Grid styling, vibrant</span>
+                    </button>
+                    <button onclick="setTemplate('bold')" class="tpl-btn p-2.5 rounded-lg border text-left flex flex-col gap-1 transition-all hover:border-brand-500 text-xs font-semibold bg-slate-50" id="btn-tpl-bold">
+                        <span class="text-slate-900 font-bold"><i class="fa-solid fa-store mr-1"></i> Bold Retail Store</span>
+                        <span class="text-[10px] text-slate-500 font-normal">High contrast dividers</span>
+                    </button>
+                    <button onclick="setTemplate('luxury')" class="tpl-btn p-2.5 rounded-lg border text-left flex flex-col gap-1 transition-all hover:border-brand-500 text-xs font-semibold bg-slate-50" id="btn-tpl-luxury">
+                        <span class="text-amber-600 font-cinzel"><i class="fa-solid fa-gem mr-1"></i> Luxury Boutique</span>
+                        <span class="text-[10px] text-slate-500 font-normal">Golden accents, refined</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2. Paper & Thermal Printer Formats -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-print text-brand-500"></i> 2. Paper & Thermal Printer Formats
+                </h2>
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                    <button onclick="setPaperSize('58mm')" class="paper-btn py-2 px-1 text-center border rounded-lg text-xs font-medium hover:bg-slate-100" id="paper-58mm">58mm Thermal</button>
+                    <button onclick="setPaperSize('80mm')" class="paper-btn py-2 px-1 text-center border rounded-lg text-xs font-medium hover:bg-slate-100 bg-brand-50 border-brand-500 text-brand-700" id="paper-80mm">80mm POS Roll</button>
+                    <button onclick="setPaperSize('a4')" class="paper-btn py-2 px-1 text-center border rounded-lg text-xs font-medium hover:bg-slate-100" id="paper-a4">A4 Full Sheet</button>
+                </div>
+                <div class="grid grid-cols-2 gap-3 text-xs">
+                    <div>
+                        <label class="block text-slate-500 mb-1">Font Size Scale</label>
+                        <input type="range" min="10" max="18" value="13" id="fontSizeRange" oninput="updateDocument()" class="w-full">
+                    </div>
+                    <div>
+                        <label class="block text-slate-500 mb-1">Padding Density</label>
+                        <select id="densitySelect" onchange="updateDocument()" class="w-full p-1.5 border rounded bg-slate-50">
+                            <option value="compact">Compact (Thermal)</option>
+                            <option value="normal" selected>Normal Standard</option>
+                            <option value="spacious">Spacious (Invoice)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Logo Style & Custom Branding Stamps -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 space-y-3">
+                <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-stamp text-brand-500"></i> 3. Logo & Custom Branding Stamps
+                </h2>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div>
+                        <label class="block text-slate-600 font-medium mb-1">Business Name</label>
+                        <input type="text" id="bizName" value="Apex Global Trading" oninput="updateDocument()" class="w-full p-2 border rounded focus:ring-1 focus:ring-brand-500">
+                    </div>
+                    <div>
+                        <label class="block text-slate-600 font-medium mb-1">Tagline / Subtitle</label>
+                        <input type="text" id="bizTagline" value="Quality Retail & Wholesale Suppliers" oninput="updateDocument()" class="w-full p-2 border rounded">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div>
+                        <label class="block text-slate-600 font-medium mb-1">Phone / Contact</label>
+                        <input type="text" id="bizPhone" value="+1 (555) 019-2834" oninput="updateDocument()" class="w-full p-2 border rounded">
+                    </div>
+                    <div>
+                        <label class="block text-slate-600 font-medium mb-1">Address / Location</label>
+                        <input type="text" id="bizAddress" value="Suite 402, Market Street, NY" oninput="updateDocument()" class="w-full p-2 border rounded">
+                    </div>
+                </div>
+                <!-- Watermark Stamp Overlay -->
+                <div class="pt-2 border-t border-slate-100">
+                    <label class="block text-xs font-semibold text-slate-700 mb-2">Custom Watermark Stamp Shape</label>
+                    <div class="grid grid-cols-4 gap-2">
+                        <select id="stampType" onchange="updateDocument()" class="col-span-2 text-xs p-2 border rounded bg-slate-50">
+                            <option value="none">No Stamp</option>
+                            <option value="paid" selected>PAID Badge</option>
+                            <option value="approved">APPROVED Seal</option>
+                            <option value="draft">DRAFT Copy</option>
+                            <option value="verified">VERIFIED Stamp</option>
+                        </select>
+                        <select id="stampShape" onchange="updateDocument()" class="col-span-2 text-xs p-2 border rounded bg-slate-50">
+                            <option value="rounded" selected>Rounded Rectangle</option>
+                            <option value="circle">Circular Rubber</option>
+                            <option value="double-border">Double Line Box</option>
+                            <option value="badge">Ribbon Style</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. General Feature Toggles & Document Details -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 space-y-3">
+                <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-sliders text-brand-500"></i> 4. Invoice & Customer Meta Details
+                </h2>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div>
+                        <label class="block text-slate-600 mb-1">Invoice / Receipt No.</label>
+                        <input type="text" id="invNumber" value="INV-2026-8891" oninput="updateDocument()" class="w-full p-2 border rounded font-mono">
+                    </div>
+                    <div>
+                        <label class="block text-slate-600 mb-1">Date & Time</label>
+                        <input type="text" id="invDate" value="2026-10-07 14:30" oninput="updateDocument()" class="w-full p-2 border rounded">
+                    </div>
+                    <div>
+                        <label class="block text-slate-600 mb-1">Customer Name</label>
+                        <input type="text" id="custName" value="Alex Smith" oninput="updateDocument()" class="w-full p-2 border rounded">
+                    </div>
+                    <div>
+                        <label class="block text-slate-600 mb-1">Customer Phone/ID</label>
+                        <input type="text" id="custId" value="CUST-77402" oninput="updateDocument()" class="w-full p-2 border rounded">
+                    </div>
+                </div>
+
+                <!-- Toggles -->
+                <div class="grid grid-cols-2 gap-2 pt-2 border-t text-xs">
+                    <label class="flex items-center gap-2 text-slate-700 cursor-pointer">
+                        <input type="checkbox" id="showBarcode" checked onchange="updateDocument()" class="rounded text-brand-600">
+                        Show Item Barcode
+                    </label>
+                    <label class="flex items-center gap-2 text-slate-700 cursor-pointer">
+                        <input type="checkbox" id="showSignature" checked onchange="updateDocument()" class="rounded text-brand-600">
+                        Signature Line
+                    </label>
+                    <label class="flex items-center gap-2 text-slate-700 cursor-pointer">
+                        <input type="checkbox" id="showTerms" checked onchange="updateDocument()" class="rounded text-brand-600">
+                        Terms & Conditions
+                    </label>
+                    <label class="flex items-center gap-2 text-slate-700 cursor-pointer">
+                        <input type="checkbox" id="showNotes" checked onchange="updateDocument()" class="rounded text-brand-600">
+                        Footer Note
+                    </label>
+                </div>
+            </div>
+
+            <!-- 5. Items & Pricing Form -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 space-y-3">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-brand-500"></i> Items & Inventory Entries
+                    </h2>
+                    <button onclick="addItem()" class="bg-brand-50 hover:bg-brand-100 text-brand-600 text-xs px-2.5 py-1 rounded font-semibold border border-brand-200">
+                        <i class="fa-solid fa-plus mr-1"></i> Add Line
+                    </button>
+                </div>
+                <div id="itemsEditorList" class="space-y-2">
+                    <!-- Dynamic Item Rows Injected by JS -->
+                </div>
+            </div>
+
+            <!-- 6. Amounts, Taxes & Financial Adjustments -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 space-y-3">
+                <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-calculator text-brand-500"></i> 6. Amounts & Financial Adjustments
+                </h2>
+                <div class="grid grid-cols-3 gap-2 text-xs">
+                    <div>
+                        <label class="block text-slate-600 mb-1">Currency Symbol</label>
+                        <input type="text" id="currencySymbol" value="$" oninput="updateDocument()" class="w-full p-2 border rounded text-center font-bold">
+                    </div>
+                    <div>
+                        <label class="block text-slate-600 mb-1">Tax / VAT (%)</label>
+                        <input type="number" id="taxPercent" value="5" oninput="updateDocument()" class="w-full p-2 border rounded text-center">
+                    </div>
+                    <div>
+                        <label class="block text-slate-600 mb-1">Discount (%)</label>
+                        <input type="number" id="discountPercent" value="0" oninput="updateDocument()" class="w-full p-2 border rounded text-center">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div>
+                        <label class="block text-slate-600 mb-1">Shipping / Service Fee</label>
+                        <input type="number" id="shippingFee" value="0" oninput="updateDocument()" class="w-full p-2 border rounded">
+                    </div>
+                    <div>
+                        <label class="block text-slate-600 mb-1">Amount Paid (Cash)</label>
+                        <input type="number" id="amountPaid" value="100" oninput="updateDocument()" class="w-full p-2 border rounded font-semibold text-emerald-700">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. Payment Options & Dynamic QR Code -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 space-y-3">
+                <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-qrcode text-brand-500"></i> 7. Payment Methods & Dynamic QR
+                </h2>
+                <div class="grid grid-cols-3 gap-2 text-xs">
+                    <div>
+                        <label class="block text-slate-600 mb-1">Payment Method</label>
+                        <select id="paymentMethod" onchange="updateDocument()" class="w-full p-2 border rounded bg-slate-50">
+                            <option value="Cash">Cash</option>
+                            <option value="Credit Card">Credit Card</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                            <option value="JazzCash / EasyPaisa">JazzCash / EasyPaisa</option>
+                            <option value="UPI / QR Scan">Online QR Scan</option>
+                        </select>
+                    </div>
+                    <div class="col-span-2">
+                        <label class="block text-slate-600 mb-1">Payment Ref / Transaction ID</label>
+                        <input type="text" id="paymentRef" value="TXN-99823411" oninput="updateDocument()" class="w-full p-2 border rounded">
+                    </div>
+                </div>
+                <div class="pt-2 border-t">
+                    <label class="flex items-center gap-2 text-xs font-semibold text-slate-700 mb-2 cursor-pointer">
+                        <input type="checkbox" id="showPaymentQR" checked onchange="updateDocument()" class="rounded text-brand-600">
+                        Include Instant Pay QR Code on Bill
+                    </label>
+                    <input type="text" id="qrText" value="https://pay.example.com/invoice/INV-2026-8891" oninput="updateDocument()" class="w-full p-2 text-xs border rounded placeholder-slate-400" placeholder="QR Code Link or Payment ID">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT PANEL: LIVE DOCUMENT / THERMAL PREVIEW -->
+        <div class="lg:col-span-6 xl:col-span-7 flex flex-col items-center justify-start print-area-wrapper">
+            
+            <!-- Context Banner (Hidden in Print) -->
+            <div class="no-print w-full bg-slate-800 text-slate-200 text-xs px-4 py-2.5 rounded-t-xl flex justify-between items-center shadow">
+                <span class="flex items-center gap-2">
+                    <i class="fa-solid fa-eye text-emerald-400"></i> Live Print Preview Mode
+                </span>
+                <span id="previewPaperBadge" class="bg-slate-700 text-slate-300 font-mono px-2 py-0.5 rounded text-[11px]">80mm POS Width</span>
+            </div>
+
+            <!-- RECEIPT / INVOICE PREVIEW CONTAINER -->
+            <div id="receiptDocument" class="receipt-container bg-white text-slate-900 p-6 shadow-xl border border-slate-200 transition-all duration-300 relative w-full overflow-hidden" style="max-width: 80mm; min-height: 500px;">
+                
+                <!-- Watermark Stamp Badge -->
+                <div id="stampElement" class="hidden absolute top-12 right-6 z-10 pointer-events-none transform rotate-[-12deg] opacity-80">
+                    <div id="stampInner" class="stamp-badge px-3 py-1 text-xs border-2 font-bold rounded">
+                        PAID
+                    </div>
+                </div>
+
+                <!-- Template Header Section -->
+                <div id="documentHeader" class="text-center pb-4 mb-4 border-b border-dashed border-slate-300">
+                    <h2 id="docBizName" class="text-xl font-bold uppercase tracking-tight">Apex Global Trading</h2>
+                    <p id="docBizTagline" class="text-xs text-slate-500 italic mt-0.5">Quality Retail & Wholesale Suppliers</p>
+                    <p id="docBizContact" class="text-[11px] text-slate-600 mt-1">Suite 402, Market Street, NY | Ph: +1 (555) 019-2834</p>
+                </div>
+
+                <!-- Meta Info (Invoice #, Date, Customer) -->
+                <div class="text-xs space-y-1 mb-4 pb-3 border-b border-dashed border-slate-300">
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">Doc / Receipt #:</span>
+                        <span id="docInvNum" class="font-bold font-mono">INV-2026-8891</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">Date & Time:</span>
+                        <span id="docInvDate">2026-10-07 14:30</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">Customer:</span>
+                        <span id="docCustName" class="font-medium">Alex Smith</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">Payment Method:</span>
+                        <span id="docPayMethod" class="font-semibold text-slate-700">Cash</span>
+                    </div>
+                </div>
+
+                <!-- Items Table -->
+                <table class="w-full text-xs text-left mb-4">
+                    <thead>
+                        <tr class="border-b border-slate-800 text-slate-700 uppercase font-bold text-[10px]">
+                            <th class="py-1">Item</th>
+                            <th class="py-1 text-center">Qty</th>
+                            <th class="py-1 text-right">Price</th>
+                            <th class="py-1 text-right">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="docItemsBody" class="divide-y divide-slate-100">
+                        <!-- Items rendered by JS -->
+                    </tbody>
+                </table>
+
+                <!-- Financial Totals Section -->
+                <div class="text-xs space-y-1.5 pt-2 border-t-2 border-slate-800">
+                    <div class="flex justify-between text-slate-600">
+                        <span>Subtotal:</span>
+                        <span id="docSubtotal">$0.00</span>
+                    </div>
+                    <div id="docTaxRow" class="flex justify-between text-slate-600">
+                        <span id="docTaxLabel">Tax (5%):</span>
+                        <span id="docTaxAmount">$0.00</span>
+                    </div>
+                    <div id="docDiscountRow" class="flex justify-between text-slate-600">
+                        <span id="docDiscountLabel">Discount:</span>
+                        <span id="docDiscountAmount">-$0.00</span>
+                    </div>
+                    <div id="docShippingRow" class="flex justify-between text-slate-600">
+                        <span>Shipping / Service Fee:</span>
+                        <span id="docShippingAmount">$0.00</span>
+                    </div>
+                    <div class="flex justify-between font-bold text-sm pt-2 border-t border-slate-300 text-slate-900">
+                        <span>Grand Total:</span>
+                        <span id="docGrandTotal" class="text-base font-extrabold">$0.00</span>
+                    </div>
+                    <div class="flex justify-between text-slate-600 pt-1">
+                        <span>Amount Paid:</span>
+                        <span id="docAmountPaid">$0.00</span>
+                    </div>
+                    <div class="flex justify-between text-slate-700 font-semibold">
+                        <span id="docBalanceLabel">Change Return:</span>
+                        <span id="docBalanceAmount">$0.00</span>
+                    </div>
+                </div>
+
+                <!-- Bottom QR & Barcode Section -->
+                <div class="mt-6 pt-4 border-t border-dashed border-slate-300 text-center space-y-3">
+                    
+                    <!-- Dynamic QR Code -->
+                    <div id="qrCodeContainer" class="flex flex-col items-center justify-center">
+                        <div id="qrcode" class="p-1.5 bg-white border rounded"></div>
+                        <span class="text-[9px] text-slate-400 mt-1">Scan to Verify / Pay Online</span>
+                    </div>
+
+                    <!-- Barcode Display -->
+                    <div id="barcodeContainer" class="flex flex-col items-center justify-center">
+                        <svg id="barcode" class="max-w-full h-10"></svg>
+                    </div>
+
+                    <!-- Footer Notes & Terms -->
+                    <p id="docTerms" class="text-[10px] text-slate-500 italic">Thank you for your business! Goods once sold are non-refundable after 7 days.</p>
+                    <p id="docNotes" class="text-[9px] text-slate-400 font-mono">Software Powered by Universal Studio POS</p>
+
+                    <!-- Signature Area -->
+                    <div id="docSignature" class="pt-6 hidden">
+                        <div class="w-36 mx-auto border-b border-slate-400"></div>
+                        <span class="text-[10px] text-slate-500 block mt-1">Authorized Signature</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Application JavaScript Engine -->
+    <script>
+        // Sample Generic State (No default specific school or personal names)
+        let state = {
+            template: 'thermal',
+            paperSize: '80mm',
+            items: [
+                { id: 1, name: "Wireless Optical Mouse", qty: 2, price: 15.00 },
+                { id: 2, name: "Mechanical Keyboard RGB", qty: 1, price: 45.00 },
+                { id: 3, name: "USB-C Fast Cable 2m", qty: 3, price: 8.50 }
+            ]
+        };
+
+        // Initialize App on DOM Ready
+        window.addEventListener('DOMContentLoaded', () => {
+            renderItemEditors();
+            updateDocument();
+        });
+
+        // Add New Line Item
+        function addItem() {
+            const newItem = {
+                id: Date.now(),
+                name: "New Product / Service",
+                qty: 1,
+                price: 10.00
+            };
+            state.items.push(newItem);
+            renderItemEditors();
+            updateDocument();
+        }
+
+        // Delete Line Item
+        function deleteItem(id) {
+            if(state.items.length <= 1) {
+                alert("Receipt must contain at least one line item.");
+                return;
+            }
+            state.items = state.items.filter(item => item.id !== id);
+            renderItemEditors();
+            updateDocument();
+        }
+
+        // Render Item Inputs in Left Panel
+        function renderItemEditors() {
+            const container = document.getElementById('itemsEditorList');
+            container.innerHTML = '';
+
+            state.items.forEach((item, index) => {
+                const row = document.createElement('div');
+                row.className = 'flex items-center gap-2 bg-slate-50 p-2 rounded border text-xs';
+                row.innerHTML = `
+                    <span class="text-slate-400 font-mono text-[10px] w-4">${index + 1}.</span>
+                    <input type="text" value="${item.name}" oninput="updateItemField(${item.id}, 'name', this.value)" class="flex-1 p-1.5 border rounded" placeholder="Item Name">
+                    <input type="number" value="${item.qty}" min="1" oninput="updateItemField(${item.id}, 'qty', this.value)" class="w-12 p-1.5 border rounded text-center" placeholder="Qty">
+                    <input type="number" value="${item.price}" step="0.01" oninput="updateItemField(${item.id}, 'price', this.value)" class="w-16 p-1.5 border rounded text-right" placeholder="Price">
+                    <button onclick="deleteItem(${item.id})" class="text-rose-500 hover:text-rose-700 p-1">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        // Update Dynamic Item Field
+        function updateItemField(id, field, value) {
+            const item = state.items.find(i => i.id === id);
+            if (item) {
+                if (field === 'qty' || field === 'price') {
+                    item[field] = parseFloat(value) || 0;
+                } else {
+                    item[field] = value;
+                }
+                updateDocument();
+            }
+        }
+
+        // Template Selection Logic
+        function setTemplate(tpl) {
+            state.template = tpl;
+            document.querySelectorAll('.tpl-btn').forEach(btn => {
+                btn.classList.remove('border-brand-500', 'bg-brand-50', 'ring-2', 'ring-brand-400');
+            });
+            const activeBtn = document.getElementById(`btn-tpl-${tpl}`);
+            if (activeBtn) activeBtn.classList.add('border-brand-500', 'bg-brand-50', 'ring-2', 'ring-brand-400');
+            
+            updateDocument();
+        }
+
+        // Paper Format Selection Logic
+        function setPaperSize(size) {
+            state.paperSize = size;
+            const doc = document.getElementById('receiptDocument');
+            const badge = document.getElementById('previewPaperBadge');
+
+            document.querySelectorAll('.paper-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-50', 'border-brand-500', 'text-brand-700');
+            });
+            document.getElementById(`paper-${size}`).classList.add('bg-brand-50', 'border-brand-500', 'text-brand-700');
+
+            if (size === '58mm') {
+                doc.style.maxWidth = '58mm';
+                badge.innerText = '58mm Thermal Width';
+            } else if (size === '80mm') {
+                doc.style.maxWidth = '80mm';
+                badge.innerText = '80mm POS Roll Width';
+            } else if (size === 'a4') {
+                doc.style.maxWidth = '210mm';
+                badge.innerText = 'A4 Sheet Width';
+            }
+            updateDocument();
+        }
+
+        // Core Document Re-Rendering Engine
+        function updateDocument() {
+            const sym = document.getElementById('currencySymbol').value || '$';
+
+            // Text Metadata
+            document.getElementById('docBizName').innerText = document.getElementById('bizName').value || 'Business Name';
+            document.getElementById('docBizTagline').innerText = document.getElementById('bizTagline').value || '';
+            document.getElementById('docBizContact').innerText = `${document.getElementById('bizAddress').value} | Ph: ${document.getElementById('bizPhone').value}`;
+            
+            document.getElementById('docInvNum').innerText = document.getElementById('invNumber').value || 'INV-000';
+            document.getElementById('docInvDate').innerText = document.getElementById('invDate').value || '';
+            document.getElementById('docCustName').innerText = document.getElementById('custName').value || 'N/A';
+            document.getElementById('docPayMethod').innerText = document.getElementById('paymentMethod').value;
+
+            // Template Styling Application
+            const doc = document.getElementById('receiptDocument');
+            doc.className = "receipt-container bg-white text-slate-900 p-6 shadow-xl border border-slate-200 transition-all duration-300 relative w-full overflow-hidden ";
+            
+            if (state.template === 'thermal') doc.classList.add('tpl-thermal');
+            else if (state.template === 'corporate') doc.classList.add('tpl-corporate');
+            else if (state.template === 'elegant') doc.classList.add('tpl-elegant');
+            else if (state.template === 'tech') doc.classList.add('tpl-tech');
+            else if (state.template === 'bold') doc.classList.add('tpl-bold');
+            else if (state.template === 'luxury') doc.classList.add('tpl-luxury');
+
+            // Font scale & density
+            const fontScale = document.getElementById('fontSizeRange').value;
+            doc.style.fontSize = `${fontScale}px`;
+
+            // Calculate Items & Render Rows
+            const tbody = document.getElementById('docItemsBody');
+            tbody.innerHTML = '';
+            let subtotal = 0;
+
+            state.items.forEach(item => {
+                const itemTotal = item.qty * item.price;
+                subtotal += itemTotal;
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="py-1 font-medium">${item.name}</td>
+                    <td class="py-1 text-center">${item.qty}</td>
+                    <td class="py-1 text-right">${sym}${item.price.toFixed(2)}</td>
+                    <td class="py-1 text-right font-bold">${sym}${itemTotal.toFixed(2)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Financial Calculations
+            const taxPct = parseFloat(document.getElementById('taxPercent').value) || 0;
+            const discountPct = parseFloat(document.getElementById('discountPercent').value) || 0;
+            const shipping = parseFloat(document.getElementById('shippingFee').value) || 0;
+            const paid = parseFloat(document.getElementById('amountPaid').value) || 0;
+
+            const taxAmt = (subtotal * taxPct) / 100;
+            const discountAmt = (subtotal * discountPct) / 100;
+            const grandTotal = subtotal + taxAmt + shipping - discountAmt;
+            const balance = paid - grandTotal;
+
+            // Render Financial UI
+            document.getElementById('docSubtotal').innerText = `${sym}${subtotal.toFixed(2)}`;
+            document.getElementById('docTaxLabel').innerText = `Tax / VAT (${taxPct}%):`;
+            document.getElementById('docTaxAmount').innerText = `${sym}${taxAmt.toFixed(2)}`;
+            document.getElementById('docDiscountAmount').innerText = `-${sym}${discountAmt.toFixed(2)}`;
+            document.getElementById('docShippingAmount').innerText = `${sym}${shipping.toFixed(2)}`;
+            document.getElementById('docGrandTotal').innerText = `${sym}${grandTotal.toFixed(2)}`;
+            document.getElementById('docAmountPaid').innerText = `${sym}${paid.toFixed(2)}`;
+
+            if (balance >= 0) {
+                document.getElementById('docBalanceLabel').innerText = "Change Return:";
+                document.getElementById('docBalanceAmount').innerText = `${sym}${balance.toFixed(2)}`;
+                document.getElementById('docBalanceAmount').className = "text-emerald-600 font-bold";
+            } else {
+                document.getElementById('docBalanceLabel').innerText = "Balance Due:";
+                document.getElementById('docBalanceAmount').innerText = `${sym}${Math.abs(balance).toFixed(2)}`;
+                document.getElementById('docBalanceAmount').className = "text-rose-600 font-bold";
+            }
+
+            // Stamp Watermark rendering
+            const stampType = document.getElementById('stampType').value;
+            const stampEl = document.getElementById('stampElement');
+            const stampInner = document.getElementById('stampInner');
+
+            if (stampType === 'none') {
+                stampEl.classList.add('hidden');
+            } else {
+                stampEl.classList.remove('hidden');
+                stampInner.innerText = stampType.toUpperCase();
+                stampInner.className = `stamp-badge px-3 py-1 text-xs font-bold stamp-${stampType}`;
+            }
+
+            // Toggles
+            document.getElementById('docTerms').style.display = document.getElementById('showTerms').checked ? 'block' : 'none';
+            document.getElementById('docNotes').style.display = document.getElementById('showNotes').checked ? 'block' : 'none';
+            document.getElementById('docSignature').style.display = document.getElementById('showSignature').checked ? 'block' : 'none';
+
+            // Barcode & QR Code Rendering
+            renderBarcode();
+            renderQRCode();
+        }
+
+        // Render Item/Invoice Barcode
+        function renderBarcode() {
+            const show = document.getElementById('showBarcode').checked;
+            const container = document.getElementById('barcodeContainer');
+            if (!show) {
+                container.style.display = 'none';
+                return;
+            }
+            container.style.display = 'flex';
+            const invNo = document.getElementById('invNumber').value || '000000';
+            try {
+                JsBarcode("#barcode", invNo, {
+                    format: "CODE128",
+                    width: 1.5,
+                    height: 35,
+                    displayValue: true,
+                    fontSize: 10
+                });
+            } catch (e) { console.log('Barcode error:', e); }
+        }
+
+        // Render Payment QR Code
+        function renderQRCode() {
+            const show = document.getElementById('showPaymentQR').checked;
+            const container = document.getElementById('qrCodeContainer');
+            const qrTarget = document.getElementById('qrcode');
+            
+            if (!show) {
+                container.style.display = 'none';
+                return;
+            }
+            container.style.display = 'flex';
+            qrTarget.innerHTML = '';
+            
+            const qrText = document.getElementById('qrText').value || 'Payment';
+            try {
+                new QRCode(qrTarget, {
+                    text: qrText,
+                    width: 70,
+                    height: 70,
+                    colorDark : "#0f172a",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.H
+                });
+            } catch (e) { console.log('QR error:', e); }
+        }
+
+        // Reset to default generic values
+        function resetData() {
+            document.getElementById('bizName').value = "Apex Global Trading";
+            document.getElementById('bizTagline').value = "Quality Retail & Wholesale Suppliers";
+            document.getElementById('bizPhone').value = "+1 (555) 019-2834";
+            document.getElementById('bizAddress').value = "Suite 402, Market Street, NY";
+            document.getElementById('invNumber').value = "INV-2026-8891";
+            document.getElementById('custName').value = "Alex Smith";
+            
+            state.items = [
+                { id: 1, name: "Wireless Optical Mouse", qty: 2, price: 15.00 },
+                { id: 2, name: "Mechanical Keyboard RGB", qty: 1, price: 45.00 },
+                { id: 3, name: "USB-C Fast Cable 2m", qty: 3, price: 8.50 }
+            ];
+
+            renderItemEditors();
+            setTemplate('thermal');
+            setPaperSize('80mm');
+        }
+    </script>
+</body>
+</html>
