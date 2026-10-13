@@ -3,18 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Invoice, Quotation & Receipt Maker - BillMaker</title>
-    <meta name="description" content="Create professional invoices, quotations and receipts online for free. Make 58mm, 80mm thermal receipts and A4 documents, then print or save as PDF. No signup required.">
-    <meta name="keywords" content="invoice maker, quotation maker, receipt maker, bill maker, free invoice generator, free quotation generator, thermal receipt maker, 58mm receipt, 80mm receipt, A4 invoice">
-    <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#0f172a">
-    <link rel="canonical" href="https://uppalc.github.io/billmaker/">
+    <title>BillMaker - Professional Online Invoice & Thermal Receipt Studio</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,300&family=Space+Grotesk:wght@400;600;700&family=Cinzel:wght@600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,300&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- JsBarcode & QRCode.js -->
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -24,14 +19,13 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0284c7', 600: '#0369a1', 700: '#075985' }
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#2563eb', 600: '#1d4ed8', 700: '#1e40af' }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         mono: ['"Courier Prime"', 'monospace'],
                         serif: ['Merriweather', 'serif'],
-                        tech: ['"Space Grotesk"', 'sans-serif'],
-                        cinzel: ['Cinzel', 'serif']
+                        tech: ['"Space Grotesk"', 'sans-serif']
                     }
                 }
             }
@@ -39,985 +33,599 @@
     </script>
 
     <style>
-        /* PRINT SPECIFIC STYLES - Hides UI controls during Print & Thermal Printing */
         @media print {
-            body {
-                background: white !important;
-                color: black !important;
-                padding: 0 !important;
-                margin: 0 !important;
-            }
-            .no-print, header, sidebar, .edit-panel, button, .action-bar {
-                display: none !important;
-            }
-            .print-area-wrapper {
-                width: 100% !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                box-shadow: none !important;
-                border: none !important;
-            }
-            .receipt-container {
-                margin: 0 auto !important;
-                box-shadow: none !important;
-                border: none !important;
-                page-break-inside: avoid;
-            }
+            body { background: white !important; color: black !important; padding: 0 !important; margin: 0 !important; }
+            .no-print, header, sidebar, .edit-panel, button, .action-bar { display: none !important; }
+            .print-area-wrapper { width: 100% !important; margin: 0 !important; padding: 0 !important; box-shadow: none !important; border: none !important; }
+            .receipt-container { margin: 0 auto !important; box-shadow: none !important; border: none !important; page-break-after: avoid; page-break-inside: avoid; width: 100% !important; max-width: 100% !important; }
         }
-
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-
-        /* Stamp Shapes CSS */
-        .stamp-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            user-select: none;
-            border-style: double;
-        }
-        .stamp-approved { border-color: #16a34a; color: #16a34a; }
-        .stamp-paid { border-color: #2563eb; color: #2563eb; }
-        .stamp-draft { border-color: #dc2626; color: #dc2626; }
-        .stamp-verified { border-color: #7c3aed; color: #7c3aed; }
-        .stamp-circle { border-radius: 9999px !important; width: 78px; height: 78px; padding: 0 !important; }
-        .stamp-double-border { border: 3px double currentColor !important; border-radius: 2px !important; }
-        .stamp-badge-shape { border-radius: 3px 14px 3px 14px !important; }
-
-        /* Custom Paper Templates Styling */
-        .tpl-thermal { font-family: 'Courier Prime', monospace; background-color: #fffef8; }
-        .tpl-corporate { font-family: 'Inter', sans-serif; border-top: 8px solid #0284c7; }
-        .tpl-elegant { font-family: 'Merriweather', serif; background-color: #faf9f6; }
-        .tpl-tech { font-family: 'Space Grotesk', sans-serif; background-color: #f8fafc; }
-        .tpl-bold { font-family: 'Inter', sans-serif; border: 3px solid #0f172a; }
-        .tpl-luxury { font-family: 'Cinzel', serif; background: #fffdf9; border: 1px solid #d4af37; }
-
-        /* BillMaker product UI refresh - clean SaaS/editor feel without copying any competitor */
-        :root { --bm-brand:#0284c7; --bm-ink:#0f172a; --bm-muted:#64748b; --bm-line:#e2e8f0; --bm-surface:#ffffff; --bm-bg:#f8fafc; }
-        body { background:linear-gradient(180deg,#f8fafc 0%,#f1f5f9 100%) !important; }
-        header { background:rgba(255,255,255,.94) !important; color:var(--bm-ink) !important; border-bottom:1px solid var(--bm-line) !important; box-shadow:0 1px 10px rgba(15,23,42,.06) !important; backdrop-filter:blur(12px); }
-        header .text-slate-400 { color:#64748b !important; }
-        header .bg-slate-800 { background:#f8fafc !important; color:#334155 !important; border-color:#e2e8f0 !important; }
-        header .bg-brand-500 { background:var(--bm-brand) !important; }
-        main { max-width:1400px !important; }
-        main > .bg-white, .space-y-5 > .bg-white { border-color:#e5e7eb !important; border-radius:14px !important; box-shadow:0 2px 10px rgba(15,23,42,.035) !important; }
-        .space-y-5 > .bg-white:hover { box-shadow:0 5px 18px rgba(15,23,42,.055) !important; }
-        input, select { border-color:#dbe3ec !important; background:#fff !important; border-radius:8px !important; transition:border-color .15s,box-shadow .15s; }
-        input:focus, select:focus { outline:none !important; border-color:#38bdf8 !important; box-shadow:0 0 0 3px rgba(56,189,248,.12) !important; }
-        button { transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease,background .12s ease !important; }
-        button:active { transform:translateY(1px); }
-        .doc-type-btn { background:#fff; border-color:#e2e8f0; color:#334155; }
-        .doc-type-btn:hover { border-color:#7dd3fc; background:#f8fdff; }
-        .doc-type-btn.active { border-color:#0284c7; background:#f0f9ff; box-shadow:0 0 0 2px rgba(2,132,199,.10); color:#075985; }
-        .doc-type-btn.active span:last-child { color:#0369a1 !important; }
-        .tpl-btn { min-height:68px; background:#fff !important; border-color:#e2e8f0 !important; }
-        .tpl-btn:hover { background:#f8fafc !important; }
-        .paper-btn { background:#fff; border-color:#e2e8f0 !important; }
-        #receiptDocument { box-shadow:0 16px 45px rgba(15,23,42,.12) !important; border-color:#dbe3ec !important; }
-        .print-area-wrapper { position:sticky; top:92px; align-self:start; }
-        @media (max-width:1023px) { .print-area-wrapper { position:static; } }
-        @media (max-width:640px) { header .max-w-7xl { padding-top:10px !important; padding-bottom:10px !important; } header .max-w-7xl > div:last-child { width:100%; } header button { flex:1; justify-content:center; } .doc-type-btn { padding:10px !important; } }
     </style>
-    <script type="application/ld+json">
-    {
-      "@context":"https://schema.org",
-      "@type":"WebApplication",
-      "name":"BillMaker",
-      "url":"https://uppalc.github.io/billmaker/",
-      "applicationCategory":"BusinessApplication",
-      "operatingSystem":"Web Browser",
-      "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
-      "description":"Free online invoice, quotation and receipt maker with thermal and A4 print layouts."
-    }
-    </script>
 </head>
-<body class="bg-slate-100 min-h-screen font-sans text-slate-800 antialiased flex flex-col">
+<body class="bg-slate-900 min-h-screen font-sans text-slate-100 antialiased flex flex-col">
 
-    <!-- Top Navigation / Header -->
-    <header class="no-print bg-slate-900 text-white shadow-lg border-b border-slate-800 sticky top-0 z-50">
+    <!-- Top Navigation -->
+    <header class="no-print bg-slate-950 text-white shadow-lg border-b border-slate-800 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <div class="bg-brand-500 text-white p-2 rounded-lg font-bold text-lg shadow-md">
-                    <i class="fa-solid fa-receipt"></i>
+                <div class="bg-blue-600 text-white p-2 rounded-lg font-bold text-lg shadow-md">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
                 </div>
                 <div>
-                    <h1 class="font-bold text-lg leading-tight">BillMaker</h1>
-                    <p class="text-xs text-slate-400">Invoice, quotation & receipt maker — fast, simple, no signup.</p>
+                    <h1 class="font-bold text-lg leading-tight">BillMaker Studio</h1>
+                    <p class="text-xs text-slate-400">Professional Invoice & POS Thermal Receipt Suite</p>
                 </div>
             </div>
             <div class="flex items-center gap-2">
-                <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 shadow transition-all hover:scale-105">
+                <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 shadow transition-all">
                     <i class="fa-solid fa-print"></i> Print / Save PDF
                 </button>
-                <button onclick="shareOnWhatsApp()" class="bg-green-600 hover:bg-green-500 text-white px-3 py-2 rounded-lg text-sm font-semibold flex items-center gap-2">
-                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                <button onclick="exportJSON()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-2 rounded-lg text-sm flex items-center gap-2 border border-slate-700">
+                    <i class="fa-solid fa-download"></i> Backup JSON
                 </button>
-                <button onclick="saveBill()" class="bg-brand-600 hover:bg-brand-500 text-white px-3 py-2 rounded-lg text-sm font-semibold flex items-center gap-2">
-                    <i class="fa-solid fa-floppy-disk"></i> Save
-                </button>
-                <button onclick="newBill()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-2 rounded-lg text-sm flex items-center gap-2 border border-slate-700">
-                    <i class="fa-solid fa-file-circle-plus"></i> New
+                <button onclick="resetData()" class="bg-red-900/40 hover:bg-red-900/60 text-red-300 px-3 py-2 rounded-lg text-sm border border-red-800">
+                    <i class="fa-solid fa-rotate-left"></i> Reset
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Main Studio Workspace -->
-    <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <!-- Main Workspace -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-        <div class="no-print lg:col-span-12 bg-white border border-slate-200 rounded-xl px-4 py-3 shadow-sm">
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                <div>
-                    <h2 class="font-semibold text-slate-800">Create your document</h2>
-                    <p class="text-xs text-slate-500">Choose a document type, enter your details, and preview it instantly.</p>
-                </div>
-                <span id="saveStatus" class="text-xs text-slate-400">Changes are saved in this browser automatically.</span>
-            </div>
-        </div>
-
-        <!-- LEFT PANEL: CONTROLS & FORM CONFIGURATOR -->
-        <div class="no-print lg:col-span-6 xl:col-span-5 space-y-5 overflow-y-auto max-h-[88vh] pr-1">
+        <!-- LEFT PANEL: CONTROLS (Scrollable Form with Clear Labels) -->
+        <div class="no-print lg:col-span-6 xl:col-span-5 space-y-4 overflow-y-auto max-h-[85vh] pr-1" id="leftControlPanel">
             
-            <!-- 1. Document Type -->
-            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
-                <div class="flex items-center justify-between mb-3">
-                    <div>
-                        <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider flex items-center gap-2">
-                            <i class="fa-solid fa-file-lines text-brand-500"></i> Document Type
-                        </h2>
-                        <p class="text-[11px] text-slate-500 mt-1">One editor for invoices, quotations and receipts.</p>
-                    </div>
-                    <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-wide">Step 1</span>
-                </div>
-                <div class="doc-type-switch grid grid-cols-3 gap-2">
-                    <button type="button" onclick="setDocumentType('invoice')" id="doc-type-invoice" class="doc-type-btn active p-3 rounded-lg border text-left">
-                        <span class="block text-sm font-semibold"><i class="fa-solid fa-file-invoice mr-1.5"></i>Invoice</span>
-                        <span class="block text-[10px] text-slate-500 mt-1">Request payment</span>
-                    </button>
-                    <button type="button" onclick="setDocumentType('quotation')" id="doc-type-quotation" class="doc-type-btn p-3 rounded-lg border text-left">
-                        <span class="block text-sm font-semibold"><i class="fa-solid fa-file-signature mr-1.5"></i>Quotation</span>
-                        <span class="block text-[10px] text-slate-500 mt-1">Send a price offer</span>
-                    </button>
-                    <button type="button" onclick="setDocumentType('receipt')" id="doc-type-receipt" class="doc-type-btn p-3 rounded-lg border text-left">
-                        <span class="block text-sm font-semibold"><i class="fa-solid fa-receipt mr-1.5"></i>Receipt</span>
-                        <span class="block text-[10px] text-slate-500 mt-1">Confirm payment</span>
-                    </button>
-                </div>
-                <div id="quotationActions" class="hidden mt-3 pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
-                    <span class="text-[11px] text-slate-500">After customer approval, convert this quotation into an invoice.</span>
-                    <button type="button" onclick="convertQuotationToInvoice()" class="shrink-0 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold px-3 py-2 rounded-lg">
-                        <i class="fa-solid fa-arrow-right-arrow-left mr-1"></i> Convert to Invoice
-                    </button>
-                </div>
-            </div>
-
-            <!-- 2. Design Template Selection -->
-            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
-                <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3 flex items-center gap-2">
-                    <i class="fa-solid fa-palette text-brand-500"></i> 1. Document Type & Layout Design
-                </h2>
+            <!-- 1. Document Type & Paper -->
+            <div class="bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-700 space-y-3">
+                <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider"><i class="fa-solid fa-file-lines text-blue-400 mr-1"></i> 1. Document Type & Paper Size</h2>
                 <div class="grid grid-cols-2 gap-2">
-                    <button onclick="setTemplate('thermal')" class="tpl-btn p-2.5 rounded-lg border text-left flex flex-col gap-1 transition-all hover:border-brand-500 text-xs font-semibold bg-slate-50 active-tpl" id="btn-tpl-thermal">
-                        <span class="text-slate-900 font-mono"><i class="fa-solid fa-note-sticky mr-1"></i> Minimalist POS</span>
-                        <span class="text-[10px] text-slate-500 font-normal">Classic receipt / Mono font</span>
-                    </button>
-                    <button onclick="setTemplate('corporate')" class="tpl-btn p-2.5 rounded-lg border text-left flex flex-col gap-1 transition-all hover:border-brand-500 text-xs font-semibold bg-slate-50" id="btn-tpl-corporate">
-                        <span class="text-brand-600"><i class="fa-solid fa-building mr-1"></i> Modern Corporate</span>
-                        <span class="text-[10px] text-slate-500 font-normal">Sleek header banner</span>
-                    </button>
-                    <button onclick="setTemplate('elegant')" class="tpl-btn p-2.5 rounded-lg border text-left flex flex-col gap-1 transition-all hover:border-brand-500 text-xs font-semibold bg-slate-50" id="btn-tpl-elegant">
-                        <span class="text-amber-800 font-serif"><i class="fa-solid fa-crown mr-1"></i> Vintage Elegant</span>
-                        <span class="text-[10px] text-slate-500 font-normal">Serif, double borders</span>
-                    </button>
-                    <button onclick="setTemplate('tech')" class="tpl-btn p-2.5 rounded-lg border text-left flex flex-col gap-1 transition-all hover:border-brand-500 text-xs font-semibold bg-slate-50" id="btn-tpl-tech">
-                        <span class="text-purple-600 font-tech"><i class="fa-solid fa-microchip mr-1"></i> Creative Tech</span>
-                        <span class="text-[10px] text-slate-500 font-normal">Grid styling, vibrant</span>
-                    </button>
-                    <button onclick="setTemplate('bold')" class="tpl-btn p-2.5 rounded-lg border text-left flex flex-col gap-1 transition-all hover:border-brand-500 text-xs font-semibold bg-slate-50" id="btn-tpl-bold">
-                        <span class="text-slate-900 font-bold"><i class="fa-solid fa-store mr-1"></i> Bold Retail Store</span>
-                        <span class="text-[10px] text-slate-500 font-normal">High contrast dividers</span>
-                    </button>
-                    <button onclick="setTemplate('luxury')" class="tpl-btn p-2.5 rounded-lg border text-left flex flex-col gap-1 transition-all hover:border-brand-500 text-xs font-semibold bg-slate-50" id="btn-tpl-luxury">
-                        <span class="text-amber-600 font-cinzel"><i class="fa-solid fa-gem mr-1"></i> Luxury Boutique</span>
-                        <span class="text-[10px] text-slate-500 font-normal">Golden accents, refined</span>
-                    </button>
+                    <button onclick="setDocType('INVOICE')" class="doc-type-btn py-2 px-2 text-center border rounded text-xs font-semibold bg-blue-600 text-white border-blue-500" id="type-invoice">📄 Tax Invoice</button>
+                    <button onclick="setDocType('QUOTATION')" class="doc-type-btn py-2 px-2 text-center border rounded text-xs font-semibold bg-slate-700 text-slate-300 border-slate-600" id="type-quotation">📋 Quotation / Estimate</button>
+                </div>
+                <div class="grid grid-cols-3 gap-2 pt-1">
+                    <button onclick="setPaperSize('58mm')" class="paper-btn py-1.5 px-1 text-center border rounded text-xs font-medium bg-slate-700 border-slate-600" id="paper-58mm">58mm Thermal</button>
+                    <button onclick="setPaperSize('80mm')" class="paper-btn py-1.5 px-1 text-center border rounded text-xs font-medium bg-slate-700 border-slate-600" id="paper-80mm">80mm POS</button>
+                    <button onclick="setPaperSize('a4')" class="paper-btn py-1.5 px-1 text-center border rounded text-xs font-medium bg-blue-900/50 border-blue-500 text-blue-300 font-bold" id="paper-a4">A4 Sheet (Default)</button>
                 </div>
             </div>
 
-            <!-- 3. Paper & Thermal Printer Formats -->
-            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
-                <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3 flex items-center gap-2">
-                    <i class="fa-solid fa-print text-brand-500"></i> 2. Paper & Thermal Printer Formats
-                </h2>
-                <div class="grid grid-cols-3 gap-2 mb-3">
-                    <button onclick="setPaperSize('58mm')" class="paper-btn py-2 px-1 text-center border rounded-lg text-xs font-medium hover:bg-slate-100" id="paper-58mm">58mm Thermal</button>
-                    <button onclick="setPaperSize('80mm')" class="paper-btn py-2 px-1 text-center border rounded-lg text-xs font-medium hover:bg-slate-100 bg-brand-50 border-brand-500 text-brand-700" id="paper-80mm">80mm POS Roll</button>
-                    <button onclick="setPaperSize('a4')" class="paper-btn py-2 px-1 text-center border rounded-lg text-xs font-medium hover:bg-slate-100" id="paper-a4">A4 Full Sheet</button>
-                </div>
-                <div class="grid grid-cols-2 gap-3 text-xs">
-                    <div>
-                        <label class="block text-slate-500 mb-1">Font Size Scale</label>
-                        <input type="range" min="10" max="18" value="13" id="fontSizeRange" oninput="updateDocument()" class="w-full">
-                    </div>
-                    <div>
-                        <label class="block text-slate-500 mb-1">Padding Density</label>
-                        <select id="densitySelect" onchange="updateDocument()" class="w-full p-1.5 border rounded bg-slate-50">
-                            <option value="compact">Compact (Thermal)</option>
-                            <option value="normal" selected>Normal Standard</option>
-                            <option value="spacious">Spacious (Invoice)</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 4. Logo Style & Custom Branding Stamps -->
-            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 space-y-3">
-                <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider flex items-center gap-2">
-                    <i class="fa-solid fa-stamp text-brand-500"></i> 3. Logo & Custom Branding Stamps
-                </h2>
+            <!-- 2. Business Information -->
+            <div class="bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-700 space-y-2">
+                <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider"><i class="fa-solid fa-building text-blue-400 mr-1"></i> 2. Business Information</h2>
                 <div class="grid grid-cols-2 gap-2 text-xs">
                     <div>
-                        <label class="block text-slate-600 font-medium mb-1">Business Name</label>
-                        <input type="text" id="bizName" value="Apex Global Trading" oninput="updateDocument()" class="w-full p-2 border rounded focus:ring-1 focus:ring-brand-500">
+                        <label class="block text-slate-400 mb-1">Business Name</label>
+                        <input type="text" id="bizName" value="Uppal Computers & Solutions" oninput="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded text-slate-100">
                     </div>
                     <div>
-                        <label class="block text-slate-600 font-medium mb-1">Tagline / Subtitle</label>
-                        <input type="text" id="bizTagline" value="Quality Retail & Wholesale Suppliers" oninput="updateDocument()" class="w-full p-2 border rounded">
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-2 text-xs">
-                    <div>
-                        <label class="block text-slate-600 font-medium mb-1">Phone / Contact</label>
-                        <input type="text" id="bizPhone" value="+1 (555) 019-2834" oninput="updateDocument()" class="w-full p-2 border rounded">
+                        <label class="block text-slate-400 mb-1">Tagline / Subtitle</label>
+                        <input type="text" id="bizTagline" value="Hardware & Software Retailer" oninput="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded text-slate-100">
                     </div>
                     <div>
-                        <label class="block text-slate-600 font-medium mb-1">Address / Location</label>
-                        <input type="text" id="bizAddress" value="Suite 402, Market Street, NY" oninput="updateDocument()" class="w-full p-2 border rounded">
-                    </div>
-                </div>
-                <!-- Watermark Stamp Overlay -->
-                <div class="pt-2 border-t border-slate-100">
-                    <label class="block text-xs font-semibold text-slate-700 mb-2">Custom Watermark Stamp Shape</label>
-                    <div class="grid grid-cols-4 gap-2">
-                        <select id="stampType" onchange="updateDocument()" class="col-span-2 text-xs p-2 border rounded bg-slate-50">
-                            <option value="none">No Stamp</option>
-                            <option value="paid" selected>PAID Badge</option>
-                            <option value="approved">APPROVED Seal</option>
-                            <option value="draft">DRAFT Copy</option>
-                            <option value="verified">VERIFIED Stamp</option>
-                        </select>
-                        <select id="stampShape" onchange="updateDocument()" class="col-span-2 text-xs p-2 border rounded bg-slate-50">
-                            <option value="rounded" selected>Rounded Rectangle</option>
-                            <option value="circle">Circular Rubber</option>
-                            <option value="double-border">Double Line Box</option>
-                            <option value="badge">Ribbon Style</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 5. General Feature Toggles & Document Details -->
-            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 space-y-3">
-                <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider flex items-center gap-2">
-                    <i class="fa-solid fa-sliders text-brand-500"></i> 4. Document & Customer Details
-                </h2>
-                <div class="grid grid-cols-2 gap-2 text-xs">
-                    <div>
-                        <label class="block text-slate-600 mb-1">Document No.</label>
-                        <input type="text" id="invNumber" value="INV-2026-8891" oninput="updateDocument()" class="w-full p-2 border rounded font-mono">
+                        <label class="block text-slate-400 mb-1">Phone Number</label>
+                        <input type="text" id="bizPhone" value="0321-7497530" oninput="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded text-slate-100">
                     </div>
                     <div>
-                        <label class="block text-slate-600 mb-1">Date & Time</label>
-                        <input type="text" id="invDate" value="" oninput="updateDocument()" class="w-full p-2 border rounded">
-                    </div>
-                    <div id="quoteValidUntilWrap" class="hidden">
-                        <label class="block text-slate-600 mb-1">Quotation Valid Until</label>
-                        <input type="date" id="quoteValidUntil" oninput="updateDocument()" class="w-full p-2 border rounded">
-                    </div>
-                    <div>
-                        <label class="block text-slate-600 mb-1">Customer Name</label>
-                        <input type="text" id="custName" value="Alex Smith" oninput="updateDocument()" class="w-full p-2 border rounded">
-                    </div>
-                    <div>
-                        <label class="block text-slate-600 mb-1">Customer Phone/ID</label>
-                        <input type="text" id="custId" value="CUST-77402" oninput="updateDocument()" class="w-full p-2 border rounded">
-                    </div>
-                </div>
-
-                <!-- Toggles -->
-                <div class="grid grid-cols-2 gap-2 pt-2 border-t text-xs">
-                    <label class="flex items-center gap-2 text-slate-700 cursor-pointer">
-                        <input type="checkbox" id="showBarcode" checked onchange="updateDocument()" class="rounded text-brand-600">
-                        Show Item Barcode
-                    </label>
-                    <label class="flex items-center gap-2 text-slate-700 cursor-pointer">
-                        <input type="checkbox" id="showSignature" checked onchange="updateDocument()" class="rounded text-brand-600">
-                        Signature Line
-                    </label>
-                    <label class="flex items-center gap-2 text-slate-700 cursor-pointer">
-                        <input type="checkbox" id="showTerms" checked onchange="updateDocument()" class="rounded text-brand-600">
-                        Terms & Conditions
-                    </label>
-                    <label class="flex items-center gap-2 text-slate-700 cursor-pointer">
-                        <input type="checkbox" id="showNotes" checked onchange="updateDocument()" class="rounded text-brand-600">
-                        Footer Note
-                    </label>
-                </div>
-            </div>
-
-            <!-- 6. Items & Pricing Form -->
-            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 space-y-3">
-                <div class="flex justify-between items-center">
-                    <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider flex items-center gap-2">
-                        <i class="fa-solid fa-list-check text-brand-500"></i> Items & Inventory Entries
-                    </h2>
-                    <button onclick="addItem()" class="bg-brand-50 hover:bg-brand-100 text-brand-600 text-xs px-2.5 py-1 rounded font-semibold border border-brand-200">
-                        <i class="fa-solid fa-plus mr-1"></i> Add Line
-                    </button>
-                </div>
-                <div id="itemsEditorList" class="space-y-2">
-                    <!-- Dynamic Item Rows Injected by JS -->
-                </div>
-            </div>
-
-            <!-- 7. Amounts, Taxes & Financial Adjustments -->
-            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 space-y-3">
-                <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider flex items-center gap-2">
-                    <i class="fa-solid fa-calculator text-brand-500"></i> 6. Amounts & Financial Adjustments
-                </h2>
-                <div class="grid grid-cols-3 gap-2 text-xs">
-                    <div>
-                        <label class="block text-slate-600 mb-1">Currency Symbol</label>
-                        <input type="text" id="currencySymbol" value="$" oninput="updateDocument()" class="w-full p-2 border rounded text-center font-bold">
-                    </div>
-                    <div>
-                        <label class="block text-slate-600 mb-1">Tax / VAT (%)</label>
-                        <input type="number" id="taxPercent" value="5" oninput="updateDocument()" class="w-full p-2 border rounded text-center">
-                    </div>
-                    <div>
-                        <label class="block text-slate-600 mb-1">Discount (%)</label>
-                        <input type="number" id="discountPercent" value="0" oninput="updateDocument()" class="w-full p-2 border rounded text-center">
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-2 text-xs">
-                    <div>
-                        <label class="block text-slate-600 mb-1">Shipping / Service Fee</label>
-                        <input type="number" id="shippingFee" value="0" oninput="updateDocument()" class="w-full p-2 border rounded">
-                    </div>
-                    <div>
-                        <label class="block text-slate-600 mb-1">Amount Paid (Cash)</label>
-                        <input type="number" id="amountPaid" value="100" oninput="updateDocument()" class="w-full p-2 border rounded font-semibold text-emerald-700">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 8. Payment Options & Dynamic QR Code -->
-            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 space-y-3">
-                <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider flex items-center gap-2">
-                    <i class="fa-solid fa-qrcode text-brand-500"></i> 7. Payment Methods & Dynamic QR
-                </h2>
-                <div class="grid grid-cols-3 gap-2 text-xs">
-                    <div>
-                        <label class="block text-slate-600 mb-1">Payment Method</label>
-                        <select id="paymentMethod" onchange="updateDocument()" class="w-full p-2 border rounded bg-slate-50">
-                            <option value="Cash">Cash</option>
-                            <option value="Credit Card">Credit Card</option>
-                            <option value="Bank Transfer">Bank Transfer</option>
-                            <option value="JazzCash / EasyPaisa">JazzCash / EasyPaisa</option>
-                            <option value="UPI / QR Scan">Online QR Scan</option>
-                        </select>
+                        <label class="block text-slate-400 mb-1">NTN / Tax ID (Optional)</label>
+                        <input type="text" id="bizNtn" value="NTN: 4239812-1" oninput="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded text-slate-100">
                     </div>
                     <div class="col-span-2">
-                        <label class="block text-slate-600 mb-1">Payment Ref / Transaction ID</label>
-                        <input type="text" id="paymentRef" value="TXN-99823411" oninput="updateDocument()" class="w-full p-2 border rounded">
+                        <label class="block text-slate-400 mb-1">Business Address</label>
+                        <input type="text" id="bizAddress" value="Peoples Colony, Gujranwala" oninput="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded text-slate-100">
                     </div>
                 </div>
-                <div class="pt-2 border-t">
-                    <label class="flex items-center gap-2 text-xs font-semibold text-slate-700 mb-2 cursor-pointer">
-                        <input type="checkbox" id="showPaymentQR" checked onchange="updateDocument()" class="rounded text-brand-600">
-                        Include Instant Pay QR Code on Bill
-                    </label>
-                    <input type="text" id="qrText" value="https://pay.example.com/invoice/INV-2026-8891" oninput="updateDocument()" class="w-full p-2 text-xs border rounded placeholder-slate-400" placeholder="QR Code Link or Payment ID">
+            </div>
+
+            <!-- 3. Customer & Bill Meta -->
+            <div class="bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-700 space-y-2">
+                <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider"><i class="fa-solid fa-user text-blue-400 mr-1"></i> 3. Customer & Bill Meta</h2>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div>
+                        <label class="block text-slate-400 mb-1">Bill / Invoice Number</label>
+                        <input type="text" id="invNumber" value="INV-1098" oninput="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded text-slate-100 font-mono">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">Date & Time</label>
+                        <input type="text" id="invDate" value="2026-10-13 18:00" oninput="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded text-slate-100">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">Customer Name</label>
+                        <input type="text" id="custName" value="Nisar Sb" oninput="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded text-slate-100">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">Customer Phone / ID</label>
+                        <input type="text" id="custPhone" value="0300-7497520" oninput="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded text-slate-100">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Items & Pricing Modes -->
+            <div class="bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-700 space-y-3">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider"><i class="fa-solid fa-list text-blue-400 mr-1"></i> 4. Items & Pricing</h2>
+                    <div class="flex items-center gap-2">
+                        <select id="pricingMode" onchange="togglePricingMode()" class="text-xs p-1 bg-slate-900 border border-slate-700 rounded text-slate-200 font-semibold">
+                            <option value="individual">Individual Prices (Standard)</option>
+                            <option value="single">Single Price (Lump-sum)</option>
+                        </select>
+                        <button onclick="addItem()" class="bg-blue-600 hover:bg-blue-500 text-white text-xs px-2.5 py-1 rounded font-semibold"><i class="fa-solid fa-plus"></i> Add Item</button>
+                    </div>
+                </div>
+                <div id="itemsEditorList" class="space-y-2"></div>
+                <!-- Single Price Container -->
+                <div id="singlePriceBox" class="hidden space-y-2 pt-2 border-t border-slate-700">
+                    <textarea id="singleDesc" oninput="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded text-xs text-slate-100" rows="3" placeholder="Enter items description (Each new line becomes a list row)"></textarea>
+                    <input type="number" id="singlePriceVal" value="2500" oninput="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded text-xs font-bold text-blue-400" placeholder="Total Lump-sum Price">
+                </div>
+            </div>
+
+            <!-- 5. Financials, Tax & Udhar (Clear Labels) -->
+            <div class="bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-700 space-y-3">
+                <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider"><i class="fa-solid fa-calculator text-blue-400 mr-1"></i> 5. Financials, Tax & Udhar</h2>
+                <div class="grid grid-cols-3 gap-2 text-xs">
+                    <div>
+                        <label class="block text-slate-400 mb-1">Currency</label>
+                        <input type="text" id="currencySymbol" value="PKR" oninput="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded text-center font-bold text-slate-100">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">Tax Rate (%)</label>
+                        <input type="number" id="taxPercent" value="0" oninput="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded text-center text-slate-100">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">Discount Amount</label>
+                        <input type="number" id="discountVal" value="0" oninput="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded text-center text-slate-100">
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-2 text-xs pt-1">
+                    <div>
+                        <label class="block text-slate-400 mb-1">Old Udhar / Balance</label>
+                        <input type="number" id="previousBalance" value="0" oninput="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded text-amber-400 font-semibold">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">Amount Paid</label>
+                        <input type="number" id="amountPaid" value="2500" oninput="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded text-emerald-400 font-semibold">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">Payment Status</label>
+                        <select id="paymentStatus" onchange="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded text-slate-200 font-semibold">
+                            <option value="Paid">Paid</option>
+                            <option value="Udhar / Credit" selected>Udhar / Credit</option>
+                            <option value="Partial">Partial</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Optional Elements Toggles -->
+            <div class="bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-700 space-y-2">
+                <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider"><i class="fa-solid fa-toggle-on text-blue-400 mr-1"></i> 6. Optional Elements Toggles</h2>
+                <div class="grid grid-cols-2 gap-2 text-xs text-slate-300">
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglLogo" checked onchange="updateDocument()"> Header Logo / Badge</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglBarcode" checked onchange="updateDocument()"> Bill # Barcode</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglQr" checked onchange="updateDocument()"> Dynamic Payment QR</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglTerms" checked onchange="updateDocument()"> Terms & Notes Box</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglSignature" checked onchange="updateDocument()"> Authorized Signature</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglWatermark" checked onchange="updateDocument()"> Watermark Stamp</label>
+                </div>
+            </div>
+
+            <!-- 7. Digital Signature & Smart QR String -->
+            <div class="bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-700 space-y-3">
+                <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider"><i class="fa-solid fa-signature text-blue-400 mr-1"></i> 7. Digital Signature & Payment QR</h2>
+                <div class="space-y-2 text-xs">
+                    <div>
+                        <label class="block text-slate-400 mb-1">Upload Signature Image (Transparent background):</label>
+                        <input type="file" accept="image/*" onchange="uploadSignature(event)" class="w-full p-1 bg-slate-900 border border-slate-700 rounded text-xs text-slate-300">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">JazzCash / EasyPaisa / Bank Account String for QR:</label>
+                        <input type="text" id="qrDataString" value="EasyPaisa: 03217497530 - Uppal Computers" oninput="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded text-xs text-slate-100" placeholder="e.g. 03217497530 or IBAN">
+                        <p class="text-[10px] text-slate-400 mt-1">Scan karene par exact bill amount aur account number customer ke mobile par pay karne ke liye show hoga.</p>
+                    </div>
                 </div>
             </div>
 
         </div>
 
-        <!-- RIGHT PANEL: LIVE DOCUMENT / THERMAL PREVIEW -->
-        <div class="lg:col-span-6 xl:col-span-7 flex flex-col items-center justify-start print-area-wrapper">
+        <!-- RIGHT PANEL: STICKY LIVE PREVIEW (A4 Default) -->
+        <div class="lg:col-span-6 xl:col-span-7 flex flex-col items-center justify-start print-area-wrapper sticky top-20">
             
-            <!-- Context Banner (Hidden in Print) -->
-            <div class="no-print w-full bg-slate-800 text-slate-200 text-xs px-4 py-2.5 rounded-t-xl flex justify-between items-center shadow">
-                <span class="flex items-center gap-2">
-                    <i class="fa-solid fa-eye text-emerald-400"></i> Live Print Preview Mode
-                </span>
-                <span id="previewPaperBadge" class="bg-slate-700 text-slate-300 font-mono px-2 py-0.5 rounded text-[11px]">80mm POS Width</span>
+            <div class="no-print w-full bg-slate-800 text-slate-200 text-xs px-4 py-2 rounded-t-xl flex justify-between items-center shadow border border-slate-700">
+                <span><i class="fa-solid fa-eye text-emerald-400 mr-1"></i> Live Preview Mode</span>
+                <span id="previewBadge" class="bg-slate-900 px-2 py-0.5 rounded text-[11px] font-mono text-blue-400">A4 Full Sheet (Default)</span>
             </div>
 
-            <!-- RECEIPT / INVOICE PREVIEW CONTAINER -->
-            <div id="receiptDocument" class="receipt-container bg-white text-slate-900 p-6 shadow-xl border border-slate-200 transition-all duration-300 relative w-full overflow-hidden" style="max-width: 80mm; min-height: 500px;">
+            <!-- Receipt / Invoice Card Container -->
+            <div id="receiptDocument" class="receipt-container bg-white text-slate-900 p-8 shadow-2xl border border-slate-200 relative w-full font-sans text-xs transition-all" style="max-width: 210mm; min-height: 800px;">
                 
-                <!-- Watermark Stamp Badge -->
-                <div id="stampElement" class="hidden absolute top-12 right-6 z-10 pointer-events-none transform rotate-[-12deg] opacity-80">
-                    <div id="stampInner" class="stamp-badge px-3 py-1 text-xs border-2 font-bold rounded">
-                        PAID
+                <!-- Watermark Stamp -->
+                <div id="watermarkStamp" class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-10 font-bold text-6xl uppercase pointer-events-none tracking-widest rotate-[-25deg] text-blue-800">
+                    TAX INVOICE
+                </div>
+
+                <!-- Header -->
+                <div id="docHeaderBox" class="flex justify-between items-start pb-4 mb-4 border-b-2 border-slate-800">
+                    <div>
+                        <h2 id="docBizName" class="text-xl font-bold uppercase text-blue-900">Uppal Computers & Solutions</h2>
+                        <p id="docBizTagline" class="text-xs text-slate-600">Hardware & Software Retailer</p>
+                        <p id="docBizContact" class="text-[11px] text-slate-600 mt-1">Ph: 0321-7497530 | Peoples Colony, Gujranwala</p>
+                        <p id="docBizNtn" class="text-[11px] text-slate-600 font-mono">NTN: 4239812-1</p>
+                    </div>
+                    <div class="text-right">
+                        <h1 id="docBadgeTitle" class="text-2xl font-extrabold text-slate-800 uppercase tracking-wide">TAX INVOICE</h1>
+                        <p class="text-xs font-mono font-bold text-blue-600 mt-1" id="docInvNum">INV-1098</p>
+                        <p class="text-[11px] text-slate-500" id="docInvDate">2026-10-13 18:00</p>
                     </div>
                 </div>
 
-                <!-- Template Header Section -->
-                <div id="documentHeader" class="text-center pb-4 mb-4 border-b border-dashed border-slate-300">
-                    <h2 id="docBizName" class="text-xl font-bold uppercase tracking-tight">Apex Global Trading</h2>
-                    <p id="docBizTagline" class="text-xs text-slate-500 italic mt-0.5">Quality Retail & Wholesale Suppliers</p>
-                    <p id="docBizContact" class="text-[11px] text-slate-600 mt-1">Suite 402, Market Street, NY | Ph: +1 (555) 019-2834</p>
-                </div>
-
-                <div class="text-center mb-3">
-                    <span id="documentTitle" class="inline-flex px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-[0.16em]">Invoice</span>
-                </div>
-
-                <!-- Meta Info (Document #, Date, Customer) -->
-                <div class="text-xs space-y-1 mb-4 pb-3 border-b border-dashed border-slate-300">
-                    <div class="flex justify-between">
-                        <span id="docNumberLabel" class="text-slate-500">Invoice #:</span>
-                        <span id="docInvNum" class="font-bold font-mono">INV-2026-8891</span>
+                <!-- Customer Meta Box -->
+                <div class="bg-slate-50 p-3 rounded border border-slate-200 mb-4 flex justify-between items-center text-xs">
+                    <div>
+                        <span class="text-slate-500 font-semibold uppercase text-[10px] block">Billed To:</span>
+                        <span id="docCustName" class="font-bold text-slate-900 text-sm">Nisar Sb</span>
+                        <span id="docCustPhone" class="text-slate-600 block">Ph: 0300-7497520</span>
                     </div>
-                    <div class="flex justify-between">
-                        <span id="docDateLabel" class="text-slate-500">Issue Date:</span>
-                        <span id="docInvDate">2026-10-07 14:30</span>
-                    </div>
-                    <div id="docValidUntilRow" class="hidden flex justify-between">
-                        <span class="text-slate-500">Valid Until:</span>
-                        <span id="docValidUntil" class="font-medium"></span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-slate-500">Customer:</span>
-                        <span id="docCustName" class="font-medium">Alex Smith</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-slate-500">Payment Method:</span>
-                        <span id="docPayMethod" class="font-semibold text-slate-700">Cash</span>
+                    <div class="text-right">
+                        <span class="text-slate-500 font-semibold uppercase text-[10px] block">Payment Status:</span>
+                        <span id="docStatusBadge" class="font-bold text-amber-700 px-2 py-0.5 bg-amber-50 border border-amber-200 rounded">Udhar / Credit</span>
                     </div>
                 </div>
 
-                <!-- Items Table -->
-                <table class="w-full text-xs text-left mb-4">
-                    <thead>
-                        <tr class="border-b border-slate-800 text-slate-700 uppercase font-bold text-[10px]">
-                            <th class="py-1">Item</th>
-                            <th class="py-1 text-center">Qty</th>
-                            <th class="py-1 text-right">Price</th>
-                            <th class="py-1 text-right">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody id="docItemsBody" class="divide-y divide-slate-100">
-                        <!-- Items rendered by JS -->
-                    </tbody>
-                </table>
+                <!-- Items Section -->
+                <div class="mb-4">
+                    <table class="w-full text-left text-xs" id="docItemsTable">
+                        <thead>
+                            <tr class="bg-slate-800 text-white font-bold text-[11px]">
+                                <th class="py-2 px-3">Description</th>
+                                <th class="py-2 px-3 text-center">Qty</th>
+                                <th class="py-2 px-3 text-right">Price</th>
+                                <th class="py-2 px-3 text-right">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="docItemsBody" class="divide-y divide-slate-200"></tbody>
+                    </table>
+                </div>
 
-                <!-- Financial Totals Section -->
-                <div class="text-xs space-y-1.5 pt-2 border-t-2 border-slate-800">
-                    <div class="flex justify-between text-slate-600">
-                        <span>Subtotal:</span>
-                        <span id="docSubtotal">$0.00</span>
-                    </div>
-                    <div id="docTaxRow" class="flex justify-between text-slate-600">
-                        <span id="docTaxLabel">Tax (5%):</span>
-                        <span id="docTaxAmount">$0.00</span>
-                    </div>
-                    <div id="docDiscountRow" class="flex justify-between text-slate-600">
-                        <span id="docDiscountLabel">Discount:</span>
-                        <span id="docDiscountAmount">-$0.00</span>
-                    </div>
-                    <div id="docShippingRow" class="flex justify-between text-slate-600">
-                        <span>Shipping / Service Fee:</span>
-                        <span id="docShippingAmount">$0.00</span>
-                    </div>
-                    <div class="flex justify-between font-bold text-sm pt-2 border-t border-slate-300 text-slate-900">
-                        <span>Grand Total:</span>
-                        <span id="docGrandTotal" class="text-base font-extrabold">$0.00</span>
-                    </div>
-                    <div class="flex justify-between text-slate-600 pt-1">
-                        <span>Amount Paid:</span>
-                        <span id="docAmountPaid">$0.00</span>
-                    </div>
-                    <div class="flex justify-between text-slate-700 font-semibold">
-                        <span id="docBalanceLabel">Change Return:</span>
-                        <span id="docBalanceAmount">$0.00</span>
+                <!-- Financial Totals (Bottom Grid) -->
+                <div class="flex justify-end mb-6">
+                    <div class="w-72 space-y-1.5 text-xs bg-slate-50 p-3 rounded border border-slate-200">
+                        <div class="flex justify-between"><span>Subtotal:</span> <span id="docSubtotal" class="font-semibold">PKR 0.00</span></div>
+                        <div id="docTaxRow" class="flex justify-between"><span>Tax (<span id="docTaxRate">0</span>%):</span> <span id="docTaxAmt">PKR 0.00</span></div>
+                        <div id="docDiscountRow" class="flex justify-between text-red-600"><span>Discount:</span> <span id="docDiscountAmt">-PKR 0.00</span></div>
+                        <div id="docOldBalRow" class="flex justify-between text-amber-700 font-semibold"><span>Previous Udhar / Balance:</span> <span id="docOldBalAmt">PKR 0.00</span></div>
+                        <div class="flex justify-between font-bold text-sm pt-2 border-t border-slate-300 text-slate-900"><span>Grand Total:</span> <span id="docGrandTotal">PKR 0.00</span></div>
+                        <div class="flex justify-between text-emerald-700 font-semibold pt-1"><span>Amount Paid:</span> <span id="docPaidAmt">PKR 0.00</span></div>
+                        <div class="flex justify-between font-bold text-slate-800 pt-1 border-t border-slate-200"><span>Remaining Balance:</span> <span id="docRemainingBal">PKR 0.00</span></div>
                     </div>
                 </div>
 
-                <!-- Bottom QR & Barcode Section -->
-                <div class="mt-6 pt-4 border-t border-dashed border-slate-300 text-center space-y-3">
-                    
-                    <!-- Dynamic QR Code -->
-                    <div id="qrCodeContainer" class="flex flex-col items-center justify-center">
-                        <div id="qrcode" class="p-1.5 bg-white border rounded"></div>
-                        <span class="text-[9px] text-slate-400 mt-1">Scan to Verify / Pay Online</span>
+                <!-- QR & Barcode Section -->
+                <div class="grid grid-cols-2 gap-4 items-center pb-4 mb-4 border-t border-dashed border-slate-300 pt-4">
+                    <div id="qrBox" class="flex items-center gap-3">
+                        <div id="qrcode" class="bg-white p-1 border rounded shadow-sm"></div>
+                        <div>
+                            <span class="font-bold text-[11px] block text-slate-800">Instant Pay QR</span>
+                            <span id="docQrString" class="text-[10px] text-slate-500">EasyPaisa: 03217497530</span>
+                        </div>
                     </div>
-
-                    <!-- Barcode Display -->
-                    <div id="barcodeContainer" class="flex flex-col items-center justify-center">
-                        <svg id="barcode" class="max-w-full h-10"></svg>
+                    <div id="barcodeBox" class="flex justify-end">
+                        <svg id="barcodeSVG"></svg>
                     </div>
+                </div>
 
-                    <!-- Footer Notes & Terms -->
-                    <p id="docTerms" class="text-[10px] text-slate-500 italic">Thank you for your business! Goods once sold are non-refundable after 7 days.</p>
-                    <p id="docNotes" class="text-[9px] text-slate-400 font-mono">Software Powered by Universal Studio POS</p>
-
-                    <!-- Signature Area -->
-                    <div id="docSignature" class="pt-6 hidden">
-                        <div class="w-36 mx-auto border-b border-slate-400"></div>
-                        <span class="text-[10px] text-slate-500 block mt-1">Authorized Signature</span>
+                <!-- Terms & Signature -->
+                <div class="flex justify-between items-end pt-4 border-t border-slate-200 text-[11px]">
+                    <div id="termsBox" class="italic text-slate-500 max-w-sm">
+                        * Thank you for your business! Please clear dues on time. Goods once sold are non-refundable.
+                    </div>
+                    <div id="signatureBox" class="text-center">
+                        <img id="sigImagePreview" class="max-h-12 mx-auto hidden" alt="Signature">
+                        <div class="border-b border-slate-800 w-36 mt-1"></div>
+                        <span class="text-[10px] text-slate-600 font-semibold">Authorized Signature</span>
                     </div>
                 </div>
 
             </div>
-
         </div>
+
     </main>
 
-    <footer class="no-print max-w-7xl w-full mx-auto px-4 pb-6 text-center text-xs text-slate-500">
-        <p>BillMaker is a free browser-based invoice and receipt maker. Your current bill is saved locally in this browser.</p>
-        <p class="mt-1">Create invoices • Send quotations • Print receipts • Save as PDF • Share on WhatsApp</p>
-    </footer>
-
-    <!-- Application JavaScript Engine -->
+    <!-- JavaScript Execution Engine -->
     <script>
-        // Sample Generic State (No default specific school or personal names)
-        let state = {
-            documentType: 'invoice',
-            template: 'thermal',
-            paperSize: '80mm',
-            items: [
-                { id: 1, name: "Wireless Optical Mouse", qty: 2, price: 15.00 },
-                { id: 2, name: "Mechanical Keyboard RGB", qty: 1, price: 45.00 },
-                { id: 3, name: "USB-C Fast Cable 2m", qty: 3, price: 8.50 }
-            ]
-        };
+        let items = [
+            { id: 1, name: "Computer Repair & Diagnostics", qty: 1, price: 1500 },
+            { id: 2, name: "Windows OS Installation", qty: 1, price: 1000 }
+        ];
 
-        const STORAGE_KEY = 'billmaker_current_v1';
-        const SAVED_KEY = 'billmaker_saved_bills_v1';
+        let currentDocType = 'INVOICE';
 
-        function currentDateTime() {
-            const d = new Date();
-            const pad = n => String(n).padStart(2, '0');
-            return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
-        }
-
-        function getFormState() {
-            const ids = ['bizName','bizTagline','bizPhone','bizAddress','invNumber','invDate','custName','custId',
-                'currencySymbol','taxPercent','discountPercent','shippingFee','amountPaid','paymentMethod','paymentRef','qrText',
-                'fontSizeRange','densitySelect','stampType','stampShape','quoteValidUntil'];
-            const data = { fields: {}, checks: {}, appState: JSON.parse(JSON.stringify(state)) };
-            ids.forEach(id => { const el=document.getElementById(id); if(el) data.fields[id]=el.value; });
-            ['showBarcode','showSignature','showTerms','showNotes','showPaymentQR'].forEach(id => {
-                const el=document.getElementById(id); if(el) data.checks[id]=el.checked;
-            });
-            return data;
-        }
-
-        function applyFormState(data) {
-            if (!data) return false;
-            if (data.appState) state = data.appState;
-            Object.entries(data.fields || {}).forEach(([id,value]) => {
-                const el=document.getElementById(id); if(el) el.value=value;
-            });
-            Object.entries(data.checks || {}).forEach(([id,value]) => {
-                const el=document.getElementById(id); if(el) el.checked=!!value;
-            });
-            return true;
-        }
-
-        function autoSave() {
-            try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(getFormState()));
-                const status=document.getElementById('saveStatus');
-                if(status) status.textContent='Saved in this browser';
-            } catch(e) {}
-        }
-
-        function saveBill() {
-            try {
-                const bills=JSON.parse(localStorage.getItem(SAVED_KEY) || '[]');
-                const bill=getFormState();
-                bill.savedAt=new Date().toISOString();
-                bills.unshift(bill);
-                localStorage.setItem(SAVED_KEY, JSON.stringify(bills.slice(0,20)));
-                autoSave();
-                const status=document.getElementById('saveStatus');
-                if(status) status.textContent='Bill saved • up to 20 bills kept on this device';
-            } catch(e) {
-                alert('This browser could not save the bill.');
-            }
-        }
-
-        function shareOnWhatsApp() {
-            const name=document.getElementById('bizName').value || 'Invoice';
-            const no=document.getElementById('invNumber').value || '';
-            const total=document.getElementById('docGrandTotal').innerText || '';
-            const type=(state.documentType || 'invoice').charAt(0).toUpperCase() + (state.documentType || 'invoice').slice(1);
-            const text=encodeURIComponent(`${name}
-${type}: ${no}
-Total: ${total}
-
-Created with BillMaker`);
-            window.open(`https://wa.me/?text=${text}`, '_blank', 'noopener');
-        }
-
-        function newBill() {
-            if (!confirm('Start a new document? Unsaved changes will be replaced.')) return;
-            state.documentType='invoice';
-            setDocumentType('invoice');
-            document.getElementById('bizName').value='';
-            document.getElementById('bizTagline').value='';
-            document.getElementById('bizPhone').value='';
-            document.getElementById('bizAddress').value='';
-            document.getElementById('invNumber').value='INV-' + Date.now().toString().slice(-6);
-            document.getElementById('invDate').value=currentDateTime();
-            document.getElementById('quoteValidUntil').value='';
-            document.getElementById('custName').value='';
-            document.getElementById('custId').value='';
-            document.getElementById('taxPercent').value=0;
-            document.getElementById('discountPercent').value=0;
-            document.getElementById('shippingFee').value=0;
-            document.getElementById('amountPaid').value=0;
-            document.getElementById('paymentRef').value='';
-            document.getElementById('qrText').value='';
-            state.items=[{id:Date.now(),name:'',qty:1,price:0}];
-            renderItemEditors();
-            updateDocument();
-            autoSave();
-        }
-
-        // Initialize App on DOM Ready
         window.addEventListener('DOMContentLoaded', () => {
-            let restored=false;
-            try {
-                const saved=localStorage.getItem(STORAGE_KEY);
-                if(saved) restored=applyFormState(JSON.parse(saved));
-            } catch(e) {}
-            if (!document.getElementById('invDate').value) document.getElementById('invDate').value=currentDateTime();
-            document.getElementById('quoteValidUntil').value='';
-            if (!document.getElementById('invNumber').value) document.getElementById('invNumber').value='INV-' + Date.now().toString().slice(-6);
-            renderItemEditors();
-            setDocumentType(state.documentType || 'invoice');
+            loadFromLocalStorage();
+            renderEditors();
             updateDocument();
-            if (!restored) autoSave();
+            setupKeyboardNavigation();
         });
 
-        // Add New Line Item
-        function addItem() {
-            const newItem = {
-                id: Date.now(),
-                name: "New Product / Service",
-                qty: 1,
-                price: 10.00
-            };
-            state.items.push(newItem);
-            renderItemEditors();
-            updateDocument();
-        }
-
-        // Delete Line Item
-        function deleteItem(id) {
-            if(state.items.length <= 1) {
-                alert("Receipt must contain at least one line item.");
-                return;
-            }
-            state.items = state.items.filter(item => item.id !== id);
-            renderItemEditors();
-            updateDocument();
-        }
-
-        // Render Item Inputs in Left Panel
-        function renderItemEditors() {
-            const container = document.getElementById('itemsEditorList');
-            container.innerHTML = '';
-
-            state.items.forEach((item, index) => {
-                const row = document.createElement('div');
-                row.className = 'flex items-center gap-2 bg-slate-50 p-2 rounded border text-xs';
-                row.innerHTML = `
-                    <span class="text-slate-400 font-mono text-[10px] w-4">${index + 1}.</span>
-                    <input type="text" value="${item.name}" oninput="updateItemField(${item.id}, 'name', this.value)" class="flex-1 p-1.5 border rounded" placeholder="Item Name">
-                    <input type="number" value="${item.qty}" min="1" oninput="updateItemField(${item.id}, 'qty', this.value)" class="w-12 p-1.5 border rounded text-center" placeholder="Qty">
-                    <input type="number" value="${item.price}" step="0.01" oninput="updateItemField(${item.id}, 'price', this.value)" class="w-16 p-1.5 border rounded text-right" placeholder="Price">
-                    <button onclick="deleteItem(${item.id})" class="text-rose-500 hover:text-rose-700 p-1">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </button>
-                `;
-                container.appendChild(row);
+        function setDocType(type) {
+            currentDocType = type;
+            document.querySelectorAll('.doc-type-btn').forEach(b => {
+                b.className = 'doc-type-btn py-2 px-2 text-center border rounded text-xs font-semibold bg-slate-700 text-slate-300 border-slate-600';
             });
+            if(type === 'INVOICE') {
+                document.getElementById('type-invoice').className = 'doc-type-btn py-2 px-2 text-center border rounded text-xs font-semibold bg-blue-600 text-white border-blue-500';
+            } else {
+                document.getElementById('type-quotation').className = 'doc-type-btn py-2 px-2 text-center border rounded text-xs font-semibold bg-blue-600 text-white border-blue-500';
+            }
+            updateDocument();
         }
 
-        // Update Dynamic Item Field
-        function updateItemField(id, field, value) {
-            const item = state.items.find(i => i.id === id);
-            if (item) {
-                if (field === 'qty' || field === 'price') {
-                    item[field] = parseFloat(value) || 0;
-                } else {
-                    item[field] = value;
-                }
+        function setPaperSize(size) {
+            const doc = document.getElementById('receiptDocument');
+            const badge = document.getElementById('previewBadge');
+            document.querySelectorAll('.paper-btn').forEach(b => b.className = 'paper-btn py-1.5 px-1 text-center border rounded text-xs font-medium bg-slate-700 border-slate-600 text-slate-300');
+            document.getElementById(`paper-${size}`).className = 'paper-btn py-1.5 px-1 text-center border rounded text-xs font-medium bg-blue-900/50 border-blue-500 text-blue-300 font-bold';
+
+            if(size === '58mm') { doc.style.maxWidth = '58mm'; badge.textContent = '58mm Thermal'; }
+            else if(size === '80mm') { doc.style.maxWidth = '80mm'; badge.textContent = '80mm POS'; }
+            else if(size === 'a4') { doc.style.maxWidth = '210mm'; badge.textContent = 'A4 Sheet (Default)'; }
+        }
+
+        function togglePricingMode() {
+            let mode = document.getElementById('pricingMode').value;
+            let singleBox = document.getElementById('singlePriceBox');
+            let editorList = document.getElementById('itemsEditorList');
+            if(mode === 'single') {
+                singleBox.classList.remove('hidden');
+                editorList.classList.add('hidden');
+            } else {
+                singleBox.classList.add('hidden');
+                editorList.classList.remove('hidden');
+            }
+            updateDocument();
+        }
+
+        function addItem() {
+            items.push({ id: Date.now(), name: "New Item", qty: 1, price: 500 });
+            renderEditors();
+            updateDocument();
+        }
+
+        function removeItem(id) {
+            if(items.length <= 1) return;
+            items = items.filter(i => i.id !== id);
+            renderEditors();
+            updateDocument();
+        }
+
+        function updateItem(id, field, val) {
+            let item = items.find(i => i.id === id);
+            if(item) {
+                item[field] = (field === 'qty' || field === 'price') ? parseFloat(val) || 0 : val;
                 updateDocument();
             }
         }
 
-        // Document type selector - one shared editor, different business documents
-        function setDocumentType(type) {
-            state.documentType = type;
-            document.querySelectorAll('.doc-type-btn').forEach(btn => btn.classList.remove('active'));
-            const active = document.getElementById(`doc-type-${type}`);
-            if (active) active.classList.add('active');
-            const labelMap = { invoice:'Invoice #:', quotation:'Quotation #:', receipt:'Receipt #:' };
-            const dateMap = { invoice:'Issue Date:', quotation:'Issue Date:', receipt:'Payment Date:' };
-            const numberLabel=document.getElementById('docNumberLabel');
-            const dateLabel=document.getElementById('docDateLabel');
-            if(numberLabel) numberLabel.textContent=labelMap[type] || 'Document #:';
-            if(dateLabel) dateLabel.textContent=dateMap[type] || 'Date:';
-            const input=document.getElementById('invNumber');
-            if(input && (!input.value || /^(INV|QUO|REC)-/.test(input.value))) {
-                const prefix = type==='quotation' ? 'QUO' : type==='receipt' ? 'REC' : 'INV';
-                input.value=prefix+'-'+Date.now().toString().slice(-6);
-            }
-            const validWrap=document.getElementById('quoteValidUntilWrap');
-            if(validWrap) validWrap.classList.toggle('hidden', type!=='quotation');
-            const quoteActions=document.getElementById('quotationActions');
-            if(quoteActions) quoteActions.classList.toggle('hidden', type!=='quotation');
-            updateDocument();
-        }
-
-        function convertQuotationToInvoice() {
-            if (state.documentType !== 'quotation') return;
-            state.documentType='invoice';
-            const input=document.getElementById('invNumber');
-            if(input) input.value='INV-'+Date.now().toString().slice(-6);
-            setDocumentType('invoice');
-            autoSave();
-        }
-
-        // Template Selection Logic
-        function setTemplate(tpl) {
-            state.template = tpl;
-            document.querySelectorAll('.tpl-btn').forEach(btn => {
-                btn.classList.remove('border-brand-500', 'bg-brand-50', 'ring-2', 'ring-brand-400');
-            });
-            const activeBtn = document.getElementById(`btn-tpl-${tpl}`);
-            if (activeBtn) activeBtn.classList.add('border-brand-500', 'bg-brand-50', 'ring-2', 'ring-brand-400');
-            
-            updateDocument();
-        }
-
-        // Paper Format Selection Logic
-        function setPaperSize(size) {
-            state.paperSize = size;
-            const doc = document.getElementById('receiptDocument');
-            const badge = document.getElementById('previewPaperBadge');
-
-            document.querySelectorAll('.paper-btn').forEach(btn => {
-                btn.classList.remove('bg-brand-50', 'border-brand-500', 'text-brand-700');
-            });
-            document.getElementById(`paper-${size}`).classList.add('bg-brand-50', 'border-brand-500', 'text-brand-700');
-
-            if (size === '58mm') {
-                doc.style.maxWidth = '58mm';
-                badge.innerText = '58mm Thermal Width';
-            } else if (size === '80mm') {
-                doc.style.maxWidth = '80mm';
-                badge.innerText = '80mm POS Roll Width';
-            } else if (size === 'a4') {
-                doc.style.maxWidth = '210mm';
-                badge.innerText = 'A4 Sheet Width';
-            }
-            updateDocument();
-        }
-
-        // Core Document Re-Rendering Engine
-        function updateDocument() {
-            const sym = document.getElementById('currencySymbol').value || '$';
-
-            // Text Metadata
-            document.getElementById('docBizName').innerText = document.getElementById('bizName').value || 'Business Name';
-            document.getElementById('docBizTagline').innerText = document.getElementById('bizTagline').value || '';
-            document.getElementById('docBizContact').innerText = `${document.getElementById('bizAddress').value} | Ph: ${document.getElementById('bizPhone').value}`;
-            
-            const typeLabel = (state.documentType || 'invoice').charAt(0).toUpperCase() + (state.documentType || 'invoice').slice(1);
-            document.getElementById('docInvNum').innerText = document.getElementById('invNumber').value || (state.documentType==='quotation' ? 'QUO-000' : state.documentType==='receipt' ? 'REC-000' : 'INV-000');
-            const docTitle=document.getElementById('documentTitle');
-            if(docTitle) docTitle.innerText=typeLabel;
-            document.getElementById('docInvDate').innerText = document.getElementById('invDate').value || '';
-            const validRow=document.getElementById('docValidUntilRow');
-            const validValue=document.getElementById('quoteValidUntil').value || '';
-            if(validRow) validRow.classList.toggle('hidden', state.documentType!=='quotation');
-            const validEl=document.getElementById('docValidUntil');
-            if(validEl) validEl.innerText=validValue || 'Not specified';
-            document.getElementById('docCustName').innerText = document.getElementById('custName').value || 'N/A';
-            document.getElementById('docPayMethod').innerText = document.getElementById('paymentMethod').value;
-
-            // Template Styling Application
-            const doc = document.getElementById('receiptDocument');
-            doc.className = "receipt-container bg-white text-slate-900 p-6 shadow-xl border border-slate-200 transition-all duration-300 relative w-full overflow-hidden ";
-            
-            if (state.template === 'thermal') doc.classList.add('tpl-thermal');
-            else if (state.template === 'corporate') doc.classList.add('tpl-corporate');
-            else if (state.template === 'elegant') doc.classList.add('tpl-elegant');
-            else if (state.template === 'tech') doc.classList.add('tpl-tech');
-            else if (state.template === 'bold') doc.classList.add('tpl-bold');
-            else if (state.template === 'luxury') doc.classList.add('tpl-luxury');
-
-            // Font scale & density
-            const fontScale = document.getElementById('fontSizeRange').value;
-            doc.style.fontSize = `${fontScale}px`;
-
-            // Calculate Items & Render Rows
-            const tbody = document.getElementById('docItemsBody');
-            tbody.innerHTML = '';
-            let subtotal = 0;
-
-            state.items.forEach(item => {
-                const itemTotal = item.qty * item.price;
-                subtotal += itemTotal;
-
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td class="py-1 font-medium">${item.name}</td>
-                    <td class="py-1 text-center">${item.qty}</td>
-                    <td class="py-1 text-right">${sym}${item.price.toFixed(2)}</td>
-                    <td class="py-1 text-right font-bold">${sym}${itemTotal.toFixed(2)}</td>
+        function renderEditors() {
+            let container = document.getElementById('itemsEditorList');
+            container.innerHTML = '';
+            items.forEach((item) => {
+                let div = document.createElement('div');
+                div.className = 'grid grid-cols-12 gap-1 items-center text-xs';
+                div.innerHTML = `
+                    <input type="text" value="${item.name}" oninput="updateItem(${item.id}, 'name', this.value)" class="col-span-6 p-1.5 bg-slate-900 border border-slate-700 rounded text-slate-100" placeholder="Item Name">
+                    <input type="number" min="1" value="${item.qty}" oninput="updateItem(${item.id}, 'qty', this.value)" class="col-span-2 p-1.5 bg-slate-900 border border-slate-700 rounded text-center text-slate-100" placeholder="Qty">
+                    <input type="number" value="${item.price}" oninput="updateItem(${item.id}, 'price', this.value)" class="col-span-3 p-1.5 bg-slate-900 border border-slate-700 rounded text-right text-slate-100" placeholder="Price">
+                    <button onclick="removeItem(${item.id})" class="col-span-1 text-red-400 hover:text-red-300 font-bold text-center"><i class="fa-solid fa-trash"></i></button>
                 `;
-                tbody.appendChild(tr);
+                container.appendChild(div);
             });
+        }
 
-            // Financial Calculations
-            const taxPct = parseFloat(document.getElementById('taxPercent').value) || 0;
-            const discountPct = parseFloat(document.getElementById('discountPercent').value) || 0;
-            const shipping = parseFloat(document.getElementById('shippingFee').value) || 0;
-            const paid = parseFloat(document.getElementById('amountPaid').value) || 0;
+        function uploadSignature(event) {
+            let file = event.target.files[0];
+            if(!file) return;
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                let img = new Image();
+                img.onload = function() {
+                    let canvas = document.createElement('canvas');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    let ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+                    let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                    let data = imgData.data;
+                    for (let i = 0; i < data.length; i += 4) {
+                        let r = data[i], g = data[i+1], b = data[i+2];
+                        if (r > 200 && g > 200 && b > 200) { data[i+3] = 0; }
+                    }
+                    ctx.putImageData(imgData, 0, 0);
+                    let preview = document.getElementById('sigImagePreview');
+                    preview.src = canvas.toDataURL();
+                    preview.classList.remove('hidden');
+                    saveToLocalStorage();
+                }
+                img.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
 
-            const taxAmt = (subtotal * taxPct) / 100;
-            const discountAmt = (subtotal * discountPct) / 100;
-            const grandTotal = subtotal + taxAmt + shipping - discountAmt;
-            const balance = paid - grandTotal;
+        function updateDocument() {
+            let currency = document.getElementById('currencySymbol').value || 'PKR';
+            let mode = document.getElementById('pricingMode').value;
+            
+            document.getElementById('docBadgeTitle').textContent = currentDocType === 'INVOICE' ? 'TAX INVOICE' : 'QUOTATION';
+            document.getElementById('watermarkStamp').textContent = currentDocType === 'INVOICE' ? 'TAX INVOICE' : 'QUOTATION';
+            
+            document.getElementById('docBizName').textContent = document.getElementById('bizName').value;
+            document.getElementById('docBizTagline').textContent = document.getElementById('bizTagline').value;
+            document.getElementById('docBizContact').textContent = `Ph: ${document.getElementById('bizPhone').value} | ${document.getElementById('bizAddress').value}`;
+            document.getElementById('docBizNtn').textContent = document.getElementById('bizNtn').value;
+            
+            document.getElementById('docInvNum').textContent = document.getElementById('invNumber').value;
+            document.getElementById('docInvDate').textContent = document.getElementById('invDate').value;
+            document.getElementById('docCustName').textContent = document.getElementById('custName').value;
+            document.getElementById('docCustPhone').textContent = `Ph: ${document.getElementById('custPhone').value}`;
+            
+            let status = document.getElementById('paymentStatus').value;
+            let statusBadge = document.getElementById('docStatusBadge');
+            statusBadge.textContent = status;
+            statusBadge.className = `font-bold ${status === 'Paid' ? 'text-emerald-700 bg-emerald-50 border-emerald-200' : 'text-amber-700 bg-amber-50 border-amber-200'} px-2 py-0.5 border rounded`;
 
-            // Render Financial UI
-            document.getElementById('docSubtotal').innerText = `${sym}${subtotal.toFixed(2)}`;
-            document.getElementById('docTaxLabel').innerText = `Tax / VAT (${taxPct}%):`;
-            document.getElementById('docTaxAmount').innerText = `${sym}${taxAmt.toFixed(2)}`;
-            document.getElementById('docDiscountAmount').innerText = `-${sym}${discountAmt.toFixed(2)}`;
-            document.getElementById('docShippingAmount').innerText = `${sym}${shipping.toFixed(2)}`;
-            document.getElementById('docGrandTotal').innerText = `${sym}${grandTotal.toFixed(2)}`;
-            document.getElementById('docAmountPaid').innerText = `${sym}${paid.toFixed(2)}`;
+            let subtotal = 0;
+            let tbody = document.getElementById('docItemsBody');
+            tbody.innerHTML = '';
 
-            if (balance >= 0) {
-                document.getElementById('docBalanceLabel').innerText = "Change Return:";
-                document.getElementById('docBalanceAmount').innerText = `${sym}${balance.toFixed(2)}`;
-                document.getElementById('docBalanceAmount').className = "text-emerald-600 font-bold";
+            if(mode === 'single') {
+                let descText = document.getElementById('singleDesc').value || 'Services Rendered';
+                let priceVal = parseFloat(document.getElementById('singlePriceVal').value) || 0;
+                subtotal = priceVal;
+                
+                descText.split('\n').forEach((line, idx) => {
+                    if(line.trim() !== '') {
+                        let tr = document.createElement('tr');
+                        tr.innerHTML = `<td colspan="3" class="py-2 px-3 font-medium">${idx+1}. ${line}</td><td class="py-2 px-3 text-right font-semibold">${idx===0 ? currency+' '+priceVal.toFixed(2) : ''}</td>`;
+                        tbody.appendChild(tr);
+                    }
+                });
             } else {
-                document.getElementById('docBalanceLabel').innerText = "Balance Due:";
-                document.getElementById('docBalanceAmount').innerText = `${sym}${Math.abs(balance).toFixed(2)}`;
-                document.getElementById('docBalanceAmount').className = "text-rose-600 font-bold";
+                items.forEach((item, index) => {
+                    let total = item.qty * item.price;
+                    subtotal += total;
+                    let tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td class="py-2 px-3">${index+1}. ${item.name}</td>
+                        <td class="py-2 px-3 text-center">${item.qty}</td>
+                        <td class="py-2 px-3 text-right">${item.price.toFixed(2)}</td>
+                        <td class="py-2 px-3 text-right font-semibold">${total.toFixed(2)}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
             }
 
-            // Stamp Watermark rendering
-            const stampType = document.getElementById('stampType').value;
-            const stampEl = document.getElementById('stampElement');
-            const stampInner = document.getElementById('stampInner');
+            let taxPct = parseFloat(document.getElementById('taxPercent').value) || 0;
+            let discount = parseFloat(document.getElementById('discountVal').value) || 0;
+            let oldBal = parseFloat(document.getElementById('previousBalance').value) || 0;
+            let paid = parseFloat(document.getElementById('amountPaid').value) || 0;
 
-            if (stampType === 'none') {
-                stampEl.classList.add('hidden');
-            } else {
-                stampEl.classList.remove('hidden');
-                const shape = document.getElementById('stampShape').value;
-                stampInner.innerText = stampType.toUpperCase();
-                stampInner.className = `stamp-badge px-3 py-1 text-xs font-bold stamp-${stampType} ${
-                    shape === 'circle' ? 'stamp-circle' :
-                    shape === 'double-border' ? 'stamp-double-border' :
-                    shape === 'badge' ? 'stamp-badge-shape' : ''
-                }`;
-            }
+            let taxAmt = (subtotal * taxPct) / 100;
+            let grandTotal = subtotal + taxAmt - discount + oldBal;
+            let remainingBal = grandTotal - paid;
+
+            document.getElementById('docSubtotal').textContent = `${currency} ${subtotal.toFixed(2)}`;
+            document.getElementById('docTaxRate').textContent = taxPct;
+            document.getElementById('docTaxAmt').textContent = `${currency} ${taxAmt.toFixed(2)}`;
+            document.getElementById('docDiscountAmt').textContent = `-${currency} ${discount.toFixed(2)}`;
+            document.getElementById('docOldBalAmt').textContent = `${currency} ${oldBal.toFixed(2)}`;
+            document.getElementById('docGrandTotal').textContent = `${currency} ${grandTotal.toFixed(2)}`;
+            document.getElementById('docPaidAmt').textContent = `${currency} ${paid.toFixed(2)}`;
+            document.getElementById('docRemainingBal').textContent = `${currency} ${remainingBal.toFixed(2)}`;
 
             // Toggles
-            document.getElementById('docTerms').style.display = document.getElementById('showTerms').checked ? 'block' : 'none';
-            document.getElementById('docNotes').style.display = document.getElementById('showNotes').checked ? 'block' : 'none';
-            document.getElementById('docSignature').style.display = document.getElementById('showSignature').checked ? 'block' : 'none';
+            document.getElementById('docHeaderBox').style.display = document.getElementById('tglLogo').checked ? 'flex' : 'none';
+            document.getElementById('termsBox').style.display = document.getElementById('tglTerms').checked ? 'block' : 'none';
+            document.getElementById('signatureBox').style.display = document.getElementById('tglSignature').checked ? 'block' : 'none';
+            document.getElementById('watermarkStamp').style.display = document.getElementById('tglWatermark').checked ? 'block' : 'none';
+            document.getElementById('barcodeBox').style.display = document.getElementById('tglBarcode').checked ? 'flex' : 'none';
+            document.getElementById('qrBox').style.display = document.getElementById('tglQr').checked ? 'flex' : 'none';
 
-            // Barcode & QR Code Rendering
-            renderBarcode();
-            renderQRCode();
-            autoSave();
-        }
-
-        // Render Item/Invoice Barcode
-        function renderBarcode() {
-            const show = document.getElementById('showBarcode').checked;
-            const container = document.getElementById('barcodeContainer');
-            if (!show) {
-                container.style.display = 'none';
-                return;
+            if(document.getElementById('tglBarcode').checked) {
+                try {
+                    JsBarcode("#barcodeSVG", document.getElementById('invNumber').value, { format: "CODE128", height: 35, width: 1.5, displayValue: true, fontSize: 10, margin: 0 });
+                } catch(e) {}
             }
-            container.style.display = 'flex';
-            const invNo = document.getElementById('invNumber').value || '000000';
-            try {
-                JsBarcode("#barcode", invNo, {
-                    format: "CODE128",
-                    width: 1.5,
-                    height: 35,
-                    displayValue: true,
-                    fontSize: 10
-                });
-            } catch (e) { console.log('Barcode error:', e); }
+
+            let qrStr = document.getElementById('qrDataString').value;
+            let qrcodeEl = document.getElementById('qrcode');
+            qrcodeEl.innerHTML = '';
+            document.getElementById('docQrString').textContent = qrStr;
+            // Dynamic payment URI format for wallet/banking apps
+            let qrPayload = `PAYTO:${qrStr}?amount=${grandTotal.toFixed(2)}&bill=${document.getElementById('invNumber').value}`;
+            new QRCode(qrcodeEl, { text: qrPayload, width: 75, height: 75 });
+
+            saveToLocalStorage();
         }
 
-        // Render Payment QR Code
-        function renderQRCode() {
-            const show = document.getElementById('showPaymentQR').checked;
-            const container = document.getElementById('qrCodeContainer');
-            const qrTarget = document.getElementById('qrcode');
-            
-            if (!show) {
-                container.style.display = 'none';
-                return;
-            }
-            container.style.display = 'flex';
-            qrTarget.innerHTML = '';
-            
-            const qrText = document.getElementById('qrText').value || 'Payment';
-            try {
-                new QRCode(qrTarget, {
-                    text: qrText,
-                    width: 70,
-                    height: 70,
-                    colorDark : "#0f172a",
-                    colorLight : "#ffffff",
-                    correctLevel : QRCode.CorrectLevel.H
+        function setupKeyboardNavigation() {
+            const focusableElements = document.querySelectorAll('#leftControlPanel input, #leftControlPanel select, #leftControlPanel textarea');
+            focusableElements.forEach((el, index) => {
+                el.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+                        e.preventDefault();
+                        const nextElement = focusableElements[index + 1];
+                        if (nextElement) nextElement.focus();
+                    }
                 });
-            } catch (e) { console.log('QR error:', e); }
+            });
         }
 
-        // Reset to default generic values
+        function saveToLocalStorage() {
+            let data = {
+                type: currentDocType,
+                bizName: document.getElementById('bizName').value,
+                bizTagline: document.getElementById('bizTagline').value,
+                bizPhone: document.getElementById('bizPhone').value,
+                bizNtn: document.getElementById('bizNtn').value,
+                bizAddress: document.getElementById('bizAddress').value,
+                invNumber: document.getElementById('invNumber').value,
+                invDate: document.getElementById('invDate').value,
+                custName: document.getElementById('custName').value,
+                custPhone: document.getElementById('custPhone').value,
+                currency: document.getElementById('currencySymbol').value,
+                tax: document.getElementById('taxPercent').value,
+                discount: document.getElementById('discountVal').value,
+                oldBal: document.getElementById('previousBalance').value,
+                paid: document.getElementById('amountPaid').value,
+                status: document.getElementById('paymentStatus').value,
+                qrStr: document.getElementById('qrDataString').value,
+                items: items
+            };
+            localStorage.setItem('billmaker_pro_data', JSON.stringify(data));
+        }
+
+        function loadFromLocalStorage() {
+            let saved = localStorage.getItem('billmaker_pro_data');
+            if(!saved) return;
+            try {
+                let data = JSON.parse(saved);
+                if(data.type) setDocType(data.type);
+                if(data.bizName) document.getElementById('bizName').value = data.bizName;
+                if(data.bizTagline) document.getElementById('bizTagline').value = data.bizTagline;
+                if(data.bizPhone) document.getElementById('bizPhone').value = data.bizPhone;
+                if(data.bizNtn) document.getElementById('bizNtn').value = data.bizNtn;
+                if(data.bizAddress) document.getElementById('bizAddress').value = data.bizAddress;
+                if(data.invNumber) document.getElementById('invNumber').value = data.invNumber;
+                if(data.invDate) document.getElementById('invDate').value = data.invDate;
+                if(data.custName) document.getElementById('custName').value = data.custName;
+                if(data.custPhone) document.getElementById('custPhone').value = data.custPhone;
+                if(data.currency) document.getElementById('currencySymbol').value = data.currency;
+                if(data.tax) document.getElementById('taxPercent').value = data.tax;
+                if(data.discount) document.getElementById('discountVal').value = data.discount;
+                if(data.oldBal) document.getElementById('previousBalance').value = data.oldBal;
+                if(data.paid) document.getElementById('amountPaid').value = data.paid;
+                if(data.status) document.getElementById('paymentStatus').value = data.status;
+                if(data.qrStr) document.getElementById('qrDataString').value = data.qrStr;
+                if(data.items) items = data.items;
+            } catch(e) {}
+        }
+
+        function exportJSON() {
+            let data = localStorage.getItem('billmaker_pro_data');
+            let blob = new Blob([data], { type: 'application/json' });
+            let link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `BillMaker-Backup-${new Date().toISOString().slice(0,10)}.json`;
+            link.click();
+        }
+
         function resetData() {
-            document.getElementById('bizName').value = "Apex Global Trading";
-            document.getElementById('bizTagline').value = "Quality Retail & Wholesale Suppliers";
-            document.getElementById('bizPhone').value = "+1 (555) 019-2834";
-            document.getElementById('bizAddress').value = "Suite 402, Market Street, NY";
-            document.getElementById('invNumber').value = "INV-2026-8891";
-            document.getElementById('custName').value = "Alex Smith";
-            
-            state.items = [
-                { id: 1, name: "Wireless Optical Mouse", qty: 2, price: 15.00 },
-                { id: 2, name: "Mechanical Keyboard RGB", qty: 1, price: 45.00 },
-                { id: 3, name: "USB-C Fast Cable 2m", qty: 3, price: 8.50 }
-            ];
-
-            renderItemEditors();
-            setTemplate('thermal');
-            setPaperSize('80mm');
+            if(confirm("Kia aap saara data reset karna chahte hain?")) {
+                localStorage.removeItem('billmaker_pro_data');
+                location.reload();
+            }
         }
     </script>
 </body>
