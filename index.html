@@ -80,7 +80,6 @@
             body.paper-mode-80mm @page { size: 80mm auto; margin: 0; }
             body.paper-mode-a4 @page { size: A4 portrait; margin: 10mm; }
 
-            /* Thermal layout grid collapse to single column */
             body.paper-mode-58mm .thermal-single-col,
             body.paper-mode-80mm .thermal-single-col {
                 display: flex !important;
@@ -134,7 +133,7 @@
                 </div>
                 <div>
                     <h1 class="font-bold text-lg leading-tight flex items-center gap-2">
-                        BillMaker Pro <span class="text-[10px] bg-blue-900 text-blue-300 px-2 py-0.5 rounded-full font-normal">v2.1 Step-1 Fixed</span>
+                        BillMaker Pro <span class="text-[10px] bg-blue-900 text-blue-300 px-2 py-0.5 rounded-full font-normal">v2.2 Step-2 Secured</span>
                     </h1>
                     <p class="text-xs text-slate-400">Professional Invoice, Quotation & Thermal POS Suite</p>
                 </div>
@@ -411,7 +410,7 @@
                     </div>
                 </div>
 
-                <!-- QR, Stamp & Barcode Footer (Thermal Responsive Grid) -->
+                <!-- QR, Stamp & Barcode Footer -->
                 <div class="grid grid-cols-3 gap-4 items-center pb-4 mb-4 border-t border-dashed border-slate-300 pt-4 thermal-single-col">
                     <div id="qrBox" class="flex items-center gap-2 col-span-1">
                         <div id="qrcode" class="bg-white p-1 border rounded shadow-sm"></div>
@@ -530,6 +529,7 @@
             items.push({ id: Date.now(), name: "New Item", qty: 1, price: 500 });
             renderEditors();
             updateDocument();
+            setupKeyboardNavigation();
         }
 
         function removeItem(id) {
@@ -537,6 +537,7 @@
             items = items.filter(i => i.id !== id);
             renderEditors();
             updateDocument();
+            setupKeyboardNavigation();
         }
 
         function updateItem(id, field, val) {
@@ -564,7 +565,8 @@
         }
 
         function escapeHtml(text) {
-            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+            if(!text) return '';
+            return text.toString().replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
         }
 
         function uploadSignature(event) {
@@ -629,27 +631,27 @@
         }
 
         function updateDocument() {
-            let currency = document.getElementById('currencySymbol').value || 'PKR';
+            let currency = escapeHtml(document.getElementById('currencySymbol').value) || 'PKR';
             let mode = document.getElementById('pricingMode').value;
             
             document.getElementById('docBadgeTitle').textContent = currentDocType === 'INVOICE' ? 'TAX INVOICE' : 'QUOTATION';
             document.getElementById('watermarkStamp').textContent = currentDocType === 'INVOICE' ? 'TAX INVOICE' : 'QUOTATION';
             
-            let bizName = document.getElementById('bizName').value;
-            let bizPhone = document.getElementById('bizPhone').value;
+            let bizName = escapeHtml(document.getElementById('bizName').value);
+            let bizPhone = escapeHtml(document.getElementById('bizPhone').value);
             document.getElementById('docBizName').textContent = bizName;
-            document.getElementById('docBizTagline').textContent = document.getElementById('bizTagline').value;
-            document.getElementById('docBizContact').textContent = `Ph: ${bizPhone} | ${document.getElementById('bizAddress').value}`;
-            document.getElementById('docBizNtn').textContent = document.getElementById('bizNtn').value;
+            document.getElementById('docBizTagline').textContent = escapeHtml(document.getElementById('bizTagline').value);
+            document.getElementById('docBizContact').textContent = `Ph: ${bizPhone} | ${escapeHtml(document.getElementById('bizAddress').value)}`;
+            document.getElementById('docBizNtn').textContent = escapeHtml(document.getElementById('bizNtn').value);
             
             document.getElementById('stampBiz').textContent = bizName;
             document.getElementById('stampPhone').textContent = `Ph: ${bizPhone}`;
             document.getElementById('stampTitle').textContent = currentDocType === 'INVOICE' ? 'PAID & VERIFIED' : 'ESTIMATE VERIFIED';
 
-            document.getElementById('docInvNum').textContent = document.getElementById('invNumber').value;
-            document.getElementById('docInvDate').textContent = document.getElementById('invDate').value;
-            document.getElementById('docCustName').textContent = document.getElementById('custName').value;
-            document.getElementById('docCustPhone').textContent = `Ph: ${document.getElementById('custPhone').value}`;
+            document.getElementById('docInvNum').textContent = escapeHtml(document.getElementById('invNumber').value);
+            document.getElementById('docInvDate').textContent = escapeHtml(document.getElementById('invDate').value);
+            document.getElementById('docCustName').textContent = escapeHtml(document.getElementById('custName').value);
+            document.getElementById('docCustPhone').textContent = `Ph: ${escapeHtml(document.getElementById('custPhone').value)}`;
             
             let status = document.getElementById('paymentStatus').value;
             let statusBadge = document.getElementById('docStatusBadge');
@@ -720,9 +722,9 @@
                 } catch(e) {}
             }
 
-            let jc = document.getElementById('jazzcashAcc').value.trim();
-            let ep = document.getElementById('easypaisaAcc').value.trim();
-            let iban = document.getElementById('bankIban').value.trim();
+            let jc = escapeHtml(document.getElementById('jazzcashAcc').value.trim());
+            let ep = escapeHtml(document.getElementById('easypaisaAcc').value.trim());
+            let iban = escapeHtml(document.getElementById('bankIban').value.trim());
             let qrParts = [];
             if(jc) qrParts.push(`JazzCash:${jc}`);
             if(ep) qrParts.push(`EasyPaisa:${ep}`);
