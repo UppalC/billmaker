@@ -8,46 +8,53 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         .glass-card-3d {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.92) 0%, rgba(30, 41, 59, 0.85) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
         }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center p-4">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center p-4 selection:bg-purple-600 selection:text-white">
 
     <!-- LOGIN CONTAINER -->
     <div id="loginCard" class="glass-card-3d rounded-3xl max-w-md w-full p-8 space-y-6 border border-purple-500/40 shadow-2xl">
         <div class="text-center space-y-2">
-            <div class="bg-purple-600/20 text-purple-400 p-4 rounded-full w-16 h-16 mx-auto flex items-center justify-center text-2xl border border-purple-500/30">
-                <i class="fa-solid fa-user-shield"></i>
+            <div class="bg-purple-600/20 text-purple-400 p-4 rounded-full w-16 h-16 mx-auto flex items-center justify-center text-2xl border border-purple-500/30 shadow-lg shadow-purple-600/30">
+                <i class="fa-solid fa-user-shield animate-pulse"></i>
             </div>
-            <h1 class="text-xl font-bold text-white tracking-wide">Master Admin Control</h1>
-            <p class="text-xs text-slate-400">BillMaker Pro Studio Web Suite</p>
+            <h1 class="text-xl font-bold text-white tracking-wide font-tech">Master Admin Control</h1>
+            <p class="text-xs text-slate-400">BillMaker Pro Studio Enterprise Suite</p>
         </div>
 
         <div class="space-y-4 text-xs">
             <div>
-                <label class="block text-slate-400 mb-1 font-semibold">Master Password:</label>
+                <label class="block text-slate-400 mb-1 font-semibold">Master Password (Default: admin123):</label>
                 <input type="password" id="adminPassInput" class="w-full p-3 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100 text-sm focus:border-purple-500 outline-none" placeholder="••••••••">
             </div>
-            <button onclick="verifyPassword()" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-semibold py-3 rounded-2xl shadow-lg shadow-purple-600/30 transition">
+            <button onclick="verifyPassword()" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold py-3 rounded-2xl shadow-xl shadow-purple-600/30 transition">
                 Authenticate & Access
             </button>
+            <div class="text-center pt-2">
+                <a href="index.html" class="text-slate-400 hover:text-white underline"><i class="fa-solid fa-arrow-left mr-1"></i> Return to Main App</a>
+            </div>
         </div>
     </div>
 
     <!-- DASHBOARD CONTAINER (Hidden by default) -->
-    <div id="dashboardCard" class="glass-card-3d rounded-3xl max-w-2xl w-full p-8 space-y-6 border border-purple-500/40 shadow-2xl hidden">
+    <div id="dashboardCard" class="glass-card-3d rounded-3xl max-w-2xl w-full p-8 space-y-6 border border-purple-500/40 shadow-2xl hidden max-h-[90vh] overflow-y-auto">
         <div class="flex justify-between items-center border-b border-slate-800 pb-4">
             <div>
-                <h1 class="text-lg font-bold text-white flex items-center gap-2"><i class="fa-solid fa-sliders text-purple-400"></i> Admin Control Panel</h1>
-                <p class="text-xs text-slate-400">Manage user feature permissions & advertising</p>
+                <h1 class="text-lg font-bold text-white flex items-center gap-2 font-tech"><i class="fa-solid fa-sliders text-purple-400"></i> Admin Master Control Center</h1>
+                <p class="text-xs text-slate-400">Manage user feature permissions & advertising banners</p>
             </div>
-            <button onclick="logout()" class="text-xs bg-red-900/40 hover:bg-red-900/60 text-red-300 px-3 py-1.5 rounded-xl border border-red-800">Logout</button>
+            <div class="flex items-center gap-2">
+                <a href="index.html" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-xl border border-slate-700">Go to App</a>
+                <button onclick="logout()" class="text-xs bg-red-950/50 hover:bg-red-900/70 text-red-300 px-3 py-1.5 rounded-xl border border-red-800/60">Logout</button>
+            </div>
         </div>
 
         <div class="space-y-4 text-xs">
@@ -75,7 +82,7 @@
                     </div>
                 </div>
                 <div>
-                    <label class="block text-slate-400 mb-1">Ad Text / HTML Code:</label>
+                    <label class="block text-slate-400 mb-1">Ad Text / HTML Code / Label:</label>
                     <input type="text" id="adminAdCode" class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-xl text-slate-100">
                 </div>
             </div>
@@ -99,7 +106,7 @@
                 </div>
             </div>
 
-            <button onclick="saveAdminSettings()" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-semibold py-3 rounded-2xl shadow-lg shadow-purple-600/30 transition">
+            <button onclick="saveAdminSettings()" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold py-3 rounded-2xl shadow-xl shadow-purple-600/30 transition">
                 Save & Deploy Master Controls
             </button>
         </div>

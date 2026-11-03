@@ -4,12 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO & Search Engine Indexing Meta Tags -->
+    <!-- SEO & AI Search Engine Indexing Meta Tags -->
     <title>BillMaker Pro Studio - Next-Gen 3D Dynamic Invoice & POS Thermal Suite</title>
     <meta name="description" content="Generate 100% customizable tax invoices, estimates, quotations, and thermal POS receipts instantly with ultra 3D dynamic UI, real ink signatures, custom headers, and live preview.">
     <meta name="keywords" content="invoice generator, free invoice maker, POS receipt maker, online bill generator, 3D invoice studio, thermal receipt generator">
     <meta name="author" content="Apex Tech Solutions Studio">
     
+    <!-- Open Graph for Social & Search Indexing -->
+    <meta property="og:title" content="BillMaker Pro Studio - Ultimate Customizable Invoice Suite">
+    <meta property="og:description" content="Fully customizable invoice, quotation, and thermal receipt generator with 3D UI and real ink digital signature.">
+    <meta property="og:type" content="website">
+
+    <!-- Schema.org Structured Data for AI & Search Engine Crawlers -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "BillMaker Pro Studio",
+      "operatingSystem": "All",
+      "applicationCategory": "BusinessApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "PKR"
+      },
+      "description": "Professional customizable online invoice generator and thermal receipt studio for businesses and retailers."
+    }
+    </script>
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -82,15 +104,15 @@
 
         /* Ultra 3D Glassmorphism & Dynamic Glowing Effects */
         .glass-card-3d {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.75) 100%);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(30, 41, 59, 0.78) 100%);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .glass-card-3d:hover {
-            border-color: rgba(59, 130, 246, 0.4);
-            box-shadow: 0 30px 60px -12px rgba(37, 99, 235, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 30px 60px -12px rgba(37, 99, 235, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.25);
         }
 
         .promo-banner {
@@ -145,9 +167,8 @@
             font-size: 8.5px;
         }
 
-        /* Dynamic Background Canvas Glow */
         .bg-glow-radial {
-            background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.15) 0%, rgba(15, 23, 42, 0) 70%);
+            background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.18) 0%, rgba(9, 13, 22, 1) 75%);
         }
     </style>
 </head>
@@ -162,7 +183,7 @@
         <button onclick="toggleBannerDisplay()" class="text-white/80 hover:text-white px-2"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
-    <!-- AdSense Header Slot -->
+    <!-- AdSense Header Slot (Policy Compliant) -->
     <div id="headerAdSlot" class="no-print w-full bg-slate-900 border-b border-slate-800 text-center py-2 text-xs text-slate-400">
         <span id="adSenseBannerLabel">Advertisement Space (AdSense Enabled)</span>
     </div>
@@ -172,33 +193,34 @@
         <div class="max-w-7xl mx-auto px-4 py-3.5 flex flex-wrap items-center justify-between gap-4">
             <div class="flex items-center gap-3">
                 <div class="bg-gradient-to-tr from-blue-600 to-indigo-600 text-white p-2.5 rounded-2xl font-bold text-lg shadow-lg shadow-blue-600/40 border border-blue-400/30">
-                    <i class="fa-solid fa-cube animate-spin" style="animation-duration: 10s;"></i>
+                    <i class="fa-solid fa-cube animate-spin" style="animation-duration: 12s;"></i>
                 </div>
                 <div>
                     <h1 class="font-bold text-lg leading-tight flex items-center gap-2 font-tech">
-                        BillMaker Pro Studio <span class="text-[10px] bg-gradient-to-r from-blue-600 to-purple-600 text-white px-2.5 py-0.5 rounded-full font-bold shadow">v6.0 3D Dynamic</span>
+                        BillMaker Pro Studio <span class="text-[10px] bg-gradient-to-r from-blue-600 to-purple-600 text-white px-2.5 py-0.5 rounded-full font-bold shadow">v6.2 3D Enterprise</span>
                     </h1>
                     <p class="text-xs text-slate-400">Apex Tech Solutions Studio</p>
                 </div>
             </div>
             
             <div class="flex items-center flex-wrap gap-2">
-                <button onclick="saveDraft()" class="bg-slate-900 hover:bg-slate-800 text-slate-200 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 border border-slate-700/80 shadow-lg transition hover:scale-105">
+                <button onclick="saveDraft()" class="bg-slate-900 hover:bg-slate-800 text-slate-200 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 border border-slate-700/80 shadow-lg transition hover:scale-105" title="Save Draft">
                     <i class="fa-solid fa-floppy-disk text-emerald-400"></i> Save Draft
                 </button>
-                <button onclick="exportSettings()" class="bg-slate-900 hover:bg-slate-800 text-slate-200 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 border border-slate-700/80 shadow-lg transition hover:scale-105">
+                <button onclick="exportSettings()" class="bg-slate-900 hover:bg-slate-800 text-slate-200 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 border border-slate-700/80 shadow-lg transition hover:scale-105" title="Backup Settings">
                     <i class="fa-solid fa-cloud-arrow-down text-blue-400"></i> Backup
                 </button>
-                <label class="bg-slate-900 hover:bg-slate-800 text-slate-200 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 border border-slate-700/80 cursor-pointer shadow-lg transition hover:scale-105">
+                <label class="bg-slate-900 hover:bg-slate-800 text-slate-200 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 border border-slate-700/80 cursor-pointer shadow-lg transition hover:scale-105" title="Restore Settings">
                     <i class="fa-solid fa-cloud-arrow-up text-amber-400"></i> Restore
                     <input type="file" accept=".json" onchange="importSettings(event)" class="hidden">
                 </label>
 
                 <div class="h-5 w-[1px] bg-slate-800 mx-1"></div>
 
-                <button onclick="openModal('userGuideModal')" class="bg-blue-950/80 hover:bg-blue-900 text-blue-200 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 border border-blue-700/60 shadow-lg transition hover:scale-105">
+                <!-- Link to Dedicated User Guide Page -->
+                <a href="guide.html" target="_blank" class="bg-blue-950/80 hover:bg-blue-900 text-blue-200 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 border border-blue-700/60 shadow-lg transition hover:scale-105">
                     <i class="fa-solid fa-book-open"></i> User Guide
-                </button>
+                </a>
 
                 <button onclick="handlePrint()" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 shadow-xl shadow-emerald-600/30 transition hover:scale-105">
                     <i class="fa-solid fa-print"></i> Print / PDF
@@ -213,7 +235,7 @@
     <!-- Main Workspace -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-        <!-- LEFT PANEL: CONTROLS -->
+        <!-- LEFT PANEL: FULL CONTROLS -->
         <div class="no-print lg:col-span-6 xl:col-span-5 space-y-4 overflow-y-auto max-h-[82vh] pr-1" id="leftControlPanel">
             
             <!-- 1. Document Type & Paper Size -->
@@ -243,7 +265,7 @@
                     <button onclick="setTheme('cyber-neon')" class="p-2.5 bg-zinc-900 border border-zinc-700 rounded-2xl text-emerald-400 hover:border-emerald-500 transition font-semibold">Cyber Neon</button>
                 </div>
                 <div class="pt-1">
-                    <label class="block text-slate-400 mb-1 text-xs">Upload Custom Background Image / Watermark Wallpaper:</label>
+                    <label class="block text-slate-400 mb-1 text-xs">Upload Custom Background Image / Wallpaper:</label>
                     <input type="file" accept="image/*" onchange="uploadCustomBackground(event)" class="w-full p-2 bg-slate-900 border border-slate-700 rounded-2xl text-xs text-slate-300">
                 </div>
             </div>
@@ -265,7 +287,7 @@
                 </div>
             </div>
 
-            <!-- 4. Business Information (Dummy Records) -->
+            <!-- 4. Business Information -->
             <div class="glass-card-3d p-4 rounded-3xl space-y-2">
                 <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
                     <i class="fa-solid fa-building text-blue-400"></i> 4. Business Information
@@ -309,7 +331,7 @@
                     </div>
                     <div>
                         <label class="block text-slate-400 mb-1">Date & Time</label>
-                        <input type="text" id="invDate" value="2026-11-03 10:00" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100">
+                        <input type="text" id="invDate" value="2026-11-03 11:45" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100">
                     </div>
                     <div>
                         <label class="block text-slate-400 mb-1">Customer Name</label>
@@ -488,7 +510,7 @@
                     <div class="text-right">
                         <h1 id="docBadgeTitle" class="text-2xl font-extrabold text-slate-800 uppercase tracking-wide">TAX INVOICE</h1>
                         <p class="text-xs font-mono font-bold text-blue-600 mt-1" id="docInvNum">INV-5001</p>
-                        <p class="text-[11px] text-slate-500" id="docInvDate">2026-11-03 10:00</p>
+                        <p class="text-[11px] text-slate-500" id="docInvDate">2026-11-03 11:45</p>
                     </div>
                 </div>
 
@@ -587,81 +609,16 @@
         <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
             <p>&copy; 2026 BillMaker Pro Studio. All rights reserved.</p>
             <div class="flex items-center gap-4 text-xs">
-                <button onclick="openModal('privacyModal')" class="hover:text-white underline">Privacy Policy</button>
-                <button onclick="openModal('termsModal')" class="hover:text-white underline">Terms & Conditions</button>
-                <button onclick="openModal('cookieModal')" class="hover:text-white underline">Cookie Policy</button>
-                <button onclick="openModal('contactModal')" class="hover:text-white underline">Contact & Agreement</button>
+                <a href="guide.html#privacy" class="hover:text-white underline">Privacy Policy</a>
+                <a href="guide.html#terms" class="hover:text-white underline">Terms & Conditions</a>
+                <a href="guide.html#cookies" class="hover:text-white underline">Cookie Policy</a>
+                <a href="guide.html#contact" class="hover:text-white underline">Contact & Agreement</a>
             </div>
             <p class="text-[11px] text-slate-400 text-center max-w-md">
                 <strong>Legal Safe Harbor Disclaimer:</strong> Free utility tool for billing estimation. Studio holds no liability for merchant tax compliance.
             </p>
         </div>
     </footer>
-
-    <!-- MODALS -->
-    <!-- User Guide Modal -->
-    <div id="userGuideModal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden">
-        <div class="glass-card-3d rounded-3xl max-w-3xl w-full p-6 text-slate-200 text-xs space-y-4 max-h-[85vh] overflow-y-auto">
-            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                <h2 class="text-base font-bold text-white flex items-center gap-2"><i class="fa-solid fa-book-open text-blue-400"></i> BillMaker Pro User Guide / Manual</h2>
-                <button onclick="closeModal('userGuideModal')" class="text-slate-400 hover:text-white text-base"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="space-y-4 text-slate-300 leading-relaxed">
-                <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
-                    <h3 class="font-bold text-blue-400 mb-1">English Manual:</h3>
-                    <ul class="list-disc pl-5 space-y-1">
-                        <li><strong>Dynamic 3D Suite:</strong> Fully customizable business details, custom background uploads, and real-time live preview.</li>
-                        <li><strong>Thermal & POS Modes:</strong> Optimized 58mm and 80mm printing layouts with zero text clipping.</li>
-                    </ul>
-                </div>
-                <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800" dir="rtl">
-                    <h3 class="font-bold text-emerald-400 mb-1">اردو یوزر مینوئل (Urdu User Guide):</h3>
-                    <ul class="list-disc pr-5 space-y-1">
-                        <li><strong>مکمل حسبِ ضرورت:</strong> آپ اپنا لوگو، بیک گراؤنڈ وال پیپر، اور ہر ٹیکسٹ فیلڈ کو خود سے تبدیل کر سکتے ہیں۔</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="text-right pt-2">
-                <button onclick="closeModal('userGuideModal')" class="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-2xl">Got It / سمجھ آ گئی</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Privacy Policy Modal -->
-    <div id="privacyModal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden">
-        <div class="glass-card-3d rounded-3xl max-w-2xl w-full p-6 text-slate-200 text-xs space-y-4 max-h-[80vh] overflow-y-auto">
-            <h2 class="text-base font-bold text-white border-b border-slate-800 pb-2">Privacy Policy</h2>
-            <p>Your privacy is fully protected. All data is securely stored locally in your browser.</p>
-            <div class="text-right pt-2"><button onclick="closeModal('privacyModal')" class="bg-blue-600 text-white px-5 py-2.5 rounded-2xl">Close</button></div>
-        </div>
-    </div>
-
-    <!-- Terms & Conditions Modal -->
-    <div id="termsModal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden">
-        <div class="glass-card-3d rounded-3xl max-w-2xl w-full p-6 text-slate-200 text-xs space-y-4 max-h-[80vh] overflow-y-auto">
-            <h2 class="text-base font-bold text-white border-b border-slate-800 pb-2">Terms & Conditions</h2>
-            <p>BillMaker Pro is a free estimation tool for merchants. Studio holds no liability for tax compliance.</p>
-            <div class="text-right pt-2"><button onclick="closeModal('termsModal')" class="bg-blue-600 text-white px-5 py-2.5 rounded-2xl">Close</button></div>
-        </div>
-    </div>
-
-    <!-- Cookie Policy Modal -->
-    <div id="cookieModal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden">
-        <div class="glass-card-3d rounded-3xl max-w-2xl w-full p-6 text-slate-200 text-xs space-y-4 max-h-[80vh] overflow-y-auto">
-            <h2 class="text-base font-bold text-white border-b border-slate-800 pb-2">Cookie Policy</h2>
-            <p>We use essential browser cookies to maintain user preferences and invoice drafts.</p>
-            <div class="text-right pt-2"><button onclick="closeModal('cookieModal')" class="bg-blue-600 text-white px-5 py-2.5 rounded-2xl">Close</button></div>
-        </div>
-    </div>
-
-    <!-- Contact & Agreement Modal -->
-    <div id="contactModal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden">
-        <div class="glass-card-3d rounded-3xl max-w-2xl w-full p-6 text-slate-200 text-xs space-y-4 max-h-[80vh] overflow-y-auto">
-            <h2 class="text-base font-bold text-white border-b border-slate-800 pb-2">Contact & Agreement</h2>
-            <p>Apex Tech Solutions Studio. All rights reserved.</p>
-            <div class="text-right pt-2"><button onclick="closeModal('contactModal')" class="bg-blue-600 text-white px-5 py-2.5 rounded-2xl">Close</button></div>
-        </div>
-    </div>
 
     <!-- JavaScript Engine -->
     <script>
@@ -750,9 +707,6 @@
                 if (data.items) items = data.items;
             } catch(e) {}
         }
-
-        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
-        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
         function applyAdminControls() {
             const bText = localStorage.getItem('billmaker_banner_text');
