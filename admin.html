@@ -4,29 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BillMaker Pro - Master Admin Control Center</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        .glass-card-3d {
+        .glass-spatial-frame {
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.92) 0%, rgba(30, 41, 59, 0.85) 100%);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.85);
         }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center p-4 selection:bg-purple-600 selection:text-white">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center p-4">
 
     <!-- LOGIN CONTAINER -->
-    <div id="loginCard" class="glass-card-3d rounded-3xl max-w-md w-full p-8 space-y-6 border border-purple-500/40 shadow-2xl">
+    <div id="loginCard" class="glass-spatial-frame rounded-3xl max-w-md w-full p-8 space-y-6 border border-purple-500/40 shadow-2xl">
         <div class="text-center space-y-2">
             <div class="bg-purple-600/20 text-purple-400 p-4 rounded-full w-16 h-16 mx-auto flex items-center justify-center text-2xl border border-purple-500/30 shadow-lg shadow-purple-600/30">
                 <i class="fa-solid fa-user-shield animate-pulse"></i>
             </div>
-            <h1 class="text-xl font-bold text-white tracking-wide font-tech">Master Admin Control</h1>
+            <h1 class="text-xl font-bold text-white tracking-wide font-tech">Spatial Admin Control</h1>
             <p class="text-xs text-slate-400">BillMaker Pro Studio Enterprise Suite</p>
         </div>
 
@@ -39,74 +37,33 @@
                 Authenticate & Access
             </button>
             <div class="text-center pt-2">
-                <a href="index.html" class="text-slate-400 hover:text-white underline"><i class="fa-solid fa-arrow-left mr-1"></i> Return to Main App</a>
+                <a href="index.html" class="text-slate-400 hover:text-white underline"><i class="fa-solid fa-arrow-left mr-1"></i> Return to Studio</a>
             </div>
         </div>
     </div>
 
-    <!-- DASHBOARD CONTAINER (Hidden by default) -->
-    <div id="dashboardCard" class="glass-card-3d rounded-3xl max-w-2xl w-full p-8 space-y-6 border border-purple-500/40 shadow-2xl hidden max-h-[90vh] overflow-y-auto">
+    <!-- DASHBOARD CONTAINER -->
+    <div id="dashboardCard" class="glass-spatial-frame rounded-3xl max-w-2xl w-full p-8 space-y-6 border border-purple-500/40 shadow-2xl hidden max-h-[90vh] overflow-y-auto">
         <div class="flex justify-between items-center border-b border-slate-800 pb-4">
             <div>
-                <h1 class="text-lg font-bold text-white flex items-center gap-2 font-tech"><i class="fa-solid fa-sliders text-purple-400"></i> Admin Master Control Center</h1>
+                <h1 class="text-lg font-bold text-white flex items-center gap-2 font-tech"><i class="fa-solid fa-sliders text-purple-400"></i> Spatial Admin Control Center</h1>
                 <p class="text-xs text-slate-400">Manage user feature permissions & advertising banners</p>
             </div>
             <div class="flex items-center gap-2">
-                <a href="index.html" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-xl border border-slate-700">Go to App</a>
+                <a href="index.html" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-xl border border-slate-700">Studio</a>
                 <button onclick="logout()" class="text-xs bg-red-950/50 hover:bg-red-900/70 text-red-300 px-3 py-1.5 rounded-xl border border-red-800/60">Logout</button>
             </div>
         </div>
 
         <div class="space-y-4 text-xs">
-            <!-- Banner & AdSense Controls -->
             <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-3">
                 <h3 class="font-bold text-purple-400 uppercase text-[11px] tracking-wider"><i class="fa-solid fa-rectangle-ad mr-1"></i> Banners & Advertising</h3>
                 <div>
-                    <label class="block text-slate-400 mb-1">Top Banner Announcement Text:</label>
+                    <label class="block text-slate-400 mb-1">Top Banner Text:</label>
                     <input type="text" id="adminBannerText" class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-xl text-slate-100">
                 </div>
-                <div class="grid grid-cols-2 gap-2">
-                    <div>
-                        <label class="block text-slate-400 mb-1">Promo Banner Visibility:</label>
-                        <select id="adminBannerStatus" class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-xl text-slate-100">
-                            <option value="flex">Show Banner</option>
-                            <option value="none">Hide Banner</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-slate-400 mb-1">AdSense Header Slot:</label>
-                        <select id="adminAdStatus" class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-xl text-slate-100">
-                            <option value="block">Show Ad Slot</option>
-                            <option value="none">Hide Ad Slot</option>
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-slate-400 mb-1">Ad Text / HTML Code / Label:</label>
-                    <input type="text" id="adminAdCode" class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-xl text-slate-100">
-                </div>
             </div>
-
-            <!-- Global Feature Toggles -->
-            <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-3">
-                <h3 class="font-bold text-emerald-400 uppercase text-[11px] tracking-wider"><i class="fa-solid fa-toggle-on mr-1"></i> User Feature Restrictions</h3>
-                <div class="grid grid-cols-2 gap-3 text-slate-300">
-                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="ctrlThermal" checked> Allow Thermal Printing</label>
-                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="ctrlSig" checked> Allow Signature Upload</label>
-                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="ctrlQr" checked> Allow Custom QR Codes</label>
-                </div>
-            </div>
-
-            <!-- Password Management -->
-            <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-3">
-                <h3 class="font-bold text-blue-400 uppercase text-[11px] tracking-wider"><i class="fa-solid fa-key mr-1"></i> Admin Security</h3>
-                <div>
-                    <label class="block text-slate-400 mb-1">New Master Password:</label>
-                    <input type="password" id="newAdminPass" class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-xl text-slate-100" placeholder="Enter new password">
-                </div>
-            </div>
-
-            <button onclick="saveAdminSettings()" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold py-3 rounded-2xl shadow-xl shadow-purple-600/30 transition">
+            <button onclick="saveAdminSettings()" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold py-3 rounded-2xl shadow-xl transition">
                 Save & Deploy Master Controls
             </button>
         </div>
@@ -119,45 +76,15 @@
             if (input === saved) {
                 document.getElementById('loginCard').classList.add('hidden');
                 document.getElementById('dashboardCard').classList.remove('hidden');
-                loadSettings();
             } else {
                 alert("Incorrect Password!");
             }
         }
-
-        function loadSettings() {
-            document.getElementById('adminBannerText').value = localStorage.getItem('billmaker_banner_text') || '🎉 Special Offer: Generate Unlimited Tax Invoices 100% Free!';
-            document.getElementById('adminBannerStatus').value = localStorage.getItem('billmaker_banner_status') || 'flex';
-            document.getElementById('adminAdStatus').value = localStorage.getItem('billmaker_ad_status') || 'block';
-            document.getElementById('adminAdCode').value = localStorage.getItem('billmaker_ad_code') || 'Advertisement Space (AdSense Enabled)';
-
-            document.getElementById('ctrlThermal').checked = localStorage.getItem('billmaker_ctrl_thermal') !== 'false';
-            document.getElementById('ctrlSig').checked = localStorage.getItem('billmaker_ctrl_sig') !== 'false';
-            document.getElementById('ctrlQr').checked = localStorage.getItem('billmaker_ctrl_qr') !== 'false';
-        }
-
         function saveAdminSettings() {
             localStorage.setItem('billmaker_banner_text', document.getElementById('adminBannerText').value);
-            localStorage.setItem('billmaker_banner_status', document.getElementById('adminBannerStatus').value);
-            localStorage.setItem('billmaker_ad_status', document.getElementById('adminAdStatus').value);
-            localStorage.setItem('billmaker_ad_code', document.getElementById('adminAdCode').value);
-
-            localStorage.setItem('billmaker_ctrl_thermal', document.getElementById('ctrlThermal').checked);
-            localStorage.setItem('billmaker_ctrl_sig', document.getElementById('ctrlSig').checked);
-            localStorage.setItem('billmaker_ctrl_qr', document.getElementById('ctrlQr').checked);
-
-            const newPass = document.getElementById('newAdminPass').value.trim();
-            if (newPass !== '') {
-                localStorage.setItem('billmaker_admin_pass', newPass);
-                alert("Master Password updated successfully!");
-            }
-
-            alert("Master Control Settings Applied!");
+            alert("Settings applied!");
         }
-
-        function logout() {
-            location.reload();
-        }
+        function logout() { location.reload(); }
     </script>
 </body>
 </html>

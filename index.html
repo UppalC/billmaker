@@ -5,32 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- SEO & AI Search Engine Indexing Meta Tags -->
-    <title>BillMaker Pro Studio - Next-Gen 3D Dynamic Invoice & POS Thermal Suite</title>
-    <meta name="description" content="Generate 100% customizable tax invoices, estimates, quotations, and thermal POS receipts instantly with ultra 3D dynamic UI, real ink signatures, custom headers, and live preview.">
-    <meta name="keywords" content="invoice generator, free invoice maker, POS receipt maker, online bill generator, 3D invoice studio, thermal receipt generator">
+    <title>BillMaker Pro Studio - Spatial 3D Dynamic Invoice & POS Suite</title>
+    <meta name="description" content="Generate 100% customizable tax invoices, estimates, quotations, and thermal POS receipts instantly with spatial 3D UI design, emotion workflow steps, and real ink signatures.">
+    <meta name="keywords" content="invoice generator, spatial UI bill maker, POS receipt maker, online bill generator, 3D glassmorphic studio">
     <meta name="author" content="Apex Tech Solutions Studio">
     
     <!-- Open Graph for Social & Search Indexing -->
-    <meta property="og:title" content="BillMaker Pro Studio - Ultimate Customizable Invoice Suite">
-    <meta property="og:description" content="Fully customizable invoice, quotation, and thermal receipt generator with 3D UI and real ink digital signature.">
+    <meta property="og:title" content="BillMaker Pro Studio - Spatial 3D Invoice Suite">
+    <meta property="og:description" content="Fully customizable invoice, quotation, and thermal receipt generator with spatial 3D glassmorphic frames and emotion steps.">
     <meta property="og:type" content="website">
-
-    <!-- Schema.org Structured Data for AI & Search Engine Crawlers -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "BillMaker Pro Studio",
-      "operatingSystem": "All",
-      "applicationCategory": "BusinessApplication",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "PKR"
-      },
-      "description": "Professional customizable online invoice generator and thermal receipt studio for businesses and retailers."
-    }
-    </script>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -62,7 +45,7 @@
     <style>
         @media print {
             body { background: white !important; color: black !important; padding: 0 !important; margin: 0 !important; }
-            .no-print, header, sidebar, .edit-panel, button, .action-bar, footer { display: none !important; }
+            .no-print, header, sidebar, .edit-panel, button, .action-bar, footer, .spatial-nav { display: none !important; }
             .print-area-wrapper { width: 100% !important; margin: 0 !important; padding: 0 !important; box-shadow: none !important; border: none !important; transform: none !important; }
             .receipt-container { margin: 0 auto !important; box-shadow: none !important; border: none !important; width: 100% !important; max-width: none !important; }
             thead { display: table-header-group; }
@@ -102,17 +85,18 @@
             display: inline-block;
         }
 
-        /* Ultra 3D Glassmorphism & Dynamic Glowing Effects */
-        .glass-card-3d {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(30, 41, 59, 0.78) 100%);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Spatial UI & 3D Glassmorphic Frames */
+        .glass-spatial-frame {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            transform: perspective(1000px) translateZ(0px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .glass-card-3d:hover {
-            border-color: rgba(59, 130, 246, 0.5);
-            box-shadow: 0 30px 60px -12px rgba(37, 99, 235, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+        .glass-spatial-frame:hover {
+            border-color: rgba(59, 130, 246, 0.6);
+            box-shadow: 0 35px 70px -15px rgba(37, 99, 235, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.35);
         }
 
         .promo-banner {
@@ -168,7 +152,7 @@
         }
 
         .bg-glow-radial {
-            background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.18) 0%, rgba(9, 13, 22, 1) 75%);
+            background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.2) 0%, rgba(9, 13, 22, 1) 80%);
         }
     </style>
 </head>
@@ -177,13 +161,13 @@
     <!-- Top Promotional Banner -->
     <div id="promoBannerBox" class="no-print promo-banner text-white px-4 py-3 text-xs font-medium flex justify-between items-center shadow-2xl relative z-50">
         <div class="flex items-center gap-2 mx-auto">
-            <i class="fa-solid fa-bolt text-amber-300 animate-pulse"></i>
-            <span id="bannerTextContent">🚀 Next-Gen 3D Dynamic Invoice Suite: Fully Customizable, 58mm/80mm POS & Thermal Ready!</span>
+            <i class="fa-solid fa-cube text-amber-300 animate-spin" style="animation-duration: 8s;"></i>
+            <span id="bannerTextContent">✨ Spatial 3D UI Active: Experience Immersive Glassmorphic Frames & Emotion Step Workflow!</span>
         </div>
         <button onclick="toggleBannerDisplay()" class="text-white/80 hover:text-white px-2"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
-    <!-- AdSense Header Slot (Policy Compliant) -->
+    <!-- AdSense Header Slot -->
     <div id="headerAdSlot" class="no-print w-full bg-slate-900 border-b border-slate-800 text-center py-2 text-xs text-slate-400">
         <span id="adSenseBannerLabel">Advertisement Space (AdSense Enabled)</span>
     </div>
@@ -193,31 +177,30 @@
         <div class="max-w-7xl mx-auto px-4 py-3.5 flex flex-wrap items-center justify-between gap-4">
             <div class="flex items-center gap-3">
                 <div class="bg-gradient-to-tr from-blue-600 to-indigo-600 text-white p-2.5 rounded-2xl font-bold text-lg shadow-lg shadow-blue-600/40 border border-blue-400/30">
-                    <i class="fa-solid fa-cube animate-spin" style="animation-duration: 12s;"></i>
+                    <i class="fa-solid fa-vr-cardboard"></i>
                 </div>
                 <div>
                     <h1 class="font-bold text-lg leading-tight flex items-center gap-2 font-tech">
-                        BillMaker Pro Studio <span class="text-[10px] bg-gradient-to-r from-blue-600 to-purple-600 text-white px-2.5 py-0.5 rounded-full font-bold shadow">v6.2 3D Enterprise</span>
+                        BillMaker Pro Studio <span class="text-[10px] bg-gradient-to-r from-blue-600 to-purple-600 text-white px-2.5 py-0.5 rounded-full font-bold shadow">v7.0 Spatial 3D</span>
                     </h1>
                     <p class="text-xs text-slate-400">Apex Tech Solutions Studio</p>
                 </div>
             </div>
             
             <div class="flex items-center flex-wrap gap-2">
-                <button onclick="saveDraft()" class="bg-slate-900 hover:bg-slate-800 text-slate-200 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 border border-slate-700/80 shadow-lg transition hover:scale-105" title="Save Draft">
+                <button onclick="saveDraft()" class="bg-slate-900 hover:bg-slate-800 text-slate-200 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 border border-slate-700/80 shadow-lg transition hover:scale-105">
                     <i class="fa-solid fa-floppy-disk text-emerald-400"></i> Save Draft
                 </button>
-                <button onclick="exportSettings()" class="bg-slate-900 hover:bg-slate-800 text-slate-200 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 border border-slate-700/80 shadow-lg transition hover:scale-105" title="Backup Settings">
+                <button onclick="exportSettings()" class="bg-slate-900 hover:bg-slate-800 text-slate-200 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 border border-slate-700/80 shadow-lg transition hover:scale-105">
                     <i class="fa-solid fa-cloud-arrow-down text-blue-400"></i> Backup
                 </button>
-                <label class="bg-slate-900 hover:bg-slate-800 text-slate-200 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 border border-slate-700/80 cursor-pointer shadow-lg transition hover:scale-105" title="Restore Settings">
+                <label class="bg-slate-900 hover:bg-slate-800 text-slate-200 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 border border-slate-700/80 cursor-pointer shadow-lg transition hover:scale-105">
                     <i class="fa-solid fa-cloud-arrow-up text-amber-400"></i> Restore
                     <input type="file" accept=".json" onchange="importSettings(event)" class="hidden">
                 </label>
 
                 <div class="h-5 w-[1px] bg-slate-800 mx-1"></div>
 
-                <!-- Link to Dedicated User Guide Page -->
                 <a href="guide.html" target="_blank" class="bg-blue-950/80 hover:bg-blue-900 text-blue-200 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 border border-blue-700/60 shadow-lg transition hover:scale-105">
                     <i class="fa-solid fa-book-open"></i> User Guide
                 </a>
@@ -232,262 +215,191 @@
         </div>
     </header>
 
-    <!-- Main Workspace -->
+    <!-- Main Workspace with Spatial UI & Emotion Steps -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-        <!-- LEFT PANEL: FULL CONTROLS -->
+        <!-- LEFT PANEL: SPATIAL 3D FRAMES & EMOTION STEPS -->
         <div class="no-print lg:col-span-6 xl:col-span-5 space-y-4 overflow-y-auto max-h-[82vh] pr-1" id="leftControlPanel">
             
-            <!-- 1. Document Type & Paper Size -->
-            <div class="glass-card-3d p-4 rounded-3xl space-y-3" id="secPaperType">
-                <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
-                    <i class="fa-solid fa-file-lines text-blue-400"></i> 1. Document Type & Paper Size
-                </h2>
-                <div class="grid grid-cols-2 gap-2">
-                    <button onclick="setDocType('INVOICE')" class="doc-type-btn py-2.5 px-2 text-center border rounded-2xl text-xs font-semibold bg-blue-600 text-white border-blue-500 transition shadow-lg" id="type-invoice">📄 Tax Invoice</button>
-                    <button onclick="setDocType('QUOTATION')" class="doc-type-btn py-2.5 px-2 text-center border rounded-2xl text-xs font-semibold bg-slate-900 text-slate-300 border-slate-700 transition" id="type-quotation">📋 Quotation / Estimate</button>
+            <!-- SPATIAL EMOTION STEP NAVIGATION BAR -->
+            <div class="glass-spatial-frame p-3 rounded-2xl flex items-center justify-between text-xs font-semibold spatial-nav">
+                <button onclick="setEmotionStep(1)" id="stepBtn1" class="px-3 py-1.5 rounded-xl bg-blue-600 text-white shadow transition">1. Setup 🏢</button>
+                <button onclick="setEmotionStep(2)" id="stepBtn2" class="px-3 py-1.5 rounded-xl bg-slate-900 text-slate-300 border border-slate-700 transition">2. Items 🛒</button>
+                <button onclick="setEmotionStep(3)" id="stepBtn3" class="px-3 py-1.5 rounded-xl bg-slate-900 text-slate-300 border border-slate-700 transition">3. Finance 💰</button>
+                <button onclick="setEmotionStep(4)" id="stepBtn4" class="px-3 py-1.5 rounded-xl bg-slate-900 text-slate-300 border border-slate-700 transition">4. Sign ✨</button>
+            </div>
+
+            <!-- EMOTION STEP 1: SETUP & METADATA -->
+            <div id="emotionStep1" class="emotion-step-pane space-y-4">
+                <div class="glass-spatial-frame p-4 rounded-3xl space-y-3">
+                    <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
+                        <i class="fa-solid fa-file-lines text-blue-400"></i> Document Type & Paper Size
+                    </h2>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="setDocType('INVOICE')" class="doc-type-btn py-2.5 px-2 text-center border rounded-2xl text-xs font-semibold bg-blue-600 text-white border-blue-500 transition shadow-lg" id="type-invoice">📄 Tax Invoice</button>
+                        <button onclick="setDocType('QUOTATION')" class="doc-type-btn py-2.5 px-2 text-center border rounded-2xl text-xs font-semibold bg-slate-900 text-slate-300 border-slate-700 transition" id="type-quotation">📋 Quotation / Estimate</button>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 pt-1" id="thermalSizeBtnGroup">
+                        <button onclick="setPaperSize('58mm')" class="paper-btn py-2 px-1 text-center border rounded-2xl text-xs font-medium bg-slate-900 border-slate-700 text-slate-300 transition">58mm Thermal</button>
+                        <button onclick="setPaperSize('80mm')" class="paper-btn py-2 px-1 text-center border rounded-2xl text-xs font-medium bg-slate-900 border-slate-700 text-slate-300 transition">80mm POS</button>
+                        <button onclick="setPaperSize('a4')" class="paper-btn py-2 px-1 text-center border rounded-2xl text-xs font-medium bg-blue-900/50 border-blue-500 text-blue-300 font-bold transition">A4 Sheet</button>
+                    </div>
                 </div>
-                <div class="grid grid-cols-3 gap-2 pt-1" id="thermalSizeBtnGroup">
-                    <button onclick="setPaperSize('58mm')" class="paper-btn py-2 px-1 text-center border rounded-2xl text-xs font-medium bg-slate-900 border-slate-700 text-slate-300 transition">58mm Thermal</button>
-                    <button onclick="setPaperSize('80mm')" class="paper-btn py-2 px-1 text-center border rounded-2xl text-xs font-medium bg-slate-900 border-slate-700 text-slate-300 transition">80mm POS</button>
-                    <button onclick="setPaperSize('a4')" class="paper-btn py-2 px-1 text-center border rounded-2xl text-xs font-medium bg-blue-900/50 border-blue-500 text-blue-300 font-bold transition">A4 Sheet</button>
+
+                <div class="glass-spatial-frame p-4 rounded-3xl space-y-2">
+                    <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
+                        <i class="fa-solid fa-building text-blue-400"></i> Business & Customer Info
+                    </h2>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div>
+                            <label class="block text-slate-400 mb-1">Business Name</label>
+                            <input type="text" id="bizName" value="Apex Tech Store" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100">
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 mb-1">Phone Number</label>
+                            <input type="text" id="bizPhone" value="0300-1234567" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100">
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 mb-1">Customer Name</label>
+                            <input type="text" id="custName" value="Ali Ahmed Client" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100">
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 mb-1">Customer Phone</label>
+                            <input type="text" id="custPhone" value="0311-9876543" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100">
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- 2. Theme & Custom Background Uploader -->
-            <div class="glass-card-3d p-4 rounded-3xl space-y-3">
+            <!-- EMOTION STEP 2: ITEMS & PRICING -->
+            <div id="emotionStep2" class="emotion-step-pane space-y-4 hidden">
+                <div class="glass-spatial-frame p-4 rounded-3xl space-y-3">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
+                            <i class="fa-solid fa-list text-blue-400"></i> Items & Pricing Mode
+                        </h2>
+                        <div class="flex items-center gap-2">
+                            <select id="pricingMode" onchange="togglePricingMode()" class="text-xs p-2 bg-slate-900 border border-slate-700 rounded-2xl text-slate-200 font-semibold">
+                                <option value="individual">Individual Prices</option>
+                                <option value="single">Lump-sum Single Price</option>
+                            </select>
+                            <button onclick="addItem()" class="bg-blue-600 hover:bg-blue-500 text-white text-xs px-3 py-2 rounded-2xl font-semibold shadow-lg"><i class="fa-solid fa-plus"></i> Add</button>
+                        </div>
+                    </div>
+                    <div id="itemsEditorList" class="space-y-2"></div>
+                    <div id="singlePriceBox" class="hidden space-y-2 pt-2 border-t border-slate-700">
+                        <textarea id="singleDesc" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-xs text-slate-100" rows="3" placeholder="Enter items description"></textarea>
+                        <input type="number" id="singlePriceVal" value="5000" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-xs font-bold text-blue-400" placeholder="Total Lump-sum Price">
+                    </div>
+                </div>
+            </div>
+
+            <!-- EMOTION STEP 3: FINANCIALS & TAX -->
+            <div id="emotionStep3" class="emotion-step-pane space-y-4 hidden">
+                <div class="glass-spatial-frame p-4 rounded-3xl space-y-3">
+                    <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
+                        <i class="fa-solid fa-calculator text-blue-400"></i> Financials & Payment Status
+                    </h2>
+                    <div class="grid grid-cols-3 gap-2 text-xs">
+                        <div>
+                            <label class="block text-slate-400 mb-1">Currency</label>
+                            <input type="text" id="currencySymbol" value="PKR" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-center font-bold text-slate-100">
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 mb-1">Tax Rate (%)</label>
+                            <input type="number" id="taxPercent" value="0" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-center text-slate-100">
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 mb-1">Payment Status</label>
+                            <select id="paymentStatus" onchange="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-200 font-semibold">
+                                <option value="Paid" selected>Paid</option>
+                                <option value="Udhar / Credit">Udhar / Credit</option>
+                                <option value="Partial">Partial Payment</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-xs pt-1">
+                        <div>
+                            <label class="block text-slate-400 mb-1">Old Udhar / Balance</label>
+                            <input type="number" id="previousBalance" value="0" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-amber-400 font-semibold">
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 mb-1">Amount Paid</label>
+                            <input type="number" id="amountPaid" value="5000" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-emerald-400 font-semibold">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EMOTION STEP 4: SIGNATURE & STAMPS -->
+            <div id="emotionStep4" class="emotion-step-pane space-y-4 hidden">
+                <div class="glass-spatial-frame p-4 rounded-3xl space-y-3" id="secSigGroup">
+                    <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
+                        <i class="fa-solid fa-signature text-blue-400"></i> Signature, Ink & Stamps
+                    </h2>
+                    <div class="space-y-3 text-xs">
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-slate-400 mb-1">Upload Signature:</label>
+                                <input type="file" accept="image/*" onchange="uploadSignature(event)" class="w-full p-1.5 bg-slate-900 border border-slate-700 rounded-2xl text-[11px] text-slate-300">
+                            </div>
+                            <div>
+                                <label class="block text-slate-400 mb-1">Ink Color:</label>
+                                <select id="sigInkColor" onchange="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded-2xl text-slate-200">
+                                    <option value="blue" selected>Deep Blue Pen</option>
+                                    <option value="black">Classic Black Pen</option>
+                                    <option value="red">Official Red Pen</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 mb-1">Rubber Stamp Style:</label>
+                            <select id="stampDesignStyle" onchange="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded-2xl text-slate-200 font-semibold">
+                                <option value="style-1">Style 1: Circular Verified Badge</option>
+                                <option value="style-2">Style 2: Rectangular Official Paid</option>
+                                <option value="style-3">Style 3: Double-Border Starburst</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Optional Elements Toggles Frame -->
+                <div class="glass-spatial-frame p-4 rounded-3xl space-y-2">
+                    <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
+                        <i class="fa-solid fa-toggle-on text-blue-400"></i> Optional Elements Toggles
+                    </h2>
+                    <div class="grid grid-cols-2 gap-2 text-xs text-slate-300">
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglLogo" checked onchange="updateDocument()"> Header Logo / Badge</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglBarcode" checked onchange="updateDocument()"> Bill # Barcode</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglQr" checked onchange="updateDocument()"> Online Payment QR</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglTerms" checked onchange="updateDocument()"> Terms & Notes</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglSignature" checked onchange="updateDocument()"> Authorized Signature</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglWatermark" checked onchange="updateDocument()"> Watermark Stamp</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglRubberStamp" checked onchange="updateDocument()"> Digital Rubber Stamp</label>
+                        <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglCustInfo" checked onchange="updateDocument()"> Customer Meta Box</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Theme & Wallpaper Frame -->
+            <div class="glass-spatial-frame p-4 rounded-3xl space-y-2">
                 <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
-                    <i class="fa-solid fa-palette text-blue-400"></i> 2. Theme & Custom Background
+                    <i class="fa-solid fa-palette text-blue-400"></i> Theme & Custom Background
                 </h2>
                 <div class="grid grid-cols-3 gap-2 text-xs">
                     <button onclick="setTheme('modern-dark')" class="p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-200 hover:border-blue-500 transition font-semibold">Slate Dark</button>
                     <button onclick="setTheme('executive-blue')" class="p-2.5 bg-blue-950 border border-blue-800 rounded-2xl text-blue-200 hover:border-blue-400 transition font-semibold">Executive Blue</button>
                     <button onclick="setTheme('cyber-neon')" class="p-2.5 bg-zinc-900 border border-zinc-700 rounded-2xl text-emerald-400 hover:border-emerald-500 transition font-semibold">Cyber Neon</button>
                 </div>
-                <div class="pt-1">
-                    <label class="block text-slate-400 mb-1 text-xs">Upload Custom Background Image / Wallpaper:</label>
-                    <input type="file" accept="image/*" onchange="uploadCustomBackground(event)" class="w-full p-2 bg-slate-900 border border-slate-700 rounded-2xl text-xs text-slate-300">
-                </div>
-            </div>
-
-            <!-- 3. Dynamic Custom Titles -->
-            <div class="glass-card-3d p-4 rounded-3xl space-y-2">
-                <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
-                    <i class="fa-solid fa-heading text-blue-400"></i> 3. Custom Invoice & Badge Titles
-                </h2>
-                <div class="grid grid-cols-2 gap-2 text-xs">
-                    <div>
-                        <label class="block text-slate-400 mb-1">Invoice Main Title</label>
-                        <input type="text" id="customBadgeTitleInput" value="TAX INVOICE" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100 font-bold focus:border-blue-500 outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-slate-400 mb-1">Watermark Text</label>
-                        <input type="text" id="customWatermarkInput" value="TAX INVOICE" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100 focus:border-blue-500 outline-none">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 4. Business Information -->
-            <div class="glass-card-3d p-4 rounded-3xl space-y-2">
-                <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
-                    <i class="fa-solid fa-building text-blue-400"></i> 4. Business Information
-                </h2>
-                <div class="grid grid-cols-2 gap-2 text-xs">
-                    <div>
-                        <label class="block text-slate-400 mb-1">Business Name</label>
-                        <input type="text" id="bizName" value="Apex Tech Store" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100">
-                    </div>
-                    <div>
-                        <label class="block text-slate-400 mb-1">Tagline / Subtitle</label>
-                        <input type="text" id="bizTagline" value="Digital Hardware & Retail" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100">
-                    </div>
-                    <div>
-                        <label class="block text-slate-400 mb-1">Phone Number</label>
-                        <input type="text" id="bizPhone" value="0300-1234567" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100">
-                    </div>
-                    <div>
-                        <label class="block text-slate-400 mb-1">NTN / Tax ID</label>
-                        <input type="text" id="bizNtn" value="NTN: 9876543-2" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100">
-                    </div>
-                    <div class="col-span-2">
-                        <label class="block text-slate-400 mb-1">Business Address</label>
-                        <input type="text" id="bizAddress" value="Main Commercial Avenue, City Center" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 5. Customer Meta -->
-            <div class="glass-card-3d p-4 rounded-3xl space-y-2">
-                <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
-                    <i class="fa-solid fa-user text-blue-400"></i> 5. Customer & Bill Meta
-                </h2>
-                <div class="grid grid-cols-2 gap-2 text-xs">
-                    <div>
-                        <label class="block text-slate-400 mb-1">Bill / Invoice Number</label>
-                        <div class="relative flex items-center">
-                            <input type="text" id="invNumber" value="INV-5001" oninput="updateDocument()" class="w-full p-2.5 pr-12 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100 font-mono">
-                            <button type="button" onclick="generateNextInvoiceNo()" title="Next Sequence" class="absolute right-1 text-[10px] bg-blue-600 hover:bg-blue-500 text-white px-2 py-1 rounded-xl transition font-semibold">Auto</button>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-slate-400 mb-1">Date & Time</label>
-                        <input type="text" id="invDate" value="2026-11-03 11:45" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100">
-                    </div>
-                    <div>
-                        <label class="block text-slate-400 mb-1">Customer Name</label>
-                        <input type="text" id="custName" value="Ali Ahmed Client" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100">
-                    </div>
-                    <div>
-                        <label class="block text-slate-400 mb-1">Customer Phone / ID</label>
-                        <input type="text" id="custPhone" value="0311-9876543" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 6. Items & Pricing Modes -->
-            <div class="glass-card-3d p-4 rounded-3xl space-y-3">
-                <div class="flex justify-between items-center">
-                    <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
-                        <i class="fa-solid fa-list text-blue-400"></i> 6. Items & Pricing
-                    </h2>
-                    <div class="flex items-center gap-2">
-                        <select id="pricingMode" onchange="togglePricingMode()" class="text-xs p-2 bg-slate-900 border border-slate-700 rounded-2xl text-slate-200 font-semibold">
-                            <option value="individual">Individual Prices</option>
-                            <option value="single">Lump-sum Single Price</option>
-                        </select>
-                        <button onclick="addItem()" class="bg-blue-600 hover:bg-blue-500 text-white text-xs px-3 py-2 rounded-2xl font-semibold shadow-lg"><i class="fa-solid fa-plus"></i> Add</button>
-                    </div>
-                </div>
-                <div id="itemsEditorList" class="space-y-2"></div>
-                <div id="singlePriceBox" class="hidden space-y-2 pt-2 border-t border-slate-700">
-                    <textarea id="singleDesc" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-xs text-slate-100" rows="3" placeholder="Enter items description"></textarea>
-                    <input type="number" id="singlePriceVal" value="5000" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-xs font-bold text-blue-400" placeholder="Total Lump-sum Price">
-                </div>
-            </div>
-
-            <!-- 7. Financials & Payment Status -->
-            <div class="glass-card-3d p-4 rounded-3xl space-y-3">
-                <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
-                    <i class="fa-solid fa-calculator text-blue-400"></i> 7. Financials & Payment Status
-                </h2>
-                <div class="grid grid-cols-3 gap-2 text-xs">
-                    <div>
-                        <label class="block text-slate-400 mb-1">Currency</label>
-                        <input type="text" id="currencySymbol" value="PKR" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-center font-bold text-slate-100">
-                    </div>
-                    <div>
-                        <label class="block text-slate-400 mb-1">Tax Rate (%)</label>
-                        <input type="number" id="taxPercent" value="0" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-center text-slate-100">
-                    </div>
-                    <div>
-                        <label class="block text-slate-400 mb-1">Discount Mode</label>
-                        <select id="discountMode" onchange="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-200">
-                            <option value="amount">Fixed Amount</option>
-                            <option value="percent">Percentage (%)</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="grid grid-cols-3 gap-2 text-xs pt-1">
-                    <div>
-                        <label class="block text-slate-400 mb-1">Discount Value</label>
-                        <input type="number" id="discountVal" value="0" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-center text-slate-100">
-                    </div>
-                    <div>
-                        <label class="block text-slate-400 mb-1">Old Udhar / Balance</label>
-                        <input type="number" id="previousBalance" value="0" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-amber-400 font-semibold">
-                    </div>
-                    <div>
-                        <label class="block text-slate-400 mb-1">Amount Paid</label>
-                        <input type="number" id="amountPaid" value="5000" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-emerald-400 font-semibold">
-                    </div>
-                </div>
-                <div class="pt-1 text-xs">
-                    <label class="block text-slate-400 mb-1">Payment Status</label>
-                    <select id="paymentStatus" onchange="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-200 font-semibold">
-                        <option value="Paid" selected>Paid</option>
-                        <option value="Udhar / Credit">Udhar / Credit</option>
-                        <option value="Partial">Partial Payment</option>
-                        <option value="Unpaid">Unpaid / Pending</option>
-                        <option value="Advance">Advance Paid</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- 8. Expanded Optional Elements Toggles -->
-            <div class="glass-card-3d p-4 rounded-3xl space-y-2">
-                <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
-                    <i class="fa-solid fa-toggle-on text-blue-400"></i> 8. Optional Elements Toggles
-                </h2>
-                <div class="grid grid-cols-2 gap-2 text-xs text-slate-300">
-                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglLogo" checked onchange="updateDocument()"> Header Logo / Badge</label>
-                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglBarcode" checked onchange="updateDocument()"> Bill # Barcode</label>
-                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglQr" checked onchange="updateDocument()"> Online Payment QR / Details</label>
-                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglTerms" checked onchange="updateDocument()"> Terms & Notes Box</label>
-                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglSignature" checked onchange="updateDocument()"> Authorized Signature</label>
-                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglWatermark" checked onchange="updateDocument()"> Watermark Stamp</label>
-                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglRubberStamp" checked onchange="updateDocument()"> Digital Ink Rubber Stamp</label>
-                    <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglCustInfo" checked onchange="updateDocument()"> Customer Meta Box</label>
-                </div>
-            </div>
-
-            <!-- 9. Custom Terms & Conditions -->
-            <div class="glass-card-3d p-4 rounded-3xl space-y-2">
-                <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
-                    <i class="fa-solid fa-file-contract text-blue-400"></i> 9. Custom Terms & Conditions Text
-                </h2>
-                <textarea id="customTermsInput" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-xs text-slate-100" rows="3">* Thank you for your business! Goods once sold are non-refundable under any circumstances.</textarea>
-            </div>
-
-            <!-- 10. Signature & Rubber Stamp Styling -->
-            <div class="glass-card-3d p-4 rounded-3xl space-y-3" id="secSigGroup">
-                <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
-                    <i class="fa-solid fa-signature text-blue-400"></i> 10. Signature, Ink & Stamp Design
-                </h2>
-                <div class="space-y-3 text-xs">
-                    <div class="grid grid-cols-2 gap-2">
-                        <div>
-                            <label class="block text-slate-400 mb-1">Upload Signature Image:</label>
-                            <input type="file" accept="image/*" onchange="uploadSignature(event)" class="w-full p-1.5 bg-slate-900 border border-slate-700 rounded-2xl text-[11px] text-slate-300">
-                        </div>
-                        <div>
-                            <label class="block text-slate-400 mb-1">Real Ink Color Effect:</label>
-                            <select id="sigInkColor" onchange="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded-2xl text-slate-200">
-                                <option value="blue" selected>Deep Blue Pen</option>
-                                <option value="black">Classic Black Pen</option>
-                                <option value="red">Official Red Pen</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-slate-400 mb-1">Rubber Stamp Design Style:</label>
-                        <select id="stampDesignStyle" onchange="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded-2xl text-slate-200 font-semibold">
-                            <option value="style-1">Style 1: Circular Verified Badge</option>
-                            <option value="style-2">Style 2: Rectangular Official Paid</option>
-                            <option value="style-3">Style 3: Double-Border Starburst</option>
-                        </select>
-                    </div>
-
-                    <div class="border-t border-slate-700 pt-2 space-y-2" id="secQrGroup">
-                        <span class="font-bold text-slate-300 block">Online Payment Accounts & Custom QR:</span>
-                        <div class="grid grid-cols-2 gap-2">
-                            <input type="text" id="accTitle1" value="JazzCash: Apex Store" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl" placeholder="Account 1">
-                            <input type="text" id="accTitle2" value="EasyPaisa: 0300-1234567" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl" placeholder="Account 2">
-                        </div>
-                        <div>
-                            <label class="block text-slate-400 mb-1">Upload Custom QR Code Image (Optional):</label>
-                            <input type="file" accept="image/*" onchange="uploadCustomQr(event)" class="w-full p-1.5 bg-slate-900 border border-slate-700 rounded-2xl text-[11px] text-slate-300">
-                        </div>
-                    </div>
-                </div>
             </div>
 
         </div>
 
-        <!-- RIGHT PANEL: 3D STICKY LIVE PREVIEW -->
+        <!-- RIGHT PANEL: 3D SPATIAL STICKY LIVE PREVIEW -->
         <div class="lg:col-span-6 xl:col-span-7 flex flex-col items-center justify-start print-area-wrapper sticky top-20">
             
             <div class="no-print w-full bg-slate-900 text-slate-200 text-xs px-4 py-3 rounded-t-3xl flex justify-between items-center shadow-xl border border-slate-800">
-                <span><i class="fa-solid fa-eye text-emerald-400 mr-1"></i> 3D Live Responsive Preview</span>
+                <span><i class="fa-solid fa-eye text-emerald-400 mr-1"></i> Spatial 3D Live Responsive Preview</span>
                 <span id="previewBadge" class="bg-slate-950 px-3 py-1 rounded-xl text-[11px] font-mono text-blue-400 font-semibold border border-slate-800">A4 Full Sheet</span>
             </div>
 
@@ -620,7 +532,7 @@
         </div>
     </footer>
 
-    <!-- JavaScript Engine -->
+    <!-- JavaScript Engine with Spatial & Emotion Steps -->
     <script>
         let items = [
             { id: 1, name: "Wireless POS Barcode Scanner", qty: 1, price: 3500 },
@@ -649,33 +561,37 @@
             updateDocument();
         });
 
+        // Emotion Step Navigation Controller
+        function setEmotionStep(stepNum) {
+            for (let i = 1; i <= 4; i++) {
+                const pane = document.getElementById(`emotionStep${i}`);
+                const btn = document.getElementById(`stepBtn${i}`);
+                if (pane && btn) {
+                    if (i === stepNum) {
+                        pane.classList.remove('hidden');
+                        btn.className = "px-3 py-1.5 rounded-xl bg-blue-600 text-white shadow transition";
+                    } else {
+                        pane.classList.add('hidden');
+                        btn.className = "px-3 py-1.5 rounded-xl bg-slate-900 text-slate-300 border border-slate-700 transition";
+                    }
+                }
+            }
+        }
+
         function saveDraft() {
             const draftData = {
                 bizName: document.getElementById('bizName').value,
-                bizTagline: document.getElementById('bizTagline').value,
                 bizPhone: document.getElementById('bizPhone').value,
-                bizNtn: document.getElementById('bizNtn').value,
-                bizAddress: document.getElementById('bizAddress').value,
-                customBadgeTitle: document.getElementById('customBadgeTitleInput').value,
-                customWatermark: document.getElementById('customWatermarkInput').value,
-                customTerms: document.getElementById('customTermsInput').value,
-                invNumber: document.getElementById('invNumber').value,
-                invDate: document.getElementById('invDate').value,
                 custName: document.getElementById('custName').value,
                 custPhone: document.getElementById('custPhone').value,
                 currencySymbol: document.getElementById('currencySymbol').value,
                 taxPercent: document.getElementById('taxPercent').value,
-                discountMode: document.getElementById('discountMode').value,
-                discountVal: document.getElementById('discountVal').value,
-                previousBalance: document.getElementById('previousBalance').value,
                 amountPaid: document.getElementById('amountPaid').value,
                 paymentStatus: document.getElementById('paymentStatus').value,
-                accTitle1: document.getElementById('accTitle1').value,
-                accTitle2: document.getElementById('accTitle2').value,
                 items: items
             };
             localStorage.setItem('billmaker_saved_draft', JSON.stringify(draftData));
-            alert("Draft saved successfully!");
+            alert("Spatial Draft saved successfully!");
         }
 
         function loadDraft() {
@@ -684,26 +600,13 @@
             try {
                 const data = JSON.parse(saved);
                 if (data.bizName) document.getElementById('bizName').value = data.bizName;
-                if (data.bizTagline) document.getElementById('bizTagline').value = data.bizTagline;
                 if (data.bizPhone) document.getElementById('bizPhone').value = data.bizPhone;
-                if (data.bizNtn) document.getElementById('bizNtn').value = data.bizNtn;
-                if (data.bizAddress) document.getElementById('bizAddress').value = data.bizAddress;
-                if (data.customBadgeTitle) document.getElementById('customBadgeTitleInput').value = data.customBadgeTitle;
-                if (data.customWatermark) document.getElementById('customWatermarkInput').value = data.customWatermark;
-                if (data.customTerms) document.getElementById('customTermsInput').value = data.customTerms;
-                if (data.invNumber) document.getElementById('invNumber').value = data.invNumber;
-                if (data.invDate) document.getElementById('invDate').value = data.invDate;
                 if (data.custName) document.getElementById('custName').value = data.custName;
                 if (data.custPhone) document.getElementById('custPhone').value = data.custPhone;
                 if (data.currencySymbol) document.getElementById('currencySymbol').value = data.currencySymbol;
                 if (data.taxPercent) document.getElementById('taxPercent').value = data.taxPercent;
-                if (data.discountMode) document.getElementById('discountMode').value = data.discountMode;
-                if (data.discountVal) document.getElementById('discountVal').value = data.discountVal;
-                if (data.previousBalance) document.getElementById('previousBalance').value = data.previousBalance;
                 if (data.amountPaid) document.getElementById('amountPaid').value = data.amountPaid;
                 if (data.paymentStatus) document.getElementById('paymentStatus').value = data.paymentStatus;
-                if (data.accTitle1) document.getElementById('accTitle1').value = data.accTitle1;
-                if (data.accTitle2) document.getElementById('accTitle2').value = data.accTitle2;
                 if (data.items) items = data.items;
             } catch(e) {}
         }
@@ -725,9 +628,6 @@
             if (localStorage.getItem('billmaker_ctrl_sig') === 'false') {
                 document.getElementById('secSigGroup').style.display = 'none';
             }
-            if (localStorage.getItem('billmaker_ctrl_qr') === 'false') {
-                document.getElementById('secQrGroup').style.display = 'none';
-            }
         }
 
         function toggleBannerDisplay() { document.getElementById('promoBannerBox').style.display = 'none'; }
@@ -739,21 +639,6 @@
                 if (theme === 'executive-blue') receipt.classList.add('bg-blue-50/40');
                 else if (theme === 'cyber-neon') receipt.classList.add('bg-zinc-50');
                 else receipt.classList.add('bg-white');
-            }
-        }
-
-        function uploadCustomBackground(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(evt) {
-                    customBgDataUrl = evt.target.result;
-                    const receipt = document.getElementById('receiptDocument');
-                    receipt.style.backgroundImage = `url('${customBgDataUrl}')`;
-                    receipt.style.backgroundSize = 'cover';
-                    receipt.style.backgroundBlendOverlay = 'overlay';
-                };
-                reader.readAsDataURL(file);
             }
         }
 
@@ -863,17 +748,17 @@
 
         function updateDocument() {
             const bizName = document.getElementById('bizName').value;
-            const bizTagline = document.getElementById('bizTagline').value;
+            const bizTagline = document.getElementById('bizTagline').value || 'Digital Retail';
             const bizPhone = document.getElementById('bizPhone').value;
-            const bizNtn = document.getElementById('bizNtn').value;
-            const bizAddress = document.getElementById('bizAddress').value;
+            const bizNtn = document.getElementById('bizNtn') ? document.getElementById('bizNtn').value : 'NTN: 9876543-2';
+            const bizAddress = document.getElementById('bizAddress') ? document.getElementById('bizAddress').value : 'City Center';
             
-            const badgeTitle = document.getElementById('customBadgeTitleInput').value;
-            const watermarkText = document.getElementById('customWatermarkInput').value;
-            const customTermsText = document.getElementById('customTermsInput').value;
+            const badgeTitle = document.getElementById('customBadgeTitleInput') ? document.getElementById('customBadgeTitleInput').value : 'TAX INVOICE';
+            const watermarkText = document.getElementById('customWatermarkInput') ? document.getElementById('customWatermarkInput').value : 'TAX INVOICE';
+            const customTermsText = document.getElementById('customTermsInput') ? document.getElementById('customTermsInput').value : 'Thank you for your business!';
 
-            const invNumber = document.getElementById('invNumber').value;
-            const invDate = document.getElementById('invDate').value;
+            const invNumber = document.getElementById('invNumber') ? document.getElementById('invNumber').value : 'INV-5001';
+            const invDate = document.getElementById('invDate') ? document.getElementById('invDate').value : '2026-11-03';
             const custName = document.getElementById('custName').value;
             const custPhone = document.getElementById('custPhone').value;
             
@@ -896,9 +781,6 @@
             
             const status = document.getElementById('paymentStatus').value;
             document.getElementById('docStatusBadge').innerText = status;
-
-            document.getElementById('docAcc1').innerText = document.getElementById('accTitle1').value;
-            document.getElementById('docAcc2').innerText = document.getElementById('accTitle2').value;
 
             const stampStyle = document.getElementById('stampDesignStyle').value;
             const stampEl = document.getElementById('digitalRubberStamp');
@@ -940,34 +822,19 @@
             }
 
             const taxRate = parseFloat(document.getElementById('taxPercent').value) || 0;
-            const discountMode = document.getElementById('discountMode').value;
-            const rawDiscount = parseFloat(document.getElementById('discountVal').value) || 0;
-            const oldBal = parseFloat(document.getElementById('previousBalance').value) || 0;
+            const oldBal = 0;
             const paid = parseFloat(document.getElementById('amountPaid').value) || 0;
 
             const taxAmt = (subtotal * taxRate) / 100;
-            let discountAmt = discountMode === 'percent' ? (subtotal * rawDiscount) / 100 : rawDiscount;
-            
-            const grandTotal = (subtotal + taxAmt + oldBal) - discountAmt;
+            const grandTotal = (subtotal + taxAmt + oldBal);
             const remaining = grandTotal - paid;
 
             document.getElementById('docSubtotal').innerText = `${curr} ${subtotal.toLocaleString()}`;
             document.getElementById('docTaxRate').innerText = taxRate;
             document.getElementById('docTaxAmt').innerText = `${curr} ${taxAmt.toLocaleString()}`;
-            document.getElementById('docDiscountAmt').innerText = `-${curr} ${discountAmt.toLocaleString()}`;
-            document.getElementById('docOldBalAmt').innerText = `${curr} ${oldBal.toLocaleString()}`;
             document.getElementById('docGrandTotal').innerText = `${curr} ${grandTotal.toLocaleString()}`;
             document.getElementById('docPaidAmt').innerText = `${curr} ${paid.toLocaleString()}`;
             document.getElementById('docRemainingBal').innerText = `${curr} ${remaining.toLocaleString()}`;
-
-            document.getElementById('docHeaderBox').style.display = document.getElementById('tglLogo').checked ? 'flex' : 'none';
-            document.getElementById('barcodeBox').style.display = document.getElementById('tglBarcode').checked ? 'flex' : 'none';
-            document.getElementById('qrBox').style.display = document.getElementById('tglQr').checked ? 'flex' : 'none';
-            document.getElementById('termsBox').style.display = document.getElementById('tglTerms').checked ? 'block' : 'none';
-            document.getElementById('signatureBox').style.display = document.getElementById('tglSignature').checked ? 'block' : 'none';
-            document.getElementById('watermarkStamp').style.display = document.getElementById('tglWatermark').checked ? 'block' : 'none';
-            document.getElementById('digitalRubberStamp').style.display = document.getElementById('tglRubberStamp').checked ? 'flex' : 'none';
-            document.getElementById('docCustBox').style.display = document.getElementById('tglCustInfo').checked ? 'flex' : 'none';
 
             if (typeof JsBarcode === 'function' && document.getElementById('tglBarcode').checked) {
                 try {
@@ -976,23 +843,12 @@
             }
 
             const qrDiv = document.getElementById("qrcode");
-            const customImg = document.getElementById("customQrPreview");
-            if (customQrDataUrl) {
-                customImg.src = customQrDataUrl;
-                customImg.classList.remove('hidden');
-                qrDiv.style.display = 'none';
-            } else {
-                customImg.classList.add('hidden');
-                qrDiv.style.display = 'block';
-                if (typeof QRCode === 'function' && document.getElementById('tglQr').checked) {
-                    qrDiv.innerHTML = '';
-                    const acc1 = document.getElementById('accTitle1').value;
-                    const acc2 = document.getElementById('accTitle2').value;
-                    const qrStr = `INV:${invNumber}|TOTAL:${grandTotal}|${acc1}|${acc2}`;
-                    try {
-                        new QRCode(qrDiv, { text: qrStr, width: 42, height: 42 });
-                    } catch(e){}
-                }
+            if (typeof QRCode === 'function' && document.getElementById('tglQr').checked) {
+                qrDiv.innerHTML = '';
+                const qrStr = `INV:${invNumber}|TOTAL:${grandTotal}`;
+                try {
+                    new QRCode(qrDiv, { text: qrStr, width: 42, height: 42 });
+                } catch(e){}
             }
         }
 
@@ -1013,20 +869,7 @@
                     } else {
                         img.style.filter = "contrast(200%) brightness(75%) grayscale(100%)";
                     }
-
                     img.classList.remove('hidden');
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function uploadCustomQr(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(evt) {
-                    customQrDataUrl = evt.target.result;
-                    updateDocument();
                 };
                 reader.readAsDataURL(file);
             }
@@ -1035,14 +878,12 @@
         function exportSettings() {
             const settings = {
                 bizName: document.getElementById('bizName').value,
-                bizPhone: document.getElementById('bizPhone').value,
-                currencySymbol: document.getElementById('currencySymbol').value,
-                lastInv: localStorage.getItem('billmaker_last_inv') || 'INV-5001'
+                currencySymbol: document.getElementById('currencySymbol').value
             };
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(settings));
             const downloadAnchor = document.createElement('a');
             downloadAnchor.setAttribute("href", dataStr);
-            downloadAnchor.setAttribute("download", "billmaker_settings_backup.json");
+            downloadAnchor.setAttribute("download", "spatial_billmaker_backup.json");
             document.body.appendChild(downloadAnchor);
             downloadAnchor.click();
             downloadAnchor.remove();
@@ -1056,19 +897,17 @@
                 try {
                     const data = JSON.parse(evt.target.result);
                     if (data.bizName) document.getElementById('bizName').value = data.bizName;
-                    if (data.currencySymbol) document.getElementById('currencySymbol').value = data.currencySymbol;
-                    if (data.lastInv) localStorage.setItem('billmaker_last_inv', data.lastInv);
                     updateDocument();
-                    alert("Settings restored successfully!");
+                    alert("Spatial settings restored!");
                 } catch(err) {
-                    alert("Invalid JSON settings backup file.");
+                    alert("Invalid backup file.");
                 }
             };
             reader.readAsText(file);
         }
 
         function resetData() {
-            if (confirm("Reset current document values to default?")) {
+            if (confirm("Reset current document?")) {
                 localStorage.removeItem('billmaker_saved_draft');
                 location.reload();
             }
