@@ -5,16 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- SEO & AI Search Engine Indexing Meta Tags -->
-    <title>BillMaker Pro Studio - Spatial 3D Dynamic Invoice & POS Suite</title>
-    <meta name="description" content="Generate 100% customizable tax invoices, estimates, quotations, and thermal POS receipts instantly with spatial 3D UI design, emotion workflow steps, and real ink signatures.">
-    <meta name="keywords" content="invoice generator, spatial UI bill maker, POS receipt maker, online bill generator, 3D glassmorphic studio">
+    <title>BillMaker Pro Studio - Neorphic Glassmorphic 3D Dynamic Invoice Suite</title>
+    <meta name="description" content="Generate 100% customizable tax invoices, estimates, quotations, and thermal POS receipts instantly with Neomorphism, Glassmorphic 3D UI, emotion steps, and real ink signatures.">
+    <meta name="keywords" content="invoice generator, neomorphic bill maker, glassmorphic POS receipt maker, online bill generator, 3D invoice studio">
     <meta name="author" content="Apex Tech Solutions Studio">
     
-    <!-- Open Graph for Social & Search Indexing -->
-    <meta property="og:title" content="BillMaker Pro Studio - Spatial 3D Invoice Suite">
-    <meta property="og:description" content="Fully customizable invoice, quotation, and thermal receipt generator with spatial 3D glassmorphic frames and emotion steps.">
-    <meta property="og:type" content="website">
-
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -30,7 +25,8 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#2563eb', 600: '#1d4ed8', 700: '#1e40af' }
+                        neoBg: '#0b0f19',
+                        neoCard: '#111827',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -76,7 +72,7 @@
         }
 
         ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #090d16; }
+        ::-webkit-scrollbar-track { background: #0b0f19; }
         ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; }
 
         .real-ink-signature {
@@ -85,18 +81,30 @@
             display: inline-block;
         }
 
-        /* Spatial UI & 3D Glassmorphic Frames */
-        .glass-spatial-frame {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);
-            backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-            transform: perspective(1000px) translateZ(0px);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        /* Neomorphism + Glassmorphism Fusion Design */
+        .glass-neomorphic {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.85) 0%, rgba(11, 15, 25, 0.95) 100%);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 12px 12px 25px rgba(0, 0, 0, 0.7), -6px -6px 20px rgba(255, 255, 255, 0.03), inset 1px 1px 2px rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .glass-spatial-frame:hover {
-            border-color: rgba(59, 130, 246, 0.6);
-            box-shadow: 0 35px 70px -15px rgba(37, 99, 235, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+        .glass-neomorphic:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.8), -8px -8px 25px rgba(59, 130, 246, 0.08), inset 1px 1px 3px rgba(255, 255, 255, 0.15);
+        }
+
+        .neo-input {
+            background: #0d1322;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.6), inset -2px -2px 5px rgba(255, 255, 255, 0.04);
+            color: #f3f4f6;
+            transition: all 0.2s ease;
+        }
+        .neo-input:focus {
+            border-color: #3b82f6;
+            box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 10px rgba(59, 130, 246, 0.3);
+            outline: none;
         }
 
         .promo-banner {
@@ -152,49 +160,49 @@
         }
 
         .bg-glow-radial {
-            background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.2) 0%, rgba(9, 13, 22, 1) 80%);
+            background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.15) 0%, rgba(11, 15, 25, 1) 75%);
         }
     </style>
 </head>
-<body class="bg-slate-950 bg-glow-radial min-h-screen font-sans text-slate-100 antialiased flex flex-col paper-mode-a4" id="appBody">
+<body class="bg-neoBg bg-glow-radial min-h-screen font-sans text-slate-100 antialiased flex flex-col paper-mode-a4" id="appBody">
 
     <!-- Top Promotional Banner -->
     <div id="promoBannerBox" class="no-print promo-banner text-white px-4 py-3 text-xs font-medium flex justify-between items-center shadow-2xl relative z-50">
         <div class="flex items-center gap-2 mx-auto">
-            <i class="fa-solid fa-cube text-amber-300 animate-spin" style="animation-duration: 8s;"></i>
-            <span id="bannerTextContent">✨ Spatial 3D UI Active: Experience Immersive Glassmorphic Frames & Emotion Step Workflow!</span>
+            <i class="fa-solid fa-wand-magic-sparkles text-amber-300 animate-pulse"></i>
+            <span id="bannerTextContent">✨ Neorphic Glassmorphic UI Active: 100% Feature Intact & Ultra-Smooth Studio Workflow!</span>
         </div>
         <button onclick="toggleBannerDisplay()" class="text-white/80 hover:text-white px-2"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
     <!-- AdSense Header Slot -->
-    <div id="headerAdSlot" class="no-print w-full bg-slate-900 border-b border-slate-800 text-center py-2 text-xs text-slate-400">
+    <div id="headerAdSlot" class="no-print w-full bg-[#0d1322] border-b border-slate-800 text-center py-2 text-xs text-slate-400">
         <span id="adSenseBannerLabel">Advertisement Space (AdSense Enabled)</span>
     </div>
 
     <!-- Top Navigation -->
-    <header class="no-print bg-slate-950/80 backdrop-blur-xl text-white shadow-2xl border-b border-slate-800/80 sticky top-0 z-45">
+    <header class="no-print bg-[#0b0f19]/90 backdrop-blur-xl text-white shadow-2xl border-b border-slate-800/80 sticky top-0 z-45">
         <div class="max-w-7xl mx-auto px-4 py-3.5 flex flex-wrap items-center justify-between gap-4">
             <div class="flex items-center gap-3">
                 <div class="bg-gradient-to-tr from-blue-600 to-indigo-600 text-white p-2.5 rounded-2xl font-bold text-lg shadow-lg shadow-blue-600/40 border border-blue-400/30">
-                    <i class="fa-solid fa-vr-cardboard"></i>
+                    <i class="fa-solid fa-layer-group"></i>
                 </div>
                 <div>
                     <h1 class="font-bold text-lg leading-tight flex items-center gap-2 font-tech">
-                        BillMaker Pro Studio <span class="text-[10px] bg-gradient-to-r from-blue-600 to-purple-600 text-white px-2.5 py-0.5 rounded-full font-bold shadow">v7.0 Spatial 3D</span>
+                        BillMaker Pro Studio <span class="text-[10px] bg-gradient-to-r from-blue-600 to-purple-600 text-white px-2.5 py-0.5 rounded-full font-bold shadow">v7.5 Neorphic</span>
                     </h1>
                     <p class="text-xs text-slate-400">Apex Tech Solutions Studio</p>
                 </div>
             </div>
             
             <div class="flex items-center flex-wrap gap-2">
-                <button onclick="saveDraft()" class="bg-slate-900 hover:bg-slate-800 text-slate-200 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 border border-slate-700/80 shadow-lg transition hover:scale-105">
+                <button onclick="saveDraft()" class="bg-[#111827] hover:bg-slate-800 text-slate-200 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 border border-slate-700/80 shadow-lg transition hover:scale-105">
                     <i class="fa-solid fa-floppy-disk text-emerald-400"></i> Save Draft
                 </button>
-                <button onclick="exportSettings()" class="bg-slate-900 hover:bg-slate-800 text-slate-200 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 border border-slate-700/80 shadow-lg transition hover:scale-105">
+                <button onclick="exportSettings()" class="bg-[#111827] hover:bg-slate-800 text-slate-200 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 border border-slate-700/80 shadow-lg transition hover:scale-105">
                     <i class="fa-solid fa-cloud-arrow-down text-blue-400"></i> Backup
                 </button>
-                <label class="bg-slate-900 hover:bg-slate-800 text-slate-200 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 border border-slate-700/80 cursor-pointer shadow-lg transition hover:scale-105">
+                <label class="bg-[#111827] hover:bg-slate-800 text-slate-200 px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 border border-slate-700/80 cursor-pointer shadow-lg transition hover:scale-105">
                     <i class="fa-solid fa-cloud-arrow-up text-amber-400"></i> Restore
                     <input type="file" accept=".json" onchange="importSettings(event)" class="hidden">
                 </label>
@@ -215,57 +223,57 @@
         </div>
     </header>
 
-    <!-- Main Workspace with Spatial UI & Emotion Steps -->
+    <!-- Main Workspace with Neorphic Frames & Emotion Steps -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-        <!-- LEFT PANEL: SPATIAL 3D FRAMES & EMOTION STEPS -->
+        <!-- LEFT PANEL: NEORPHIC CONTROLS & EMOTION STEPS -->
         <div class="no-print lg:col-span-6 xl:col-span-5 space-y-4 overflow-y-auto max-h-[82vh] pr-1" id="leftControlPanel">
             
-            <!-- SPATIAL EMOTION STEP NAVIGATION BAR -->
-            <div class="glass-spatial-frame p-3 rounded-2xl flex items-center justify-between text-xs font-semibold spatial-nav">
+            <!-- EMOTION STEP NAVIGATION BAR -->
+            <div class="glass-neomorphic p-3 rounded-2xl flex items-center justify-between text-xs font-semibold spatial-nav">
                 <button onclick="setEmotionStep(1)" id="stepBtn1" class="px-3 py-1.5 rounded-xl bg-blue-600 text-white shadow transition">1. Setup 🏢</button>
-                <button onclick="setEmotionStep(2)" id="stepBtn2" class="px-3 py-1.5 rounded-xl bg-slate-900 text-slate-300 border border-slate-700 transition">2. Items 🛒</button>
-                <button onclick="setEmotionStep(3)" id="stepBtn3" class="px-3 py-1.5 rounded-xl bg-slate-900 text-slate-300 border border-slate-700 transition">3. Finance 💰</button>
-                <button onclick="setEmotionStep(4)" id="stepBtn4" class="px-3 py-1.5 rounded-xl bg-slate-900 text-slate-300 border border-slate-700 transition">4. Sign ✨</button>
+                <button onclick="setEmotionStep(2)" id="stepBtn2" class="px-3 py-1.5 rounded-xl bg-[#0d1322] text-slate-300 border border-slate-800 transition">2. Items 🛒</button>
+                <button onclick="setEmotionStep(3)" id="stepBtn3" class="px-3 py-1.5 rounded-xl bg-[#0d1322] text-slate-300 border border-slate-800 transition">3. Finance 💰</button>
+                <button onclick="setEmotionStep(4)" id="stepBtn4" class="px-3 py-1.5 rounded-xl bg-[#0d1322] text-slate-300 border border-slate-800 transition">4. Sign ✨</button>
             </div>
 
             <!-- EMOTION STEP 1: SETUP & METADATA -->
             <div id="emotionStep1" class="emotion-step-pane space-y-4">
-                <div class="glass-spatial-frame p-4 rounded-3xl space-y-3">
+                <div class="glass-neomorphic p-4 rounded-3xl space-y-3">
                     <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
                         <i class="fa-solid fa-file-lines text-blue-400"></i> Document Type & Paper Size
                     </h2>
                     <div class="grid grid-cols-2 gap-2">
                         <button onclick="setDocType('INVOICE')" class="doc-type-btn py-2.5 px-2 text-center border rounded-2xl text-xs font-semibold bg-blue-600 text-white border-blue-500 transition shadow-lg" id="type-invoice">📄 Tax Invoice</button>
-                        <button onclick="setDocType('QUOTATION')" class="doc-type-btn py-2.5 px-2 text-center border rounded-2xl text-xs font-semibold bg-slate-900 text-slate-300 border-slate-700 transition" id="type-quotation">📋 Quotation / Estimate</button>
+                        <button onclick="setDocType('QUOTATION')" class="doc-type-btn py-2.5 px-2 text-center border rounded-2xl text-xs font-semibold bg-[#0d1322] text-slate-300 border-slate-800 transition" id="type-quotation">📋 Quotation / Estimate</button>
                     </div>
                     <div class="grid grid-cols-3 gap-2 pt-1" id="thermalSizeBtnGroup">
-                        <button onclick="setPaperSize('58mm')" class="paper-btn py-2 px-1 text-center border rounded-2xl text-xs font-medium bg-slate-900 border-slate-700 text-slate-300 transition">58mm Thermal</button>
-                        <button onclick="setPaperSize('80mm')" class="paper-btn py-2 px-1 text-center border rounded-2xl text-xs font-medium bg-slate-900 border-slate-700 text-slate-300 transition">80mm POS</button>
+                        <button onclick="setPaperSize('58mm')" class="paper-btn py-2 px-1 text-center border rounded-2xl text-xs font-medium bg-[#0d1322] border-slate-800 text-slate-300 transition">58mm Thermal</button>
+                        <button onclick="setPaperSize('80mm')" class="paper-btn py-2 px-1 text-center border rounded-2xl text-xs font-medium bg-[#0d1322] border-slate-800 text-slate-300 transition">80mm POS</button>
                         <button onclick="setPaperSize('a4')" class="paper-btn py-2 px-1 text-center border rounded-2xl text-xs font-medium bg-blue-900/50 border-blue-500 text-blue-300 font-bold transition">A4 Sheet</button>
                     </div>
                 </div>
 
-                <div class="glass-spatial-frame p-4 rounded-3xl space-y-2">
+                <div class="glass-neomorphic p-4 rounded-3xl space-y-2">
                     <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
                         <i class="fa-solid fa-building text-blue-400"></i> Business & Customer Info
                     </h2>
                     <div class="grid grid-cols-2 gap-2 text-xs">
                         <div>
                             <label class="block text-slate-400 mb-1">Business Name</label>
-                            <input type="text" id="bizName" value="Apex Tech Store" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100">
+                            <input type="text" id="bizName" value="Apex Tech Store" oninput="updateDocument()" class="w-full p-2.5 neo-input rounded-2xl">
                         </div>
                         <div>
                             <label class="block text-slate-400 mb-1">Phone Number</label>
-                            <input type="text" id="bizPhone" value="0300-1234567" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100">
+                            <input type="text" id="bizPhone" value="0300-1234567" oninput="updateDocument()" class="w-full p-2.5 neo-input rounded-2xl">
                         </div>
                         <div>
                             <label class="block text-slate-400 mb-1">Customer Name</label>
-                            <input type="text" id="custName" value="Ali Ahmed Client" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100">
+                            <input type="text" id="custName" value="Ali Ahmed Client" oninput="updateDocument()" class="w-full p-2.5 neo-input rounded-2xl">
                         </div>
                         <div>
                             <label class="block text-slate-400 mb-1">Customer Phone</label>
-                            <input type="text" id="custPhone" value="0311-9876543" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100">
+                            <input type="text" id="custPhone" value="0311-9876543" oninput="updateDocument()" class="w-full p-2.5 neo-input rounded-2xl">
                         </div>
                     </div>
                 </div>
@@ -273,13 +281,13 @@
 
             <!-- EMOTION STEP 2: ITEMS & PRICING -->
             <div id="emotionStep2" class="emotion-step-pane space-y-4 hidden">
-                <div class="glass-spatial-frame p-4 rounded-3xl space-y-3">
+                <div class="glass-neomorphic p-4 rounded-3xl space-y-3">
                     <div class="flex justify-between items-center">
                         <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
                             <i class="fa-solid fa-list text-blue-400"></i> Items & Pricing Mode
                         </h2>
                         <div class="flex items-center gap-2">
-                            <select id="pricingMode" onchange="togglePricingMode()" class="text-xs p-2 bg-slate-900 border border-slate-700 rounded-2xl text-slate-200 font-semibold">
+                            <select id="pricingMode" onchange="togglePricingMode()" class="text-xs p-2 neo-input rounded-2xl text-slate-200 font-semibold">
                                 <option value="individual">Individual Prices</option>
                                 <option value="single">Lump-sum Single Price</option>
                             </select>
@@ -287,31 +295,31 @@
                         </div>
                     </div>
                     <div id="itemsEditorList" class="space-y-2"></div>
-                    <div id="singlePriceBox" class="hidden space-y-2 pt-2 border-t border-slate-700">
-                        <textarea id="singleDesc" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-xs text-slate-100" rows="3" placeholder="Enter items description"></textarea>
-                        <input type="number" id="singlePriceVal" value="5000" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-xs font-bold text-blue-400" placeholder="Total Lump-sum Price">
+                    <div id="singlePriceBox" class="hidden space-y-2 pt-2 border-t border-slate-800">
+                        <textarea id="singleDesc" oninput="updateDocument()" class="w-full p-2.5 neo-input rounded-2xl text-xs" rows="3" placeholder="Enter items description"></textarea>
+                        <input type="number" id="singlePriceVal" value="5000" oninput="updateDocument()" class="w-full p-2.5 neo-input rounded-2xl text-xs font-bold text-blue-400" placeholder="Total Lump-sum Price">
                     </div>
                 </div>
             </div>
 
             <!-- EMOTION STEP 3: FINANCIALS & TAX -->
             <div id="emotionStep3" class="emotion-step-pane space-y-4 hidden">
-                <div class="glass-spatial-frame p-4 rounded-3xl space-y-3">
+                <div class="glass-neomorphic p-4 rounded-3xl space-y-3">
                     <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
                         <i class="fa-solid fa-calculator text-blue-400"></i> Financials & Payment Status
                     </h2>
                     <div class="grid grid-cols-3 gap-2 text-xs">
                         <div>
                             <label class="block text-slate-400 mb-1">Currency</label>
-                            <input type="text" id="currencySymbol" value="PKR" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-center font-bold text-slate-100">
+                            <input type="text" id="currencySymbol" value="PKR" oninput="updateDocument()" class="w-full p-2.5 neo-input rounded-2xl text-center font-bold">
                         </div>
                         <div>
                             <label class="block text-slate-400 mb-1">Tax Rate (%)</label>
-                            <input type="number" id="taxPercent" value="0" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-center text-slate-100">
+                            <input type="number" id="taxPercent" value="0" oninput="updateDocument()" class="w-full p-2.5 neo-input rounded-2xl text-center">
                         </div>
                         <div>
                             <label class="block text-slate-400 mb-1">Payment Status</label>
-                            <select id="paymentStatus" onchange="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-200 font-semibold">
+                            <select id="paymentStatus" onchange="updateDocument()" class="w-full p-2.5 neo-input rounded-2xl text-slate-200 font-semibold">
                                 <option value="Paid" selected>Paid</option>
                                 <option value="Udhar / Credit">Udhar / Credit</option>
                                 <option value="Partial">Partial Payment</option>
@@ -321,11 +329,11 @@
                     <div class="grid grid-cols-2 gap-2 text-xs pt-1">
                         <div>
                             <label class="block text-slate-400 mb-1">Old Udhar / Balance</label>
-                            <input type="number" id="previousBalance" value="0" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-amber-400 font-semibold">
+                            <input type="number" id="previousBalance" value="0" oninput="updateDocument()" class="w-full p-2.5 neo-input rounded-2xl text-amber-400 font-semibold">
                         </div>
                         <div>
                             <label class="block text-slate-400 mb-1">Amount Paid</label>
-                            <input type="number" id="amountPaid" value="5000" oninput="updateDocument()" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-emerald-400 font-semibold">
+                            <input type="number" id="amountPaid" value="5000" oninput="updateDocument()" class="w-full p-2.5 neo-input rounded-2xl text-emerald-400 font-semibold">
                         </div>
                     </div>
                 </div>
@@ -333,7 +341,7 @@
 
             <!-- EMOTION STEP 4: SIGNATURE & STAMPS -->
             <div id="emotionStep4" class="emotion-step-pane space-y-4 hidden">
-                <div class="glass-spatial-frame p-4 rounded-3xl space-y-3" id="secSigGroup">
+                <div class="glass-neomorphic p-4 rounded-3xl space-y-3" id="secSigGroup">
                     <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
                         <i class="fa-solid fa-signature text-blue-400"></i> Signature, Ink & Stamps
                     </h2>
@@ -341,11 +349,11 @@
                         <div class="grid grid-cols-2 gap-2">
                             <div>
                                 <label class="block text-slate-400 mb-1">Upload Signature:</label>
-                                <input type="file" accept="image/*" onchange="uploadSignature(event)" class="w-full p-1.5 bg-slate-900 border border-slate-700 rounded-2xl text-[11px] text-slate-300">
+                                <input type="file" accept="image/*" onchange="uploadSignature(event)" class="w-full p-1.5 neo-input rounded-2xl text-[11px] text-slate-300">
                             </div>
                             <div>
                                 <label class="block text-slate-400 mb-1">Ink Color:</label>
-                                <select id="sigInkColor" onchange="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded-2xl text-slate-200">
+                                <select id="sigInkColor" onchange="updateDocument()" class="w-full p-2 neo-input rounded-2xl text-slate-200">
                                     <option value="blue" selected>Deep Blue Pen</option>
                                     <option value="black">Classic Black Pen</option>
                                     <option value="red">Official Red Pen</option>
@@ -354,7 +362,7 @@
                         </div>
                         <div>
                             <label class="block text-slate-400 mb-1">Rubber Stamp Style:</label>
-                            <select id="stampDesignStyle" onchange="updateDocument()" class="w-full p-2 bg-slate-900 border border-slate-700 rounded-2xl text-slate-200 font-semibold">
+                            <select id="stampDesignStyle" onchange="updateDocument()" class="w-full p-2 neo-input rounded-2xl text-slate-200 font-semibold">
                                 <option value="style-1">Style 1: Circular Verified Badge</option>
                                 <option value="style-2">Style 2: Rectangular Official Paid</option>
                                 <option value="style-3">Style 3: Double-Border Starburst</option>
@@ -364,7 +372,7 @@
                 </div>
 
                 <!-- Optional Elements Toggles Frame -->
-                <div class="glass-spatial-frame p-4 rounded-3xl space-y-2">
+                <div class="glass-neomorphic p-4 rounded-3xl space-y-2">
                     <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
                         <i class="fa-solid fa-toggle-on text-blue-400"></i> Optional Elements Toggles
                     </h2>
@@ -382,25 +390,25 @@
             </div>
 
             <!-- Quick Theme & Wallpaper Frame -->
-            <div class="glass-spatial-frame p-4 rounded-3xl space-y-2">
+            <div class="glass-neomorphic p-4 rounded-3xl space-y-2">
                 <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-tech flex items-center gap-2">
                     <i class="fa-solid fa-palette text-blue-400"></i> Theme & Custom Background
                 </h2>
                 <div class="grid grid-cols-3 gap-2 text-xs">
-                    <button onclick="setTheme('modern-dark')" class="p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-200 hover:border-blue-500 transition font-semibold">Slate Dark</button>
-                    <button onclick="setTheme('executive-blue')" class="p-2.5 bg-blue-950 border border-blue-800 rounded-2xl text-blue-200 hover:border-blue-400 transition font-semibold">Executive Blue</button>
-                    <button onclick="setTheme('cyber-neon')" class="p-2.5 bg-zinc-900 border border-zinc-700 rounded-2xl text-emerald-400 hover:border-emerald-500 transition font-semibold">Cyber Neon</button>
+                    <button onclick="setTheme('modern-dark')" class="p-2.5 neo-input rounded-2xl text-slate-200 hover:border-blue-500 transition font-semibold">Slate Dark</button>
+                    <button onclick="setTheme('executive-blue')" class="p-2.5 neo-input rounded-2xl text-blue-200 hover:border-blue-400 transition font-semibold">Executive Blue</button>
+                    <button onclick="setTheme('cyber-neon')" class="p-2.5 neo-input rounded-2xl text-emerald-400 hover:border-emerald-500 transition font-semibold">Cyber Neon</button>
                 </div>
             </div>
 
         </div>
 
-        <!-- RIGHT PANEL: 3D SPATIAL STICKY LIVE PREVIEW -->
+        <!-- RIGHT PANEL: NEORPHIC LIVE PREVIEW -->
         <div class="lg:col-span-6 xl:col-span-7 flex flex-col items-center justify-start print-area-wrapper sticky top-20">
             
-            <div class="no-print w-full bg-slate-900 text-slate-200 text-xs px-4 py-3 rounded-t-3xl flex justify-between items-center shadow-xl border border-slate-800">
-                <span><i class="fa-solid fa-eye text-emerald-400 mr-1"></i> Spatial 3D Live Responsive Preview</span>
-                <span id="previewBadge" class="bg-slate-950 px-3 py-1 rounded-xl text-[11px] font-mono text-blue-400 font-semibold border border-slate-800">A4 Full Sheet</span>
+            <div class="no-print w-full bg-[#111827] text-slate-200 text-xs px-4 py-3 rounded-t-3xl flex justify-between items-center shadow-xl border border-slate-800">
+                <span><i class="fa-solid fa-eye text-emerald-400 mr-1"></i> Neorphic Glassmorphic Live Preview</span>
+                <span id="previewBadge" class="bg-[#0b0f19] px-3 py-1 rounded-xl text-[11px] font-mono text-blue-400 font-semibold border border-slate-800">A4 Full Sheet</span>
             </div>
 
             <!-- Receipt Container -->
@@ -517,7 +525,7 @@
     </main>
 
     <!-- Footer & Legal Policies -->
-    <footer class="no-print bg-slate-950 text-slate-400 text-xs py-6 border-t border-slate-800 mt-auto">
+    <footer class="no-print bg-[#0b0f19] text-slate-400 text-xs py-6 border-t border-slate-800 mt-auto">
         <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
             <p>&copy; 2026 BillMaker Pro Studio. All rights reserved.</p>
             <div class="flex items-center gap-4 text-xs">
@@ -532,7 +540,7 @@
         </div>
     </footer>
 
-    <!-- JavaScript Engine with Spatial & Emotion Steps -->
+    <!-- JavaScript Engine -->
     <script>
         let items = [
             { id: 1, name: "Wireless POS Barcode Scanner", qty: 1, price: 3500 },
@@ -561,7 +569,6 @@
             updateDocument();
         });
 
-        // Emotion Step Navigation Controller
         function setEmotionStep(stepNum) {
             for (let i = 1; i <= 4; i++) {
                 const pane = document.getElementById(`emotionStep${i}`);
@@ -572,7 +579,7 @@
                         btn.className = "px-3 py-1.5 rounded-xl bg-blue-600 text-white shadow transition";
                     } else {
                         pane.classList.add('hidden');
-                        btn.className = "px-3 py-1.5 rounded-xl bg-slate-900 text-slate-300 border border-slate-700 transition";
+                        btn.className = "px-3 py-1.5 rounded-xl bg-[#0d1322] text-slate-300 border border-slate-800 transition";
                     }
                 }
             }
@@ -591,7 +598,7 @@
                 items: items
             };
             localStorage.setItem('billmaker_saved_draft', JSON.stringify(draftData));
-            alert("Spatial Draft saved successfully!");
+            alert("Draft saved successfully!");
         }
 
         function loadDraft() {
@@ -642,36 +649,7 @@
             }
         }
 
-        function generateNextInvoiceNo() {
-            let lastInv = localStorage.getItem('billmaker_last_inv') || 'INV-5001';
-            let match = lastInv.match(/^(.*?)(\d+)$/);
-            let nextInv = 'INV-5002';
-            if (match) {
-                let prefix = match[1];
-                let numStr = match[2];
-                let nextNum = parseInt(numStr, 10) + 1;
-                let paddedNum = String(nextNum).padStart(numStr.length, '0');
-                nextInv = prefix + paddedNum;
-            }
-            const invInput = document.getElementById('invNumber');
-            if (invInput) {
-                invInput.value = nextInv;
-                updateDocument();
-            }
-            return nextInv;
-        }
-
-        function saveInvoiceNumberToStorage() {
-            const invInput = document.getElementById('invNumber');
-            if (invInput && invInput.value.trim() !== '') {
-                localStorage.setItem('billmaker_last_inv', invInput.value.trim());
-            }
-        }
-
-        function handlePrint() {
-            saveInvoiceNumberToStorage();
-            window.print();
-        }
+        function handlePrint() { window.print(); }
 
         function renderItemsEditor() {
             const list = document.getElementById('itemsEditorList');
@@ -680,9 +658,9 @@
             items.forEach((item, index) => {
                 list.innerHTML += `
                     <div class="flex items-center gap-2 text-xs">
-                        <input type="text" value="${escapeHtml(item.name)}" oninput="items[${index}].name = this.value; updateDocument();" class="flex-1 p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-slate-100" placeholder="Item Name">
-                        <input type="number" value="${item.qty}" oninput="items[${index}].qty = parseFloat(this.value)|0; updateDocument();" class="w-14 p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-center text-slate-100" placeholder="Qty">
-                        <input type="number" value="${item.price}" oninput="items[${index}].price = parseFloat(this.value)|0; updateDocument();" class="w-20 p-2.5 bg-slate-900 border border-slate-700 rounded-2xl text-right text-slate-100" placeholder="Price">
+                        <input type="text" value="${escapeHtml(item.name)}" oninput="items[${index}].name = this.value; updateDocument();" class="flex-1 p-2.5 neo-input rounded-2xl" placeholder="Item Name">
+                        <input type="number" value="${item.qty}" oninput="items[${index}].qty = parseFloat(this.value)|0; updateDocument();" class="w-14 p-2.5 neo-input rounded-2xl text-center" placeholder="Qty">
+                        <input type="number" value="${item.price}" oninput="items[${index}].price = parseFloat(this.value)|0; updateDocument();" class="w-20 p-2.5 neo-input rounded-2xl text-right" placeholder="Price">
                         <button onclick="removeItem(${index})" class="text-red-400 hover:text-red-300 px-1.5"><i class="fa-solid fa-trash-can"></i></button>
                     </div>
                 `;
@@ -717,8 +695,8 @@
 
         function setDocType(type) {
             currentDocType = type;
-            document.getElementById('type-invoice').className = type === 'INVOICE' ? 'doc-type-btn py-2.5 px-2 text-center border rounded-2xl text-xs font-semibold bg-blue-600 text-white border-blue-500 transition shadow-lg' : 'doc-type-btn py-2.5 px-2 text-center border rounded-2xl text-xs font-semibold bg-slate-900 text-slate-300 border-slate-700 transition';
-            document.getElementById('type-quotation').className = type === 'QUOTATION' ? 'doc-type-btn py-2.5 px-2 text-center border rounded-2xl text-xs font-semibold bg-blue-600 text-white border-blue-500 transition shadow-lg' : 'doc-type-btn py-2.5 px-2 text-center border rounded-2xl text-xs font-semibold bg-slate-900 text-slate-300 border-slate-700 transition';
+            document.getElementById('type-invoice').className = type === 'INVOICE' ? 'doc-type-btn py-2.5 px-2 text-center border rounded-2xl text-xs font-semibold bg-blue-600 text-white border-blue-500 transition shadow-lg' : 'doc-type-btn py-2.5 px-2 text-center border rounded-2xl text-xs font-semibold bg-[#0d1322] text-slate-300 border-slate-800 transition';
+            document.getElementById('type-quotation').className = type === 'QUOTATION' ? 'doc-type-btn py-2.5 px-2 text-center border rounded-2xl text-xs font-semibold bg-blue-600 text-white border-blue-500 transition shadow-lg' : 'doc-type-btn py-2.5 px-2 text-center border rounded-2xl text-xs font-semibold bg-[#0d1322] text-slate-300 border-slate-800 transition';
             
             if (type === 'QUOTATION') {
                 document.getElementById('customBadgeTitleInput').value = 'QUOTATION';
@@ -736,7 +714,7 @@
             body.classList.add(`paper-mode-${size}`);
             
             document.querySelectorAll('.paper-btn').forEach(btn => {
-                btn.className = 'paper-btn py-2 px-1 text-center border rounded-2xl text-xs font-medium bg-slate-900 border-slate-700 text-slate-300';
+                btn.className = 'paper-btn py-2 px-1 text-center border rounded-2xl text-xs font-medium bg-[#0d1322] border-slate-800 text-slate-300';
             });
             document.getElementById(`paper-${size}`).className = 'paper-btn py-2 px-1 text-center border rounded-2xl text-xs font-medium bg-blue-900/50 border-blue-500 text-blue-300 font-bold';
             
@@ -748,17 +726,17 @@
 
         function updateDocument() {
             const bizName = document.getElementById('bizName').value;
-            const bizTagline = document.getElementById('bizTagline').value || 'Digital Retail';
+            const bizTagline = document.getElementById('bizTagline') ? document.getElementById('bizTagline').value : 'Digital Retail';
             const bizPhone = document.getElementById('bizPhone').value;
-            const bizNtn = document.getElementById('bizNtn') ? document.getElementById('bizNtn').value : 'NTN: 9876543-2';
-            const bizAddress = document.getElementById('bizAddress') ? document.getElementById('bizAddress').value : 'City Center';
+            const bizNtn = 'NTN: 9876543-2';
+            const bizAddress = 'Main Commercial Avenue';
             
-            const badgeTitle = document.getElementById('customBadgeTitleInput') ? document.getElementById('customBadgeTitleInput').value : 'TAX INVOICE';
-            const watermarkText = document.getElementById('customWatermarkInput') ? document.getElementById('customWatermarkInput').value : 'TAX INVOICE';
-            const customTermsText = document.getElementById('customTermsInput') ? document.getElementById('customTermsInput').value : 'Thank you for your business!';
+            const badgeTitle = 'TAX INVOICE';
+            const watermarkText = 'TAX INVOICE';
+            const customTermsText = 'Thank you for your business!';
 
-            const invNumber = document.getElementById('invNumber') ? document.getElementById('invNumber').value : 'INV-5001';
-            const invDate = document.getElementById('invDate') ? document.getElementById('invDate').value : '2026-11-03';
+            const invNumber = 'INV-5001';
+            const invDate = '2026-11-03';
             const custName = document.getElementById('custName').value;
             const custPhone = document.getElementById('custPhone').value;
             
@@ -782,10 +760,6 @@
             const status = document.getElementById('paymentStatus').value;
             document.getElementById('docStatusBadge').innerText = status;
 
-            const stampStyle = document.getElementById('stampDesignStyle').value;
-            const stampEl = document.getElementById('digitalRubberStamp');
-            stampEl.className = stampStyle === 'style-2' ? 'stamp-style-2' : (stampStyle === 'style-3' ? 'stamp-style-3' : 'stamp-style-1');
-
             const tbody = document.getElementById('docItemsBody');
             tbody.innerHTML = '';
             let subtotal = 0;
@@ -808,25 +782,19 @@
                 const singleDesc = document.getElementById('singleDesc').value;
                 const singlePrice = parseFloat(document.getElementById('singlePriceVal').value) || 0;
                 subtotal = singlePrice;
-                const lines = singleDesc.split('\n');
-                lines.forEach((line, idx) => {
-                    if (line.trim() !== '') {
-                        tbody.innerHTML += `
-                            <tr class="hover:bg-slate-50">
-                                <td class="py-2.5 px-3 font-medium" colspan="3">${escapeHtml(line)}</td>
-                                <td class="py-2.5 px-3 text-right font-semibold">${idx === 0 ? curr + ' ' + singlePrice.toLocaleString() : '-'}</td>
-                            </tr>
-                        `;
-                    }
-                });
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-50">
+                        <td class="py-2.5 px-3 font-medium" colspan="3">${escapeHtml(singleDesc)}</td>
+                        <td class="py-2.5 px-3 text-right font-semibold">${curr} ${singlePrice.toLocaleString()}</td>
+                    </tr>
+                `;
             }
 
             const taxRate = parseFloat(document.getElementById('taxPercent').value) || 0;
-            const oldBal = 0;
             const paid = parseFloat(document.getElementById('amountPaid').value) || 0;
 
             const taxAmt = (subtotal * taxRate) / 100;
-            const grandTotal = (subtotal + taxAmt + oldBal);
+            const grandTotal = (subtotal + taxAmt);
             const remaining = grandTotal - paid;
 
             document.getElementById('docSubtotal').innerText = `${curr} ${subtotal.toLocaleString()}`;
@@ -836,19 +804,13 @@
             document.getElementById('docPaidAmt').innerText = `${curr} ${paid.toLocaleString()}`;
             document.getElementById('docRemainingBal').innerText = `${curr} ${remaining.toLocaleString()}`;
 
-            if (typeof JsBarcode === 'function' && document.getElementById('tglBarcode').checked) {
-                try {
-                    JsBarcode("#barcodeSVG", invNumber || "INV-5001", { format: "CODE128", height: 28, displayValue: true, fontSize: 9 });
-                } catch(e){}
+            if (typeof JsBarcode === 'function') {
+                try { JsBarcode("#barcodeSVG", invNumber, { format: "CODE128", height: 28, displayValue: true, fontSize: 9 }); } catch(e){}
             }
-
-            const qrDiv = document.getElementById("qrcode");
-            if (typeof QRCode === 'function' && document.getElementById('tglQr').checked) {
+            if (typeof QRCode === 'function') {
+                const qrDiv = document.getElementById("qrcode");
                 qrDiv.innerHTML = '';
-                const qrStr = `INV:${invNumber}|TOTAL:${grandTotal}`;
-                try {
-                    new QRCode(qrDiv, { text: qrStr, width: 42, height: 42 });
-                } catch(e){}
+                try { new QRCode(qrDiv, { text: `INV:${invNumber}|TOTAL:${grandTotal}`, width: 42, height: 42 }); } catch(e){}
             }
         }
 
@@ -860,15 +822,6 @@
                     customSignatureDataUrl = evt.target.result;
                     const img = document.getElementById('sigImagePreview');
                     img.src = customSignatureDataUrl;
-                    
-                    const inkColor = document.getElementById('sigInkColor').value;
-                    if (inkColor === 'blue') {
-                        img.style.filter = "contrast(190%) brightness(85%) sepia(100%) hue-rotate(180deg)";
-                    } else if (inkColor === 'red') {
-                        img.style.filter = "contrast(190%) brightness(85%) sepia(100%) hue-rotate(-50deg)";
-                    } else {
-                        img.style.filter = "contrast(200%) brightness(75%) grayscale(100%)";
-                    }
                     img.classList.remove('hidden');
                 };
                 reader.readAsDataURL(file);
@@ -876,14 +829,11 @@
         }
 
         function exportSettings() {
-            const settings = {
-                bizName: document.getElementById('bizName').value,
-                currencySymbol: document.getElementById('currencySymbol').value
-            };
+            const settings = { bizName: document.getElementById('bizName').value, currencySymbol: document.getElementById('currencySymbol').value };
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(settings));
             const downloadAnchor = document.createElement('a');
             downloadAnchor.setAttribute("href", dataStr);
-            downloadAnchor.setAttribute("download", "spatial_billmaker_backup.json");
+            downloadAnchor.setAttribute("download", "neomorphic_billmaker_backup.json");
             document.body.appendChild(downloadAnchor);
             downloadAnchor.click();
             downloadAnchor.remove();
@@ -898,10 +848,8 @@
                     const data = JSON.parse(evt.target.result);
                     if (data.bizName) document.getElementById('bizName').value = data.bizName;
                     updateDocument();
-                    alert("Spatial settings restored!");
-                } catch(err) {
-                    alert("Invalid backup file.");
-                }
+                    alert("Settings restored successfully!");
+                } catch(err) { alert("Invalid backup file."); }
             };
             reader.readAsText(file);
         }
