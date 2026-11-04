@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO & Rich Social Share Meta Tags (Open Graph for WhatsApp, FB, LinkedIn Preview) -->
+    <!-- SEO & Rich Open Graph Meta Tags for Social Media Link Sharing -->
     <title>BillMaker Pro Studio - Smart Invoice & Thermal POS Suite</title>
-    <meta name="description" content="Create professional Tax Invoices, Estimates, and Quotations instantly with 1-click conversion, thermal POS receipt support, and enhanced HD digital ink signatures.">
-    <meta name="keywords" content="invoice generator, quotation maker, POS receipt maker, online bill generator, bill to quotation converter, digital signature bill">
+    <meta name="description" content="Generate 100% customizable tax invoices, estimates, quotations, and thermal POS receipts instantly with 1-click conversion, real ink signatures, and HD rubber stamps.">
+    <meta name="keywords" content="invoice generator, quotation maker, POS receipt maker, online bill generator, thermal receipt studio, bill converter">
     <meta name="author" content="Apex Tech Solutions Studio">
 
-    <!-- Open Graph / Social Media Preview Meta -->
-    <meta property="og:title" content="BillMaker Pro Studio - Smart Billing & Quotation Suite">
-    <meta property="og:description" content="Generate, convert, and print invoices and quotations instantly with step-by-step wizard and HD ink stamp support.">
+    <!-- Open Graph (WhatsApp, Facebook, LinkedIn Link Preview) -->
+    <meta property="og:title" content="BillMaker Pro Studio - Professional Billing Suite">
+    <meta property="og:description" content="Create, convert, and print invoices and quotations instantly with thermal paper support and digital ink stamps.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&h=630&fit=crop">
 
-    <!-- Schema.org Structured Data for AI & Search Engines -->
+    <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -51,7 +51,7 @@
                         humanBg: '#f8fafc',
                         humanCard: '#ffffff',
                         humanBorder: '#e2e8f0',
-                        humanText: '#1e293b',
+                        humanText: '#0f172a',
                         humanPrimary: '#2563eb'
                     },
                     fontFamily: {
@@ -68,21 +68,21 @@
         @media print {
             body { background: white !important; color: black !important; padding: 0 !important; margin: 0 !important; }
             .no-print, header, sidebar, .wizard-nav, button, footer { display: none !important; }
-            .print-area-wrapper { width: 100% !important; margin: 0 !important; padding: 0 !important; box-shadow: none !important; border: none !important; }
+            .print-area-wrapper { width: 100% !important; margin: 0 !important; padding: 0 !important; box-shadow: none !important; border: none !important; transform: none !important; }
             .receipt-container { margin: 0 auto !important; box-shadow: none !important; border: none !important; width: 100% !important; max-width: none !important; }
             thead { display: table-header-group; }
             tr { page-break-inside: avoid; }
         }
 
-        /* Thermal Printer Responsive Rules */
-        body.paper-mode-58mm .receipt-container { max-width: 58mm !important; width: 58mm !important; padding: 2mm !important; font-size: 8.5px !important; font-family: 'Courier Prime', monospace !important; word-break: break-word; }
-        body.paper-mode-80mm .receipt-container { max-width: 80mm !important; width: 80mm !important; padding: 3mm !important; font-size: 10px !important; font-family: 'Courier Prime', monospace !important; word-break: break-word; }
+        /* 58mm & 80mm THERMAL PRINTER RESPONSIVE FIXES */
+        body.paper-mode-58mm .receipt-container { max-width: 58mm !important; width: 58mm !important; padding: 2mm !important; font-size: 8.5px !important; font-family: 'Courier Prime', monospace !important; word-break: break-word; box-sizing: border-box !important; }
+        body.paper-mode-80mm .receipt-container { max-width: 80mm !important; width: 80mm !important; padding: 3mm !important; font-size: 10px !important; font-family: 'Courier Prime', monospace !important; word-break: break-word; box-sizing: border-box !important; }
 
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
         ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
 
-        /* Improved High-Definition Real Ink Signature Filter */
+        /* Real Pen Ink Signature Matrix Filter */
         .real-ink-signature {
             mix-blend-mode: multiply;
             filter: contrast(220%) brightness(80%);
@@ -90,7 +90,7 @@
             transition: all 0.3s ease;
         }
 
-        /* Humanized Clean Card & Input UI */
+        /* Humanized Clean UI Elements */
         .human-panel {
             background: #ffffff;
             border: 1px solid #e2e8f0;
@@ -109,7 +109,7 @@
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
         }
 
-        /* Improved Stamps */
+        /* Rubber Stamp Styles */
         .stamp-style-1 {
             border: 3px dashed #2563eb;
             color: #1e40af;
@@ -142,15 +142,30 @@
             letter-spacing: 0.5px;
             background: rgba(254, 242, 242, 0.6);
         }
+        .stamp-style-3 {
+            border: 3px double #059669;
+            color: #047857;
+            border-radius: 50%;
+            width: 95px;
+            height: 95px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(8deg);
+            font-weight: 700;
+            font-size: 8.5px;
+            background: rgba(236, 253, 245, 0.6);
+        }
     </style>
 </head>
 <body class="bg-humanBg min-h-screen font-sans text-slate-800 flex flex-col paper-mode-a4" id="appBody">
 
-    <!-- Top Promotional Banner -->
+    <!-- Top Announcement Banner -->
     <div id="promoBannerBox" class="no-print bg-slate-800 text-white px-4 py-2.5 text-xs font-medium flex justify-between items-center shadow-sm relative z-50">
         <div class="flex items-center gap-2 mx-auto">
             <i class="fa-solid fa-circle-check text-emerald-400"></i>
-            <span id="bannerTextContent">Smart Billing Suite: Easy Wizard Steps, 1-Click Invoice & Quotation Conversion, Thermal Ready!</span>
+            <span id="bannerTextContent">Smart Studio Active: Step-by-Step Wizard, 1-Click Invoice & Quotation Conversion, 58mm/80mm Thermal Ready!</span>
         </div>
         <button onclick="toggleBannerDisplay()" class="text-slate-400 hover:text-white px-2"><i class="fa-solid fa-xmark"></i></button>
     </div>
@@ -160,12 +175,12 @@
         <span id="adSenseBannerLabel">Advertisement Space (AdSense Enabled)</span>
     </div>
 
-    <!-- Top Header Navigation -->
+    <!-- Main Navigation Header -->
     <header class="no-print bg-white border-b border-slate-200 sticky top-0 z-45 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center flex-wrap gap-4">
             <div class="flex items-center gap-3">
                 <div class="bg-blue-600 text-white p-2.5 rounded-xl font-bold shadow-sm">
-                    <i class="fa-solid fa-file-invoice"></i>
+                    <i class="fa-solid fa-file-invoice-dollar text-lg"></i>
                 </div>
                 <div>
                     <h1 class="font-bold text-base text-slate-900 leading-tight font-tech">BillMaker Pro Studio</h1>
@@ -173,14 +188,24 @@
                 </div>
             </div>
 
-            <!-- Quick Action & Convert Bar -->
+            <!-- Quick Action & Converter Controls -->
             <div class="flex items-center gap-2 flex-wrap text-xs">
                 <button onclick="convertDocumentType()" id="convertBtn" class="bg-amber-600 hover:bg-amber-700 text-white px-3.5 py-2 rounded-lg font-semibold shadow-sm transition flex items-center gap-1.5">
                     <i class="fa-solid fa-right-left"></i> Convert to Quotation
                 </button>
-                <button onclick="saveDraft()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3.5 py-2 rounded-lg font-medium border border-slate-300 transition">
+                <button onclick="saveDraft()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-lg font-medium border border-slate-300 transition" title="Save Active Draft">
                     <i class="fa-solid fa-floppy-disk text-emerald-600 mr-1"></i> Save Draft
                 </button>
+                <button onclick="exportSettings()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-lg font-medium border border-slate-300 transition" title="Backup Business Settings">
+                    <i class="fa-solid fa-cloud-arrow-down text-blue-600 mr-1"></i> Backup
+                </button>
+                <label class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-lg font-medium border border-slate-300 cursor-pointer transition" title="Restore Business Settings">
+                    <i class="fa-solid fa-cloud-arrow-up text-amber-600 mr-1"></i> Restore
+                    <input type="file" accept=".json" onchange="importSettings(event)" class="hidden">
+                </label>
+
+                <div class="h-4 w-[1px] bg-slate-300 mx-1"></div>
+
                 <a href="guide.html" target="_blank" class="bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 px-3.5 py-2 rounded-lg font-medium transition">
                     <i class="fa-solid fa-book-open mr-1"></i> User Manual
                 </a>
@@ -194,21 +219,21 @@
         </div>
     </header>
 
-    <!-- Main Workspace with Wizard Steps -->
+    <!-- Main Studio Workspace -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-        <!-- LEFT PANEL: EASY STEP-BY-STEP WIZARD CONTROLS -->
+        <!-- LEFT PANEL: EASY STEP-BY-STEP WIZARD -->
         <div class="no-print lg:col-span-6 xl:col-span-5 space-y-4" id="leftControlPanel">
             
-            <!-- Wizard Step Buttons -->
+            <!-- Wizard Step Navigation Buttons -->
             <div class="bg-white p-2 rounded-xl border border-slate-200 shadow-sm flex justify-between items-center text-xs font-semibold wizard-nav">
-                <button onclick="setWizardStep(1)" id="wizBtn1" class="px-3 py-2 rounded-lg bg-blue-600 text-white shadow-sm">1. Business 🏢</button>
+                <button onclick="setWizardStep(1)" id="wizBtn1" class="px-3 py-2 rounded-lg bg-blue-600 text-white shadow-sm">1. Setup 🏢</button>
                 <button onclick="setWizardStep(2)" id="wizBtn2" class="px-3 py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200">2. Items 🛒</button>
-                <button onclick="setWizardStep(3)" id="wizBtn3" class="px-3 py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200">3. Total & Tax 💰</button>
+                <button onclick="setWizardStep(3)" id="wizBtn3" class="px-3 py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200">3. Finance 💰</button>
                 <button onclick="setWizardStep(4)" id="wizBtn4" class="px-3 py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200">4. Sign & Stamp ✨</button>
             </div>
 
-            <!-- STEP 1: BUSINESS & CUSTOMER DETAILS -->
+            <!-- WIZARD STEP 1: BUSINESS & CUSTOMER SETUP -->
             <div id="wizStep1" class="wizard-pane space-y-4">
                 <div class="human-panel p-5 rounded-2xl space-y-3">
                     <h2 class="text-xs font-bold text-slate-700 uppercase tracking-wider font-tech flex items-center gap-2 border-b border-slate-100 pb-2">
@@ -220,8 +245,20 @@
                             <input type="text" id="bizName" value="Apex Tech Store" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg">
                         </div>
                         <div>
-                            <label class="block text-slate-600 font-medium mb-1">Business Phone</label>
+                            <label class="block text-slate-600 font-medium mb-1">Tagline / Subtitle</label>
+                            <input type="text" id="bizTagline" value="Digital Hardware & Retail" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-slate-600 font-medium mb-1">Phone Number</label>
                             <input type="text" id="bizPhone" value="0300-1234567" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-slate-600 font-medium mb-1">NTN / Tax ID</label>
+                            <input type="text" id="bizNtn" value="NTN: 9876543-2" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg">
+                        </div>
+                        <div class="col-span-2">
+                            <label class="block text-slate-600 font-medium mb-1">Business Address</label>
+                            <input type="text" id="bizAddress" value="Main Commercial Avenue, City Center" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg">
                         </div>
                         <div>
                             <label class="block text-slate-600 font-medium mb-1">Customer Name</label>
@@ -231,10 +268,6 @@
                             <label class="block text-slate-600 font-medium mb-1">Customer Phone</label>
                             <input type="text" id="custPhone" value="0311-9876543" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg">
                         </div>
-                        <div class="col-span-2">
-                            <label class="block text-slate-600 font-medium mb-1">Business Address</label>
-                            <input type="text" id="bizAddress" value="Main Commercial Avenue, City Center" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg">
-                        </div>
                     </div>
                     <div class="pt-2 flex justify-end">
                         <button onclick="setWizardStep(2)" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-sm">Next: Items <i class="fa-solid fa-arrow-right ml-1"></i></button>
@@ -242,7 +275,7 @@
                 </div>
             </div>
 
-            <!-- STEP 2: ITEMS & PRICING -->
+            <!-- WIZARD STEP 2: ITEMS & PRICING -->
             <div id="wizStep2" class="wizard-pane space-y-4 hidden">
                 <div class="human-panel p-5 rounded-2xl space-y-3">
                     <div class="flex justify-between items-center border-b border-slate-100 pb-2">
@@ -274,11 +307,11 @@
                 </div>
             </div>
 
-            <!-- STEP 3: FINANCIALS, TAX & POS PAPER SIZE -->
+            <!-- WIZARD STEP 3: FINANCIALS & POS FORMAT -->
             <div id="wizStep3" class="wizard-pane space-y-4 hidden">
                 <div class="human-panel p-5 rounded-2xl space-y-3">
                     <h2 class="text-xs font-bold text-slate-700 uppercase tracking-wider font-tech flex items-center gap-2 border-b border-slate-100 pb-2">
-                        <i class="fa-solid fa-calculator text-blue-600"></i> Step 3: Tax, Discounts & Paper Format
+                        <i class="fa-solid fa-calculator text-blue-600"></i> Step 3: Tax, Balances & Thermal Paper
                     </h2>
                     <div class="grid grid-cols-3 gap-2 text-xs">
                         <div>
@@ -290,6 +323,29 @@
                             <input type="number" id="taxPercent" value="0" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg text-center">
                         </div>
                         <div>
+                            <label class="block text-slate-600 font-medium mb-1">Discount Mode</label>
+                            <select id="discountMode" onchange="updateDocument()" class="w-full p-2.5 human-input rounded-lg text-slate-800">
+                                <option value="amount">Fixed Amount</option>
+                                <option value="percent">Percentage (%)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 text-xs pt-1">
+                        <div>
+                            <label class="block text-slate-600 font-medium mb-1">Discount Value</label>
+                            <input type="number" id="discountVal" value="0" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg text-center">
+                        </div>
+                        <div>
+                            <label class="block text-slate-600 font-medium mb-1">Old Udhar / Balance</label>
+                            <input type="number" id="previousBalance" value="0" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg text-amber-700 font-semibold">
+                        </div>
+                        <div>
+                            <label class="block text-slate-600 font-medium mb-1">Amount Paid</label>
+                            <input type="number" id="amountPaid" value="5000" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg text-emerald-700 font-semibold">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-xs pt-1">
+                        <div>
                             <label class="block text-slate-600 font-medium mb-1">Payment Status</label>
                             <select id="paymentStatus" onchange="updateDocument()" class="w-full p-2.5 human-input rounded-lg text-slate-800 font-semibold">
                                 <option value="Paid" selected>Paid</option>
@@ -297,12 +353,6 @@
                                 <option value="Partial">Partial Payment</option>
                                 <option value="Unpaid">Unpaid</option>
                             </select>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2 text-xs pt-1">
-                        <div>
-                            <label class="block text-slate-600 font-medium mb-1">Amount Paid</label>
-                            <input type="number" id="amountPaid" value="5000" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg text-emerald-700 font-semibold">
                         </div>
                         <div>
                             <label class="block text-slate-600 font-medium mb-1">Paper Layout Format</label>
@@ -320,11 +370,11 @@
                 </div>
             </div>
 
-            <!-- STEP 4: ENHANCED DIGITAL SIGNATURE & STAMPS -->
+            <!-- WIZARD STEP 4: DIGITAL SIGNATURE & STAMPS -->
             <div id="wizStep4" class="wizard-pane space-y-4 hidden">
                 <div class="human-panel p-5 rounded-2xl space-y-4">
                     <h2 class="text-xs font-bold text-slate-700 uppercase tracking-wider font-tech flex items-center gap-2 border-b border-slate-100 pb-2">
-                        <i class="fa-solid fa-signature text-blue-600"></i> Step 4: Digital Signature & Rubber Stamps
+                        <i class="fa-solid fa-signature text-blue-600"></i> Step 4: Digital Signature & HD Stamps
                     </h2>
                     <div class="space-y-3 text-xs">
                         <div class="grid grid-cols-2 gap-2">
@@ -343,19 +393,22 @@
                         </div>
 
                         <div>
-                            <label class="block text-slate-600 font-medium mb-1">Rubber Stamp Design:</label>
+                            <label class="block text-slate-600 font-medium mb-1">Rubber Stamp Design Style:</label>
                             <select id="stampDesignStyle" onchange="updateDocument()" class="w-full p-2.5 human-input rounded-lg text-slate-800 font-semibold">
-                                <option value="style-1">Circular Verified Official Badge</option>
-                                <option value="style-2">Rectangular Paid Seal</option>
+                                <option value="style-1">Style 1: Circular Verified Official Badge</option>
+                                <option value="style-2">Style 2: Rectangular Official Paid Seal</option>
+                                <option value="style-3">Style 3: Double-Border Starburst</option>
                             </select>
                         </div>
 
                         <div class="pt-2 border-t border-slate-100">
-                            <span class="font-semibold text-slate-700 block mb-1">Visibility Controls:</span>
+                            <span class="font-semibold text-slate-700 block mb-1">Optional Element Toggles:</span>
                             <div class="grid grid-cols-2 gap-2 text-slate-600">
+                                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglLogo" checked onchange="updateDocument()"> Business Header</label>
                                 <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglBarcode" checked onchange="updateDocument()"> Barcode</label>
-                                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglQr" checked onchange="updateDocument()"> Payment QR</label>
-                                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglSignature" checked onchange="updateDocument()"> Signature Box</label>
+                                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglQr" checked onchange="updateDocument()"> Payment QR Code</label>
+                                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglSignature" checked onchange="updateDocument()"> Signature Line</label>
+                                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglWatermark" checked onchange="updateDocument()"> Background Watermark</label>
                                 <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglRubberStamp" checked onchange="updateDocument()"> Rubber Stamp</label>
                             </div>
                         </div>
@@ -369,15 +422,15 @@
 
         </div>
 
-        <!-- RIGHT PANEL: REAL-TIME DOCUMENT PREVIEW -->
+        <!-- RIGHT PANEL: LIVE DOCUMENT PREVIEW -->
         <div class="lg:col-span-6 xl:col-span-7 flex flex-col items-center justify-start print-area-wrapper sticky top-20">
             
             <div class="no-print w-full bg-slate-800 text-white text-xs px-4 py-2.5 rounded-t-xl flex justify-between items-center shadow-sm">
-                <span><i class="fa-solid fa-eye text-emerald-400 mr-1"></i> Live Document Preview</span>
+                <span><i class="fa-solid fa-eye text-emerald-400 mr-1"></i> Live Real-Time Preview</span>
                 <span id="docTypeBadge" class="bg-slate-900 px-3 py-1 rounded-md text-[11px] font-mono text-blue-300 font-semibold">TAX INVOICE</span>
             </div>
 
-            <!-- Receipt Sheet -->
+            <!-- Receipt Container -->
             <div id="receiptDocument" class="receipt-container bg-white text-slate-900 p-8 shadow-xl border border-slate-200 relative w-full font-sans text-xs transition-all rounded-b-xl" style="max-width: 210mm; min-height: 800px;">
                 
                 <!-- Watermark -->
@@ -386,12 +439,12 @@
                 </div>
 
                 <!-- Document Header -->
-                <div class="flex justify-between items-start pb-4 mb-4 border-b-2 border-slate-800">
+                <div id="docHeaderBox" class="flex justify-between items-start pb-4 mb-4 border-b-2 border-slate-800">
                     <div>
                         <h2 id="docBizName" class="text-xl font-bold uppercase text-blue-900">Apex Tech Store</h2>
-                        <p class="text-xs text-slate-600">Digital Retail & Hardware</p>
+                        <p id="docBizTagline" class="text-xs text-slate-600">Digital Hardware & Retail</p>
                         <p id="docBizContact" class="text-[11px] text-slate-600 mt-1">Ph: 0300-1234567 | Main Commercial Avenue</p>
-                        <p class="text-[11px] text-slate-600 font-mono">NTN: 9876543-2</p>
+                        <p id="docBizNtn" class="text-[11px] text-slate-600 font-mono">NTN: 9876543-2</p>
                     </div>
                     <div class="text-right">
                         <h1 id="docBadgeTitle" class="text-2xl font-extrabold text-slate-800 uppercase tracking-wide">TAX INVOICE</h1>
@@ -400,7 +453,7 @@
                     </div>
                 </div>
 
-                <!-- Customer Info Box -->
+                <!-- Customer Meta Box -->
                 <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 mb-4 flex justify-between items-center text-xs">
                     <div>
                         <span class="text-slate-500 font-semibold uppercase text-[10px] block">Billed To:</span>
@@ -428,18 +481,20 @@
                     </table>
                 </div>
 
-                <!-- Financial Totals -->
+                <!-- Financial Totals Box -->
                 <div class="flex justify-end mb-6">
                     <div class="w-72 space-y-1.5 text-xs bg-slate-50 p-3.5 rounded-xl border border-slate-200">
                         <div class="flex justify-between"><span>Subtotal:</span> <span id="docSubtotal" class="font-semibold">PKR 0.00</span></div>
                         <div class="flex justify-between"><span>Tax (<span id="docTaxRate">0</span>%):</span> <span id="docTaxAmt">PKR 0.00</span></div>
+                        <div class="flex justify-between text-red-600"><span>Discount:</span> <span id="docDiscountAmt">-PKR 0.00</span></div>
+                        <div class="flex justify-between text-amber-700 font-semibold"><span>Previous Balance / Udhar:</span> <span id="docOldBalAmt">PKR 0.00</span></div>
                         <div class="flex justify-between font-bold text-sm pt-2 border-t border-slate-300 text-slate-900"><span>Grand Total:</span> <span id="docGrandTotal">PKR 0.00</span></div>
                         <div class="flex justify-between text-emerald-700 font-semibold pt-1"><span>Amount Paid:</span> <span id="docPaidAmt">PKR 0.00</span></div>
                         <div class="flex justify-between font-bold text-slate-800 pt-1 border-t border-slate-200"><span>Remaining Balance:</span> <span id="docRemainingBal">PKR 0.00</span></div>
                     </div>
                 </div>
 
-                <!-- QR, Stamp & Barcode Footer -->
+                <!-- QR Code, Rubber Stamp & Barcode -->
                 <div class="grid grid-cols-3 gap-4 items-center pb-4 mb-4 border-t border-dashed border-slate-300 pt-4">
                     <div id="qrBox" class="flex items-center gap-2 col-span-1">
                         <div id="qrcode" class="bg-white p-1 border border-slate-200 rounded shadow-sm"></div>
@@ -452,6 +507,7 @@
                         <div id="digitalRubberStamp" class="stamp-style-1">
                             <span id="stampTitle" class="text-[9px] font-bold">PAID & VERIFIED</span>
                             <span id="stampBiz" class="text-[8px] truncate max-w-[85px]">Apex Tech</span>
+                            <span id="stampPhone" class="text-[8px]">0300-1234567</span>
                         </div>
                     </div>
                     <div id="barcodeBox" class="flex justify-end col-span-1">
@@ -481,7 +537,7 @@
         <p>&copy; 2026 BillMaker Pro Studio. All rights reserved. | <a href="guide.html" class="underline hover:text-white">User Manual & Policies</a></p>
     </footer>
 
-    <!-- JavaScript Engine -->
+    <!-- JavaScript Application Engine -->
     <script>
         let items = [
             { id: 1, name: "Wireless POS Barcode Scanner", qty: 1, price: 3500 },
@@ -615,7 +671,19 @@
         function saveDraft() {
             const data = {
                 bizName: document.getElementById('bizName').value,
+                bizTagline: document.getElementById('bizTagline').value,
+                bizPhone: document.getElementById('bizPhone').value,
+                bizNtn: document.getElementById('bizNtn').value,
+                bizAddress: document.getElementById('bizAddress').value,
                 custName: document.getElementById('custName').value,
+                custPhone: document.getElementById('custPhone').value,
+                currencySymbol: document.getElementById('currencySymbol').value,
+                taxPercent: document.getElementById('taxPercent').value,
+                discountMode: document.getElementById('discountMode').value,
+                discountVal: document.getElementById('discountVal').value,
+                previousBalance: document.getElementById('previousBalance').value,
+                amountPaid: document.getElementById('amountPaid').value,
+                paymentStatus: document.getElementById('paymentStatus').value,
                 items: items
             };
             localStorage.setItem('billmaker_wizard_draft', JSON.stringify(data));
@@ -628,9 +696,55 @@
             try {
                 const data = JSON.parse(saved);
                 if (data.bizName) document.getElementById('bizName').value = data.bizName;
+                if (data.bizTagline) document.getElementById('bizTagline').value = data.bizTagline;
+                if (data.bizPhone) document.getElementById('bizPhone').value = data.bizPhone;
+                if (data.bizNtn) document.getElementById('bizNtn').value = data.bizNtn;
+                if (data.bizAddress) document.getElementById('bizAddress').value = data.bizAddress;
                 if (data.custName) document.getElementById('custName').value = data.custName;
+                if (data.custPhone) document.getElementById('custPhone').value = data.custPhone;
+                if (data.currencySymbol) document.getElementById('currencySymbol').value = data.currencySymbol;
+                if (data.taxPercent) document.getElementById('taxPercent').value = data.taxPercent;
+                if (data.discountMode) document.getElementById('discountMode').value = data.discountMode;
+                if (data.discountVal) document.getElementById('discountVal').value = data.discountVal;
+                if (data.previousBalance) document.getElementById('previousBalance').value = data.previousBalance;
+                if (data.amountPaid) document.getElementById('amountPaid').value = data.amountPaid;
+                if (data.paymentStatus) document.getElementById('paymentStatus').value = data.paymentStatus;
                 if (data.items) items = data.items;
             } catch(e) {}
+        }
+
+        function exportSettings() {
+            const settings = {
+                bizName: document.getElementById('bizName').value,
+                bizPhone: document.getElementById('bizPhone').value,
+                bizAddress: document.getElementById('bizAddress').value,
+                currencySymbol: document.getElementById('currencySymbol').value
+            };
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(settings));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", "billmaker_backup_settings.json");
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        function importSettings(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                try {
+                    const data = JSON.parse(evt.target.result);
+                    if (data.bizName) document.getElementById('bizName').value = data.bizName;
+                    if (data.bizPhone) document.getElementById('bizPhone').value = data.bizPhone;
+                    if (data.bizAddress) document.getElementById('bizAddress').value = data.bizAddress;
+                    if (data.currencySymbol) document.getElementById('currencySymbol').value = data.currencySymbol;
+                    updateDocument();
+                    alert("Settings restored successfully!");
+                } catch(err) { alert("Invalid backup file."); }
+            };
+            reader.readAsText(file);
         }
 
         function handlePrint() { window.print(); }
@@ -638,21 +752,26 @@
 
         function updateDocument() {
             const bizName = document.getElementById('bizName').value;
+            const bizTagline = document.getElementById('bizTagline').value;
             const bizPhone = document.getElementById('bizPhone').value;
+            const bizNtn = document.getElementById('bizNtn').value;
             const bizAddress = document.getElementById('bizAddress').value;
             const custName = document.getElementById('custName').value;
             const custPhone = document.getElementById('custPhone').value;
             const curr = document.getElementById('currencySymbol').value || 'PKR';
             
             document.getElementById('docBizName').innerText = bizName;
+            document.getElementById('docBizTagline').innerText = bizTagline;
             document.getElementById('docBizContact').innerText = `Ph: ${bizPhone} | ${bizAddress}`;
+            document.getElementById('docBizNtn').innerText = bizNtn;
             document.getElementById('docCustName').innerText = custName;
             document.getElementById('docCustPhone').innerText = `Ph: ${custPhone}`;
             document.getElementById('stampBiz').innerText = bizName;
+            document.getElementById('stampPhone').innerText = bizPhone;
             document.getElementById('docStatusBadge').innerText = document.getElementById('paymentStatus').value;
 
             const stampStyle = document.getElementById('stampDesignStyle').value;
-            document.getElementById('digitalRubberStamp').className = stampStyle === 'style-2' ? 'stamp-style-2' : 'stamp-style-1';
+            document.getElementById('digitalRubberStamp').className = stampStyle === 'style-2' ? 'stamp-style-2' : (stampStyle === 'style-3' ? 'stamp-style-3' : 'stamp-style-1');
 
             const tbody = document.getElementById('docItemsBody');
             tbody.innerHTML = '';
@@ -685,21 +804,30 @@
             }
 
             const taxRate = parseFloat(document.getElementById('taxPercent').value) || 0;
+            const discountMode = document.getElementById('discountMode').value;
+            const rawDiscount = parseFloat(document.getElementById('discountVal').value) || 0;
+            const oldBal = parseFloat(document.getElementById('previousBalance').value) || 0;
             const paid = parseFloat(document.getElementById('amountPaid').value) || 0;
+
             const taxAmt = (subtotal * taxRate) / 100;
-            const grandTotal = subtotal + taxAmt;
+            let discountAmt = discountMode === 'percent' ? (subtotal * rawDiscount) / 100 : rawDiscount;
+            const grandTotal = (subtotal + taxAmt + oldBal) - discountAmt;
             const remaining = grandTotal - paid;
 
             document.getElementById('docSubtotal').innerText = `${curr} ${subtotal.toLocaleString()}`;
             document.getElementById('docTaxRate').innerText = taxRate;
             document.getElementById('docTaxAmt').innerText = `${curr} ${taxAmt.toLocaleString()}`;
+            document.getElementById('docDiscountAmt').innerText = `-${curr} ${discountAmt.toLocaleString()}`;
+            document.getElementById('docOldBalAmt').innerText = `${curr} ${oldBal.toLocaleString()}`;
             document.getElementById('docGrandTotal').innerText = `${curr} ${grandTotal.toLocaleString()}`;
             document.getElementById('docPaidAmt').innerText = `${curr} ${paid.toLocaleString()}`;
             document.getElementById('docRemainingBal').innerText = `${curr} ${remaining.toLocaleString()}`;
 
+            document.getElementById('docHeaderBox').style.display = document.getElementById('tglLogo').checked ? 'flex' : 'none';
             document.getElementById('barcodeBox').style.display = document.getElementById('tglBarcode').checked ? 'flex' : 'none';
             document.getElementById('qrBox').style.display = document.getElementById('tglQr').checked ? 'flex' : 'none';
             document.getElementById('signatureBox').style.display = document.getElementById('tglSignature').checked ? 'block' : 'none';
+            document.getElementById('watermarkStamp').style.display = document.getElementById('tglWatermark').checked ? 'block' : 'none';
             document.getElementById('digitalRubberStamp').style.display = document.getElementById('tglRubberStamp').checked ? 'flex' : 'none';
 
             if (typeof JsBarcode === 'function' && document.getElementById('tglBarcode').checked) {
@@ -708,12 +836,12 @@
             if (typeof QRCode === 'function' && document.getElementById('tglQr').checked) {
                 const qrDiv = document.getElementById("qrcode");
                 qrDiv.innerHTML = '';
-                try { new QRCode(qrDiv, { text: `TOTAL:${grandTotal}`, width: 38, height: 38 }); } catch(e){}
+                try { new QRCode(qrDiv, { text: `INV:5001|TOTAL:${grandTotal}`, width: 38, height: 38 }); } catch(e){}
             }
         }
 
         function resetData() {
-            if (confirm("Reset current form values?")) {
+            if (confirm("Reset current form values to default?")) {
                 localStorage.removeItem('billmaker_wizard_draft');
                 location.reload();
             }
