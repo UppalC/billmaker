@@ -4,34 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO & Rich Open Graph Meta Tags for Social Media Link Sharing -->
+    <!-- SEO & Rich Open Graph Meta Tags for Mobile & Social Link Sharing -->
     <title>BillMaker Pro Studio - Smart Invoice & Thermal POS Suite</title>
-    <meta name="description" content="Generate 100% customizable tax invoices, estimates, quotations, and thermal POS receipts instantly with 1-click conversion, real ink signatures, and HD rubber stamps.">
-    <meta name="keywords" content="invoice generator, quotation maker, POS receipt maker, online bill generator, thermal receipt studio, bill converter">
+    <meta name="description" content="Generate 100% customizable tax invoices, estimates, quotations, and thermal POS receipts instantly with mobile responsiveness, 1-click conversion, and real ink signatures.">
+    <meta name="keywords" content="invoice generator, quotation maker, mobile responsive bill maker, POS receipt maker, thermal receipt studio">
     <meta name="author" content="Apex Tech Solutions Studio">
 
-    <!-- Open Graph (WhatsApp, Facebook, LinkedIn Link Preview) -->
+    <!-- Open Graph (WhatsApp, Facebook, LinkedIn Preview) -->
     <meta property="og:title" content="BillMaker Pro Studio - Professional Billing Suite">
-    <meta property="og:description" content="Create, convert, and print invoices and quotations instantly with thermal paper support and digital ink stamps.">
+    <meta property="og:description" content="Create, convert, and print invoices and quotations instantly with mobile support and digital ink stamps.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&h=630&fit=crop">
-
-    <!-- Schema.org Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "BillMaker Pro Studio",
-      "operatingSystem": "All",
-      "applicationCategory": "BusinessApplication",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "PKR"
-      },
-      "description": "Professional customizable online invoice generator and thermal receipt studio for businesses."
-    }
-    </script>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -74,9 +57,13 @@
             tr { page-break-inside: avoid; }
         }
 
-        /* 58mm & 80mm THERMAL PRINTER RESPONSIVE FIXES */
-        body.paper-mode-58mm .receipt-container { max-width: 58mm !important; width: 58mm !important; padding: 2mm !important; font-size: 8.5px !important; font-family: 'Courier Prime', monospace !important; word-break: break-word; box-sizing: border-box !important; }
-        body.paper-mode-80mm .receipt-container { max-width: 80mm !important; width: 80mm !important; padding: 3mm !important; font-size: 10px !important; font-family: 'Courier Prime', monospace !important; word-break: break-word; box-sizing: border-box !important; }
+        /* MOBILE & THERMAL PRINTER RESPONSIVE FIXES */
+        @media (max-width: 768px) {
+            .receipt-container { padding: 12px !important; font-size: 11px !important; }
+        }
+
+        body.paper-mode-58mm .receipt-container { max-width: 58mm !important; width: 100% !important; padding: 2mm !important; font-size: 8.5px !important; font-family: 'Courier Prime', monospace !important; word-break: break-word; box-sizing: border-box !important; }
+        body.paper-mode-80mm .receipt-container { max-width: 80mm !important; width: 100% !important; padding: 3mm !important; font-size: 10px !important; font-family: 'Courier Prime', monospace !important; word-break: break-word; box-sizing: border-box !important; }
 
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
@@ -114,48 +101,31 @@
             border: 3px dashed #2563eb;
             color: #1e40af;
             border-radius: 50%;
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             transform: rotate(-10deg);
             font-weight: 700;
-            font-size: 8.5px;
+            font-size: 8px;
             background: rgba(239, 246, 255, 0.6);
-            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
         }
         .stamp-style-2 {
             border: 3px solid #dc2626;
             color: #991b1b;
             border-radius: 6px;
-            width: 110px;
-            height: 52px;
+            width: 100px;
+            height: 48px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             transform: rotate(-5deg);
             font-weight: 800;
-            font-size: 9.5px;
-            letter-spacing: 0.5px;
+            font-size: 9px;
             background: rgba(254, 242, 242, 0.6);
-        }
-        .stamp-style-3 {
-            border: 3px double #059669;
-            color: #047857;
-            border-radius: 50%;
-            width: 95px;
-            height: 95px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transform: rotate(8deg);
-            font-weight: 700;
-            font-size: 8.5px;
-            background: rgba(236, 253, 245, 0.6);
         }
     </style>
 </head>
@@ -163,54 +133,36 @@
 
     <!-- Top Announcement Banner -->
     <div id="promoBannerBox" class="no-print bg-slate-800 text-white px-4 py-2.5 text-xs font-medium flex justify-between items-center shadow-sm relative z-50">
-        <div class="flex items-center gap-2 mx-auto">
-            <i class="fa-solid fa-circle-check text-emerald-400"></i>
-            <span id="bannerTextContent">Smart Studio Active: Step-by-Step Wizard, 1-Click Invoice & Quotation Conversion, 58mm/80mm Thermal Ready!</span>
+        <div class="flex items-center gap-2 mx-auto text-center">
+            <i class="fa-solid fa-mobile-screen-button text-emerald-400"></i>
+            <span>Mobile-Optimized Studio Active: Fully Responsive, Error-Free & Thermal POS Ready!</span>
         </div>
         <button onclick="toggleBannerDisplay()" class="text-slate-400 hover:text-white px-2"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
-    <!-- AdSense Header Slot (Policy Compliant) -->
-    <div id="headerAdSlot" class="no-print w-full bg-slate-100 border-b border-slate-200 text-center py-2 text-xs text-slate-500">
-        <span id="adSenseBannerLabel">Advertisement Space (AdSense Enabled)</span>
-    </div>
-
     <!-- Main Navigation Header -->
     <header class="no-print bg-white border-b border-slate-200 sticky top-0 z-45 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center flex-wrap gap-4">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center flex-wrap gap-3">
             <div class="flex items-center gap-3">
                 <div class="bg-blue-600 text-white p-2.5 rounded-xl font-bold shadow-sm">
-                    <i class="fa-solid fa-file-invoice-dollar text-lg"></i>
+                    <i class="fa-solid fa-file-invoice-dollar text-base"></i>
                 </div>
                 <div>
-                    <h1 class="font-bold text-base text-slate-900 leading-tight font-tech">BillMaker Pro Studio</h1>
-                    <p class="text-xs text-slate-500">Apex Tech Solutions Studio</p>
+                    <h1 class="font-bold text-sm sm:text-base text-slate-900 leading-tight font-tech">BillMaker Pro Studio</h1>
+                    <p class="text-[11px] text-slate-500">Apex Tech Solutions Studio</p>
                 </div>
             </div>
 
             <!-- Quick Action & Converter Controls -->
-            <div class="flex items-center gap-2 flex-wrap text-xs">
-                <button onclick="convertDocumentType()" id="convertBtn" class="bg-amber-600 hover:bg-amber-700 text-white px-3.5 py-2 rounded-lg font-semibold shadow-sm transition flex items-center gap-1.5">
-                    <i class="fa-solid fa-right-left"></i> Convert to Quotation
+            <div class="flex items-center gap-1.5 flex-wrap text-xs">
+                <button onclick="convertDocumentType()" id="convertBtn" class="bg-amber-600 hover:bg-amber-700 text-white px-3 py-2 rounded-lg font-semibold shadow-sm transition flex items-center gap-1">
+                    <i class="fa-solid fa-right-left"></i> <span class="hidden sm:inline">Convert to</span> Quotation
                 </button>
-                <button onclick="saveDraft()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-lg font-medium border border-slate-300 transition" title="Save Active Draft">
-                    <i class="fa-solid fa-floppy-disk text-emerald-600 mr-1"></i> Save Draft
+                <button onclick="saveDraft()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-lg font-medium border border-slate-300 transition">
+                    <i class="fa-solid fa-floppy-disk text-emerald-600 mr-1"></i> Save
                 </button>
-                <button onclick="exportSettings()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-lg font-medium border border-slate-300 transition" title="Backup Business Settings">
-                    <i class="fa-solid fa-cloud-arrow-down text-blue-600 mr-1"></i> Backup
-                </button>
-                <label class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-lg font-medium border border-slate-300 cursor-pointer transition" title="Restore Business Settings">
-                    <i class="fa-solid fa-cloud-arrow-up text-amber-600 mr-1"></i> Restore
-                    <input type="file" accept=".json" onchange="importSettings(event)" class="hidden">
-                </label>
-
-                <div class="h-4 w-[1px] bg-slate-300 mx-1"></div>
-
-                <a href="guide.html" target="_blank" class="bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 px-3.5 py-2 rounded-lg font-medium transition">
-                    <i class="fa-solid fa-book-open mr-1"></i> User Manual
-                </a>
-                <button onclick="handlePrint()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold shadow-sm transition">
-                    <i class="fa-solid fa-print mr-1"></i> Print / Download PDF
+                <button onclick="handlePrint()" class="bg-blue-600 hover:bg-blue-700 text-white px-3.5 py-2 rounded-lg font-semibold shadow-sm transition">
+                    <i class="fa-solid fa-print mr-1"></i> Print / PDF
                 </button>
                 <button onclick="resetData()" class="bg-slate-100 hover:bg-red-50 text-slate-600 hover:text-red-600 p-2 rounded-lg border border-slate-300 transition" title="Reset Form">
                     <i class="fa-solid fa-rotate-left"></i>
@@ -220,26 +172,26 @@
     </header>
 
     <!-- Main Studio Workspace -->
-    <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+    <main class="flex-1 max-w-7xl w-full mx-auto p-3 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-        <!-- LEFT PANEL: EASY STEP-BY-STEP WIZARD -->
+        <!-- LEFT PANEL: EASY STEP-BY-STEP WIZARD (MOBILE COMPATIBLE) -->
         <div class="no-print lg:col-span-6 xl:col-span-5 space-y-4" id="leftControlPanel">
             
             <!-- Wizard Step Navigation Buttons -->
-            <div class="bg-white p-2 rounded-xl border border-slate-200 shadow-sm flex justify-between items-center text-xs font-semibold wizard-nav">
-                <button onclick="setWizardStep(1)" id="wizBtn1" class="px-3 py-2 rounded-lg bg-blue-600 text-white shadow-sm">1. Setup 🏢</button>
-                <button onclick="setWizardStep(2)" id="wizBtn2" class="px-3 py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200">2. Items 🛒</button>
-                <button onclick="setWizardStep(3)" id="wizBtn3" class="px-3 py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200">3. Finance 💰</button>
-                <button onclick="setWizardStep(4)" id="wizBtn4" class="px-3 py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200">4. Sign & Stamp ✨</button>
+            <div class="bg-white p-2 rounded-xl border border-slate-200 shadow-sm grid grid-cols-4 gap-1 text-center text-[11px] sm:text-xs font-semibold wizard-nav">
+                <button onclick="setWizardStep(1)" id="wizBtn1" class="py-2 rounded-lg bg-blue-600 text-white shadow-sm">1. Setup</button>
+                <button onclick="setWizardStep(2)" id="wizBtn2" class="py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200">2. Items</button>
+                <button onclick="setWizardStep(3)" id="wizBtn3" class="py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200">3. Finance</button>
+                <button onclick="setWizardStep(4)" id="wizBtn4" class="py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200">4. Sign</button>
             </div>
 
             <!-- WIZARD STEP 1: BUSINESS & CUSTOMER SETUP -->
             <div id="wizStep1" class="wizard-pane space-y-4">
-                <div class="human-panel p-5 rounded-2xl space-y-3">
+                <div class="human-panel p-4 sm:p-5 rounded-2xl space-y-3">
                     <h2 class="text-xs font-bold text-slate-700 uppercase tracking-wider font-tech flex items-center gap-2 border-b border-slate-100 pb-2">
                         <i class="fa-solid fa-building text-blue-600"></i> Step 1: Business & Client Details
                     </h2>
-                    <div class="grid grid-cols-2 gap-3 text-xs">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                         <div>
                             <label class="block text-slate-600 font-medium mb-1">Business Name</label>
                             <input type="text" id="bizName" value="Apex Tech Store" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg">
@@ -256,7 +208,7 @@
                             <label class="block text-slate-600 font-medium mb-1">NTN / Tax ID</label>
                             <input type="text" id="bizNtn" value="NTN: 9876543-2" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg">
                         </div>
-                        <div class="col-span-2">
+                        <div class="sm:col-span-2">
                             <label class="block text-slate-600 font-medium mb-1">Business Address</label>
                             <input type="text" id="bizAddress" value="Main Commercial Avenue, City Center" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg">
                         </div>
@@ -277,7 +229,7 @@
 
             <!-- WIZARD STEP 2: ITEMS & PRICING -->
             <div id="wizStep2" class="wizard-pane space-y-4 hidden">
-                <div class="human-panel p-5 rounded-2xl space-y-3">
+                <div class="human-panel p-4 sm:p-5 rounded-2xl space-y-3">
                     <div class="flex justify-between items-center border-b border-slate-100 pb-2">
                         <h2 class="text-xs font-bold text-slate-700 uppercase tracking-wider font-tech flex items-center gap-2">
                             <i class="fa-solid fa-list-check text-blue-600"></i> Step 2: Add Items & Products
@@ -309,7 +261,7 @@
 
             <!-- WIZARD STEP 3: FINANCIALS & POS FORMAT -->
             <div id="wizStep3" class="wizard-pane space-y-4 hidden">
-                <div class="human-panel p-5 rounded-2xl space-y-3">
+                <div class="human-panel p-4 sm:p-5 rounded-2xl space-y-3">
                     <h2 class="text-xs font-bold text-slate-700 uppercase tracking-wider font-tech flex items-center gap-2 border-b border-slate-100 pb-2">
                         <i class="fa-solid fa-calculator text-blue-600"></i> Step 3: Tax, Balances & Thermal Paper
                     </h2>
@@ -319,32 +271,32 @@
                             <input type="text" id="currencySymbol" value="PKR" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg text-center font-bold">
                         </div>
                         <div>
-                            <label class="block text-slate-600 font-medium mb-1">Tax Rate (%)</label>
+                            <label class="block text-slate-600 font-medium mb-1">Tax (%)</label>
                             <input type="number" id="taxPercent" value="0" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg text-center">
                         </div>
                         <div>
-                            <label class="block text-slate-600 font-medium mb-1">Discount Mode</label>
+                            <label class="block text-slate-600 font-medium mb-1">Disc Mode</label>
                             <select id="discountMode" onchange="updateDocument()" class="w-full p-2.5 human-input rounded-lg text-slate-800">
-                                <option value="amount">Fixed Amount</option>
-                                <option value="percent">Percentage (%)</option>
+                                <option value="amount">Fixed</option>
+                                <option value="percent">Percent (%)</option>
                             </select>
                         </div>
                     </div>
                     <div class="grid grid-cols-3 gap-2 text-xs pt-1">
                         <div>
-                            <label class="block text-slate-600 font-medium mb-1">Discount Value</label>
+                            <label class="block text-slate-600 font-medium mb-1">Discount</label>
                             <input type="number" id="discountVal" value="0" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg text-center">
                         </div>
                         <div>
-                            <label class="block text-slate-600 font-medium mb-1">Old Udhar / Balance</label>
+                            <label class="block text-slate-600 font-medium mb-1">Old Balance</label>
                             <input type="number" id="previousBalance" value="0" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg text-amber-700 font-semibold">
                         </div>
                         <div>
-                            <label class="block text-slate-600 font-medium mb-1">Amount Paid</label>
+                            <label class="block text-slate-600 font-medium mb-1">Paid</label>
                             <input type="number" id="amountPaid" value="5000" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg text-emerald-700 font-semibold">
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-2 text-xs pt-1">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs pt-1">
                         <div>
                             <label class="block text-slate-600 font-medium mb-1">Payment Status</label>
                             <select id="paymentStatus" onchange="updateDocument()" class="w-full p-2.5 human-input rounded-lg text-slate-800 font-semibold">
@@ -365,19 +317,19 @@
                     </div>
                     <div class="pt-2 flex justify-between">
                         <button onclick="setWizardStep(2)" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-lg text-xs font-semibold"><i class="fa-solid fa-arrow-left mr-1"></i> Back</button>
-                        <button onclick="setWizardStep(4)" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-sm">Next: Signature & Stamps <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                        <button onclick="setWizardStep(4)" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-sm">Next: Sign <i class="fa-solid fa-arrow-right ml-1"></i></button>
                     </div>
                 </div>
             </div>
 
             <!-- WIZARD STEP 4: DIGITAL SIGNATURE & STAMPS -->
             <div id="wizStep4" class="wizard-pane space-y-4 hidden">
-                <div class="human-panel p-5 rounded-2xl space-y-4">
+                <div class="human-panel p-4 sm:p-5 rounded-2xl space-y-4">
                     <h2 class="text-xs font-bold text-slate-700 uppercase tracking-wider font-tech flex items-center gap-2 border-b border-slate-100 pb-2">
                         <i class="fa-solid fa-signature text-blue-600"></i> Step 4: Digital Signature & HD Stamps
                     </h2>
                     <div class="space-y-3 text-xs">
-                        <div class="grid grid-cols-2 gap-2">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             <div>
                                 <label class="block text-slate-600 font-medium mb-1">Upload Signature File:</label>
                                 <input type="file" accept="image/*" onchange="uploadSignature(event)" class="w-full p-1.5 human-input rounded-lg text-[11px] text-slate-600">
@@ -397,7 +349,6 @@
                             <select id="stampDesignStyle" onchange="updateDocument()" class="w-full p-2.5 human-input rounded-lg text-slate-800 font-semibold">
                                 <option value="style-1">Style 1: Circular Verified Official Badge</option>
                                 <option value="style-2">Style 2: Rectangular Official Paid Seal</option>
-                                <option value="style-3">Style 3: Double-Border Starburst</option>
                             </select>
                         </div>
 
@@ -408,7 +359,7 @@
                                 <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglBarcode" checked onchange="updateDocument()"> Barcode</label>
                                 <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglQr" checked onchange="updateDocument()"> Payment QR Code</label>
                                 <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglSignature" checked onchange="updateDocument()"> Signature Line</label>
-                                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglWatermark" checked onchange="updateDocument()"> Background Watermark</label>
+                                <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglWatermark" checked onchange="updateDocument()"> Watermark</label>
                                 <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglRubberStamp" checked onchange="updateDocument()"> Rubber Stamp</label>
                             </div>
                         </div>
@@ -423,7 +374,7 @@
         </div>
 
         <!-- RIGHT PANEL: LIVE DOCUMENT PREVIEW -->
-        <div class="lg:col-span-6 xl:col-span-7 flex flex-col items-center justify-start print-area-wrapper sticky top-20">
+        <div class="lg:col-span-6 xl:col-span-7 flex flex-col items-center justify-start print-area-wrapper w-full">
             
             <div class="no-print w-full bg-slate-800 text-white text-xs px-4 py-2.5 rounded-t-xl flex justify-between items-center shadow-sm">
                 <span><i class="fa-solid fa-eye text-emerald-400 mr-1"></i> Live Real-Time Preview</span>
@@ -431,50 +382,50 @@
             </div>
 
             <!-- Receipt Container -->
-            <div id="receiptDocument" class="receipt-container bg-white text-slate-900 p-8 shadow-xl border border-slate-200 relative w-full font-sans text-xs transition-all rounded-b-xl" style="max-width: 210mm; min-height: 800px;">
+            <div id="receiptDocument" class="receipt-container bg-white text-slate-900 p-4 sm:p-8 shadow-xl border border-slate-200 relative w-full font-sans text-xs transition-all rounded-b-xl overflow-x-auto" style="max-width: 210mm; min-height: 700px;">
                 
                 <!-- Watermark -->
-                <div id="watermarkStamp" class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-10 font-bold text-6xl uppercase pointer-events-none tracking-widest rotate-[-25deg] text-blue-900">
+                <div id="watermarkStamp" class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-10 font-bold text-5xl sm:text-6xl uppercase pointer-events-none tracking-widest rotate-[-25deg] text-blue-900 text-center w-full">
                     TAX INVOICE
                 </div>
 
                 <!-- Document Header -->
-                <div id="docHeaderBox" class="flex justify-between items-start pb-4 mb-4 border-b-2 border-slate-800">
+                <div id="docHeaderBox" class="flex justify-between items-start pb-4 mb-4 border-b-2 border-slate-800 gap-2">
                     <div>
-                        <h2 id="docBizName" class="text-xl font-bold uppercase text-blue-900">Apex Tech Store</h2>
-                        <p id="docBizTagline" class="text-xs text-slate-600">Digital Hardware & Retail</p>
-                        <p id="docBizContact" class="text-[11px] text-slate-600 mt-1">Ph: 0300-1234567 | Main Commercial Avenue</p>
-                        <p id="docBizNtn" class="text-[11px] text-slate-600 font-mono">NTN: 9876543-2</p>
+                        <h2 id="docBizName" class="text-lg sm:text-xl font-bold uppercase text-blue-900">Apex Tech Store</h2>
+                        <p id="docBizTagline" class="text-[11px] text-slate-600">Digital Hardware & Retail</p>
+                        <p id="docBizContact" class="text-[10px] sm:text-[11px] text-slate-600 mt-1">Ph: 0300-1234567 | Main Commercial Avenue</p>
+                        <p id="docBizNtn" class="text-[10px] sm:text-[11px] text-slate-600 font-mono">NTN: 9876543-2</p>
                     </div>
                     <div class="text-right">
-                        <h1 id="docBadgeTitle" class="text-2xl font-extrabold text-slate-800 uppercase tracking-wide">TAX INVOICE</h1>
-                        <p class="text-xs font-mono font-bold text-blue-600 mt-1" id="docInvNum">INV-5001</p>
-                        <p class="text-[11px] text-slate-500" id="docInvDate">2026-11-05</p>
+                        <h1 id="docBadgeTitle" class="text-lg sm:text-2xl font-extrabold text-slate-800 uppercase tracking-wide">TAX INVOICE</h1>
+                        <p class="text-[11px] sm:text-xs font-mono font-bold text-blue-600 mt-1" id="docInvNum">INV-5001</p>
+                        <p class="text-[10px] sm:text-[11px] text-slate-500" id="docInvDate">2026-11-05</p>
                     </div>
                 </div>
 
                 <!-- Customer Meta Box -->
-                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 mb-4 flex justify-between items-center text-xs">
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 mb-4 flex justify-between items-center text-xs gap-2">
                     <div>
-                        <span class="text-slate-500 font-semibold uppercase text-[10px] block">Billed To:</span>
-                        <span id="docCustName" class="font-bold text-slate-900 text-sm">Ali Ahmed Client</span>
-                        <span id="docCustPhone" class="text-slate-600 block">Ph: 0311-9876543</span>
+                        <span class="text-slate-500 font-semibold uppercase text-[9px] sm:text-[10px] block">Billed To:</span>
+                        <span id="docCustName" class="font-bold text-slate-900 text-xs sm:text-sm">Ali Ahmed Client</span>
+                        <span id="docCustPhone" class="text-slate-600 block text-[11px]">Ph: 0311-9876543</span>
                     </div>
                     <div class="text-right">
-                        <span class="text-slate-500 font-semibold uppercase text-[10px] block">Payment Status:</span>
-                        <span id="docStatusBadge" class="font-bold text-emerald-700 px-2.5 py-1 bg-emerald-50 border border-emerald-200 rounded-lg">Paid</span>
+                        <span class="text-slate-500 font-semibold uppercase text-[9px] sm:text-[10px] block">Status:</span>
+                        <span id="docStatusBadge" class="font-bold text-emerald-700 px-2 py-0.5 sm:px-2.5 sm:py-1 bg-emerald-50 border border-emerald-200 rounded-lg text-[11px]">Paid</span>
                     </div>
                 </div>
 
                 <!-- Items Table -->
-                <div class="mb-4">
-                    <table class="w-full text-left text-xs">
+                <div class="mb-4 overflow-x-auto">
+                    <table class="w-full text-left text-xs min-w-[280px]">
                         <thead>
-                            <tr class="bg-slate-800 text-white font-bold text-[11px]">
-                                <th class="py-2 px-3 rounded-l-md">Description</th>
-                                <th class="py-2 px-3 text-center">Qty</th>
-                                <th class="py-2 px-3 text-right">Price</th>
-                                <th class="py-2 px-3 text-right rounded-r-md">Total</th>
+                            <tr class="bg-slate-800 text-white font-bold text-[10px] sm:text-[11px]">
+                                <th class="py-2 px-2 sm:px-3 rounded-l-md">Description</th>
+                                <th class="py-2 px-2 sm:px-3 text-center">Qty</th>
+                                <th class="py-2 px-2 sm:px-3 text-right">Price</th>
+                                <th class="py-2 px-2 sm:px-3 text-right rounded-r-md">Total</th>
                             </tr>
                         </thead>
                         <tbody id="docItemsBody" class="divide-y divide-slate-200"></tbody>
@@ -483,20 +434,20 @@
 
                 <!-- Financial Totals Box -->
                 <div class="flex justify-end mb-6">
-                    <div class="w-72 space-y-1.5 text-xs bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+                    <div class="w-full sm:w-72 space-y-1.5 text-xs bg-slate-50 p-3.5 rounded-xl border border-slate-200">
                         <div class="flex justify-between"><span>Subtotal:</span> <span id="docSubtotal" class="font-semibold">PKR 0.00</span></div>
                         <div class="flex justify-between"><span>Tax (<span id="docTaxRate">0</span>%):</span> <span id="docTaxAmt">PKR 0.00</span></div>
                         <div class="flex justify-between text-red-600"><span>Discount:</span> <span id="docDiscountAmt">-PKR 0.00</span></div>
-                        <div class="flex justify-between text-amber-700 font-semibold"><span>Previous Balance / Udhar:</span> <span id="docOldBalAmt">PKR 0.00</span></div>
+                        <div class="flex justify-between text-amber-700 font-semibold"><span>Old Balance:</span> <span id="docOldBalAmt">PKR 0.00</span></div>
                         <div class="flex justify-between font-bold text-sm pt-2 border-t border-slate-300 text-slate-900"><span>Grand Total:</span> <span id="docGrandTotal">PKR 0.00</span></div>
                         <div class="flex justify-between text-emerald-700 font-semibold pt-1"><span>Amount Paid:</span> <span id="docPaidAmt">PKR 0.00</span></div>
-                        <div class="flex justify-between font-bold text-slate-800 pt-1 border-t border-slate-200"><span>Remaining Balance:</span> <span id="docRemainingBal">PKR 0.00</span></div>
+                        <div class="flex justify-between font-bold text-slate-800 pt-1 border-t border-slate-200"><span>Remaining:</span> <span id="docRemainingBal">PKR 0.00</span></div>
                     </div>
                 </div>
 
                 <!-- QR Code, Rubber Stamp & Barcode -->
-                <div class="grid grid-cols-3 gap-4 items-center pb-4 mb-4 border-t border-dashed border-slate-300 pt-4">
-                    <div id="qrBox" class="flex items-center gap-2 col-span-1">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center pb-4 mb-4 border-t border-dashed border-slate-300 pt-4 text-center sm:text-left">
+                    <div id="qrBox" class="flex items-center justify-center sm:justify-start gap-2 col-span-1">
                         <div id="qrcode" class="bg-white p-1 border border-slate-200 rounded shadow-sm"></div>
                         <div>
                             <span class="font-bold text-[10px] block text-slate-800">Scan to Pay</span>
@@ -506,18 +457,17 @@
                     <div class="flex justify-center col-span-1">
                         <div id="digitalRubberStamp" class="stamp-style-1">
                             <span id="stampTitle" class="text-[9px] font-bold">PAID & VERIFIED</span>
-                            <span id="stampBiz" class="text-[8px] truncate max-w-[85px]">Apex Tech</span>
-                            <span id="stampPhone" class="text-[8px]">0300-1234567</span>
+                            <span id="stampBiz" class="text-[8px] truncate max-w-[80px]">Apex Tech</span>
                         </div>
                     </div>
-                    <div id="barcodeBox" class="flex justify-end col-span-1">
+                    <div id="barcodeBox" class="flex justify-center sm:justify-end col-span-1">
                         <svg id="barcodeSVG"></svg>
                     </div>
                 </div>
 
                 <!-- Terms & Digital Signature -->
-                <div class="flex justify-between items-end pt-4 border-t border-slate-200 text-[11px]">
-                    <div class="italic text-slate-500 max-w-xs">
+                <div class="flex flex-col sm:flex-row justify-between items-center sm:items-end pt-4 border-t border-slate-200 text-[11px] gap-4">
+                    <div class="italic text-slate-500 text-center sm:text-left max-w-xs">
                         * Thank you for your business! Goods once sold are non-refundable.
                     </div>
                     <div id="signatureBox" class="text-center">
@@ -565,10 +515,10 @@
                 if (pane && btn) {
                     if (i === stepNum) {
                         pane.classList.remove('hidden');
-                        btn.className = "px-3 py-2 rounded-lg bg-blue-600 text-white shadow-sm";
+                        btn.className = "py-2 rounded-lg bg-blue-600 text-white shadow-sm font-semibold";
                     } else {
                         pane.classList.add('hidden');
-                        btn.className = "px-3 py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200";
+                        btn.className = "py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium";
                     }
                 }
             }
@@ -577,15 +527,13 @@
         function convertDocumentType() {
             if (currentMode === 'INVOICE') {
                 currentMode = 'QUOTATION';
-                document.getElementById('convertBtn').innerHTML = '<i class="fa-solid fa-right-left"></i> Convert to Invoice';
-                document.getElementById('convertBtn').className = 'bg-blue-600 hover:bg-blue-700 text-white px-3.5 py-2 rounded-lg font-semibold shadow-sm transition flex items-center gap-1.5';
+                document.getElementById('convertBtn').innerHTML = '<i class="fa-solid fa-right-left"></i> Invoice';
                 document.getElementById('docBadgeTitle').innerText = 'QUOTATION / ESTIMATE';
                 document.getElementById('docTypeBadge').innerText = 'QUOTATION';
                 document.getElementById('watermarkStamp').innerText = 'QUOTATION';
             } else {
                 currentMode = 'INVOICE';
-                document.getElementById('convertBtn').innerHTML = '<i class="fa-solid fa-right-left"></i> Convert to Quotation';
-                document.getElementById('convertBtn').className = 'bg-amber-600 hover:bg-amber-700 text-white px-3.5 py-2 rounded-lg font-semibold shadow-sm transition flex items-center gap-1.5';
+                document.getElementById('convertBtn').innerHTML = '<i class="fa-solid fa-right-left"></i> Quotation';
                 document.getElementById('docBadgeTitle').innerText = 'TAX INVOICE';
                 document.getElementById('docTypeBadge').innerText = 'TAX INVOICE';
                 document.getElementById('watermarkStamp').innerText = 'TAX INVOICE';
@@ -713,40 +661,6 @@
             } catch(e) {}
         }
 
-        function exportSettings() {
-            const settings = {
-                bizName: document.getElementById('bizName').value,
-                bizPhone: document.getElementById('bizPhone').value,
-                bizAddress: document.getElementById('bizAddress').value,
-                currencySymbol: document.getElementById('currencySymbol').value
-            };
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(settings));
-            const downloadAnchor = document.createElement('a');
-            downloadAnchor.setAttribute("href", dataStr);
-            downloadAnchor.setAttribute("download", "billmaker_backup_settings.json");
-            document.body.appendChild(downloadAnchor);
-            downloadAnchor.click();
-            downloadAnchor.remove();
-        }
-
-        function importSettings(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(evt) {
-                try {
-                    const data = JSON.parse(evt.target.result);
-                    if (data.bizName) document.getElementById('bizName').value = data.bizName;
-                    if (data.bizPhone) document.getElementById('bizPhone').value = data.bizPhone;
-                    if (data.bizAddress) document.getElementById('bizAddress').value = data.bizAddress;
-                    if (data.currencySymbol) document.getElementById('currencySymbol').value = data.currencySymbol;
-                    updateDocument();
-                    alert("Settings restored successfully!");
-                } catch(err) { alert("Invalid backup file."); }
-            };
-            reader.readAsText(file);
-        }
-
         function handlePrint() { window.print(); }
         function toggleBannerDisplay() { document.getElementById('promoBannerBox').style.display = 'none'; }
 
@@ -767,11 +681,10 @@
             document.getElementById('docCustName').innerText = custName;
             document.getElementById('docCustPhone').innerText = `Ph: ${custPhone}`;
             document.getElementById('stampBiz').innerText = bizName;
-            document.getElementById('stampPhone').innerText = bizPhone;
             document.getElementById('docStatusBadge').innerText = document.getElementById('paymentStatus').value;
 
             const stampStyle = document.getElementById('stampDesignStyle').value;
-            document.getElementById('digitalRubberStamp').className = stampStyle === 'style-2' ? 'stamp-style-2' : (stampStyle === 'style-3' ? 'stamp-style-3' : 'stamp-style-1');
+            document.getElementById('digitalRubberStamp').className = stampStyle === 'style-2' ? 'stamp-style-2' : 'stamp-style-1';
 
             const tbody = document.getElementById('docItemsBody');
             tbody.innerHTML = '';
@@ -784,10 +697,10 @@
                     subtotal += lineTotal;
                     tbody.innerHTML += `
                         <tr>
-                            <td class="py-2.5 px-3 font-medium">${escapeHtml(item.name)}</td>
-                            <td class="py-2.5 px-3 text-center">${item.qty}</td>
-                            <td class="py-2.5 px-3 text-right">${curr} ${item.price.toLocaleString()}</td>
-                            <td class="py-2.5 px-3 text-right font-semibold">${curr} ${lineTotal.toLocaleString()}</td>
+                            <td class="py-2.5 px-2 sm:px-3 font-medium">${escapeHtml(item.name)}</td>
+                            <td class="py-2.5 px-2 sm:px-3 text-center">${item.qty}</td>
+                            <td class="py-2.5 px-2 sm:px-3 text-right">${curr} ${item.price.toLocaleString()}</td>
+                            <td class="py-2.5 px-2 sm:px-3 text-right font-semibold">${curr} ${lineTotal.toLocaleString()}</td>
                         </tr>
                     `;
                 });
@@ -797,8 +710,8 @@
                 subtotal = singlePrice;
                 tbody.innerHTML += `
                     <tr>
-                        <td class="py-2.5 px-3 font-medium" colspan="3">${escapeHtml(singleDesc)}</td>
-                        <td class="py-2.5 px-3 text-right font-semibold">${curr} ${singlePrice.toLocaleString()}</td>
+                        <td class="py-2.5 px-2 sm:px-3 font-medium" colspan="3">${escapeHtml(singleDesc)}</td>
+                        <td class="py-2.5 px-2 sm:px-3 text-right font-semibold">${curr} ${singlePrice.toLocaleString()}</td>
                     </tr>
                 `;
             }
@@ -831,12 +744,12 @@
             document.getElementById('digitalRubberStamp').style.display = document.getElementById('tglRubberStamp').checked ? 'flex' : 'none';
 
             if (typeof JsBarcode === 'function' && document.getElementById('tglBarcode').checked) {
-                try { JsBarcode("#barcodeSVG", "INV-5001", { format: "CODE128", height: 26, displayValue: true, fontSize: 8 }); } catch(e){}
+                try { JsBarcode("#barcodeSVG", "INV-5001", { format: "CODE128", height: 24, displayValue: true, fontSize: 8 }); } catch(e){}
             }
             if (typeof QRCode === 'function' && document.getElementById('tglQr').checked) {
                 const qrDiv = document.getElementById("qrcode");
                 qrDiv.innerHTML = '';
-                try { new QRCode(qrDiv, { text: `INV:5001|TOTAL:${grandTotal}`, width: 38, height: 38 }); } catch(e){}
+                try { new QRCode(qrDiv, { text: `INV:5001|TOTAL:${grandTotal}`, width: 36, height: 36 }); } catch(e){}
             }
         }
 
