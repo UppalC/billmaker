@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://billmakerpro.com/">
     
-    <!-- SEO & Rich Open Graph Meta Tags for Mobile & AI Search Engine Indexing -->
+    <!-- SEO & Rich Open Graph Meta Tags for Mobile & Social Link Sharing -->
     <title>BillMaker Pro Studio - Smart Invoice & Thermal POS Suite</title>
-    <meta name="description" content="Generate customizable tax invoices, estimates, quotations, and thermal POS receipts with mobile responsiveness, logo upload, WhatsApp share, and multi-language support.">
+    <meta name="description" content="Generate customizable tax invoices, estimates, quotations, and thermal POS receipts with mobile responsiveness, custom title, logo upload, WhatsApp share, and admin controls.">
     <meta name="keywords" content="invoice generator, quotation maker, mobile responsive bill maker, POS receipt studio, whatsapp billing suite">
     <meta name="author" content="Apex Tech Solutions Studio">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
-    <!-- Open Graph Social Links -->
+    <!-- Open Graph Social Links (WhatsApp, Facebook, LinkedIn Preview) -->
     <meta property="og:title" content="BillMaker Pro Studio - Professional Billing Suite">
-    <meta property="og:description" content="Create, convert, share, and print invoices and quotations instantly with full thermal POS paper support and digital ink stamps.">
+    <meta property="og:description" content="Create, convert, share, and print invoices and quotations instantly with full thermal POS paper support, admin controls, and digital ink stamps.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://billmakerpro.com/">
     <meta property="og:image" content="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&h=630&fit=crop">
@@ -22,7 +22,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=32&h=32&fit=crop">
 
-    <!-- Schema.org Structured Data for Search Engine AI Bots -->
+    <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -84,7 +84,6 @@
             tr { page-break-inside: avoid; }
         }
 
-        /* Responsive Mobile & Thermal Printer CSS Rules */
         @media (max-width: 768px) {
             .receipt-container { padding: 12px !important; font-size: 11px !important; }
         }
@@ -155,21 +154,16 @@
 </head>
 <body class="bg-humanBg min-h-screen font-sans text-slate-800 flex flex-col paper-mode-a4" id="appBody">
 
-    <!-- Header Promotional Announcement Bar -->
+    <!-- Top Announcement Bar -->
     <div id="promoBannerBox" class="no-print bg-slate-900 text-white px-4 py-2 text-xs font-medium flex justify-between items-center shadow-sm relative z-50">
         <div class="flex items-center gap-2 mx-auto text-center">
             <i class="fa-solid fa-shield-halved text-emerald-400"></i>
-            <span>Apex Tech Studio Billing Engine - Secure, Multi-Language, & Full Printer Compatible</span>
+            <span>Apex Tech Studio Billing Suite - Secure Admin Master Controls & Customizable Headings</span>
         </div>
         <button onclick="toggleBannerDisplay()" class="text-slate-400 hover:text-white px-2"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
-    <!-- Google AdSense Placement Header -->
-    <div id="headerAdSlot" class="no-print w-full bg-slate-100 border-b border-slate-200 text-center py-2 text-xs text-slate-500">
-        <span id="adSenseBannerLabel">Advertisement Space (Google AdSense Policy Compliant Slot)</span>
-    </div>
-
-    <!-- Main Navigation Header Bar -->
+    <!-- Main Navigation Header -->
     <header class="no-print bg-white border-b border-slate-200 sticky top-0 z-45 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center flex-wrap gap-3">
             <div class="flex items-center gap-3">
@@ -185,16 +179,13 @@
             <!-- Top Action Controls -->
             <div class="flex items-center gap-1.5 flex-wrap text-xs">
                 <button onclick="convertDocumentType()" id="convertBtn" class="bg-amber-700 hover:bg-amber-800 text-white px-3 py-2 rounded-lg font-semibold shadow-sm transition flex items-center gap-1">
-                    <i class="fa-solid fa-right-left"></i> <span class="hidden sm:inline">Convert to</span> Quotation
+                    <i class="fa-solid fa-right-left"></i> <span class="hidden sm:inline">Convert</span>
                 </button>
                 <button onclick="shareOnWhatsApp()" class="bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-2 rounded-lg font-semibold shadow-sm transition flex items-center gap-1">
                     <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
                 </button>
-                <button onclick="openGuideModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-lg font-medium border border-slate-300 transition" title="User Guide Manual">
-                    <i class="fa-solid fa-book-open text-blue-700 mr-1"></i> User Manual
-                </button>
-                <button onclick="openAdminModal()" class="bg-slate-800 hover:bg-slate-900 text-white px-3 py-2 rounded-lg font-medium shadow-sm transition" title="Admin Settings Panel">
-                    <i class="fa-solid fa-sliders mr-1"></i> Admin Settings
+                <button onclick="openAdminModal()" class="bg-slate-800 hover:bg-slate-900 text-white px-3 py-2 rounded-lg font-medium shadow-sm transition" title="Master Admin Panel">
+                    <i class="fa-solid fa-sliders mr-1"></i> Admin Panel
                 </button>
                 <button onclick="handlePrint()" class="bg-blue-900 hover:bg-blue-950 text-white px-3.5 py-2 rounded-lg font-semibold shadow-sm transition">
                     <i class="fa-solid fa-print mr-1"></i> Print / PDF
@@ -206,7 +197,7 @@
         </div>
     </header>
 
-    <!-- Main Studio Workspace Grid -->
+    <!-- Main Workspace Grid -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-3 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
         <!-- LEFT CONTROL PANEL (WIZARD STEPS) -->
@@ -217,23 +208,23 @@
                 <button onclick="setWizardStep(1)" id="wizBtn1" class="py-2 rounded-lg bg-blue-900 text-white shadow-sm font-semibold">1. Business</button>
                 <button onclick="setWizardStep(2)" id="wizBtn2" class="py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium">2. Items</button>
                 <button onclick="setWizardStep(3)" id="wizBtn3" class="py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium">3. Finance</button>
-                <button onclick="setWizardStep(4)" id="wizBtn4" class="py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium">4. Sign & Options</button>
+                <button onclick="setWizardStep(4)" id="wizBtn4" class="py-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium">4. Custom</button>
             </div>
 
-            <!-- WIZARD STEP 1: BUSINESS & LOGO SETUP -->
+            <!-- WIZARD STEP 1: BUSINESS, CUSTOM TITLE & LOGO -->
             <div id="wizStep1" class="wizard-pane space-y-4">
                 <div class="human-panel p-4 sm:p-5 rounded-2xl space-y-3">
                     <h2 class="text-xs font-bold text-slate-700 uppercase tracking-wider font-tech flex items-center gap-2 border-b border-slate-100 pb-2">
-                        <i class="fa-solid fa-building text-blue-900"></i> Step 1: Business & Client Setup
+                        <i class="fa-solid fa-building text-blue-900"></i> Step 1: Business, Title & Logo Setup
                     </h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                         <div>
-                            <label class="block text-slate-600 font-medium mb-1">Business Name</label>
-                            <input type="text" id="bizName" value="Apex Tech Store" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg">
+                            <label class="block text-slate-600 font-medium mb-1">Document Title (Customizable)</label>
+                            <input type="text" id="customDocTitle" value="TAX INVOICE" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg font-bold uppercase text-blue-900" placeholder="e.g. TAX INVOICE, ESTIMATE">
                         </div>
                         <div>
-                            <label class="block text-slate-600 font-medium mb-1">Tagline / Subtitle</label>
-                            <input type="text" id="bizTagline" value="Digital Hardware & Retail" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg">
+                            <label class="block text-slate-600 font-medium mb-1">Business Name</label>
+                            <input type="text" id="bizName" value="Apex Tech Store" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg">
                         </div>
                         <div>
                             <label class="block text-slate-600 font-medium mb-1">Phone Number</label>
@@ -248,8 +239,11 @@
                             <input type="text" id="bizAddress" value="Main Commercial Avenue, City Center" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg">
                         </div>
                         <div class="sm:col-span-2">
-                            <label class="block text-slate-600 font-medium mb-1">Company Logo Upload (Optional):</label>
-                            <input type="file" accept="image/*" onchange="uploadLogo(event)" class="w-full p-1.5 human-input rounded-lg text-[11px] text-slate-600">
+                            <div class="flex justify-between items-center mb-1">
+                                <label class="text-slate-600 font-medium">Company Logo (Optional / Removable):</label>
+                                <button onclick="removeCompanyLogo()" class="text-red-600 hover:text-red-700 text-[11px] font-semibold"><i class="fa-solid fa-trash-can mr-1"></i> Remove Logo</button>
+                            </div>
+                            <input type="file" id="logoFileInput" accept="image/*" onchange="uploadLogo(event)" class="w-full p-1.5 human-input rounded-lg text-[11px] text-slate-600">
                         </div>
                         <div>
                             <label class="block text-slate-600 font-medium mb-1">Customer Name</label>
@@ -287,8 +281,8 @@
                     <div id="itemsEditorList" class="space-y-2"></div>
 
                     <div id="singlePriceBox" class="hidden space-y-2 pt-2 border-t border-slate-200">
-                        <textarea id="singleDesc" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg text-xs" rows="3" placeholder="Enter complete service or project description..."></textarea>
-                        <input type="number" id="singlePriceVal" value="5000" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg text-xs font-bold text-blue-900" placeholder="Lump-sum Price Amount">
+                        <textarea id="singleDesc" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg text-xs" rows="3" placeholder="Enter complete service description..."></textarea>
+                        <input type="number" id="singlePriceVal" value="5000" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg text-xs font-bold text-blue-900" placeholder="Lump-sum Amount">
                     </div>
 
                     <div class="pt-2 flex justify-between">
@@ -298,16 +292,16 @@
                 </div>
             </div>
 
-            <!-- WIZARD STEP 3: FINANCIALS & OPTIONAL FIELDS TOGGLES -->
+            <!-- WIZARD STEP 3: FINANCIALS & USER OPTIONAL TOGGLES -->
             <div id="wizStep3" class="wizard-pane space-y-4 hidden">
                 <div class="human-panel p-4 sm:p-5 rounded-2xl space-y-3">
                     <h2 class="text-xs font-bold text-slate-700 uppercase tracking-wider font-tech flex items-center gap-2 border-b border-slate-100 pb-2">
-                        <i class="fa-solid fa-calculator text-blue-900"></i> Step 3: Optional Financial Rows & Taxes
+                        <i class="fa-solid fa-calculator text-blue-900"></i> Step 3: Financials & User Optional Toggles
                     </h2>
                     
                     <div class="bg-blue-50 p-3 rounded-xl border border-blue-100 text-xs text-slate-700 mb-2">
-                        <span class="font-bold block text-blue-900 mb-1">Optional Financial Display Toggles:</span>
-                        <div class="grid grid-cols-2 gap-2">
+                        <span class="font-bold block text-blue-900 mb-1">User Optional Display Toggles (What to show on Bill):</span>
+                        <div class="grid grid-cols-2 gap-2" id="userTogglesContainer">
                             <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="tglSubtotal" checked onchange="updateDocument()"> Show Subtotal</label>
                             <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="tglTaxRow" checked onchange="updateDocument()"> Show Tax Row</label>
                             <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" id="tglDiscountRow" checked onchange="updateDocument()"> Show Discount</label>
@@ -369,12 +363,12 @@
                     </div>
                     <div class="pt-2 flex justify-between">
                         <button onclick="setWizardStep(2)" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-lg text-xs font-semibold"><i class="fa-solid fa-arrow-left mr-1"></i> Back</button>
-                        <button onclick="setWizardStep(4)" class="bg-blue-900 hover:bg-blue-950 text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-sm">Next: Sign & Options <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                        <button onclick="setWizardStep(4)" class="bg-blue-900 hover:bg-blue-950 text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-sm">Next: Custom <i class="fa-solid fa-arrow-right ml-1"></i></button>
                     </div>
                 </div>
             </div>
 
-            <!-- WIZARD STEP 4: SIGNATURE, STAMPS & TOGGLES -->
+            <!-- WIZARD STEP 4: SIGNATURE, STAMPS & VISUAL TOGGLES -->
             <div id="wizStep4" class="wizard-pane space-y-4 hidden">
                 <div class="human-panel p-4 sm:p-5 rounded-2xl space-y-4">
                     <h2 class="text-xs font-bold text-slate-700 uppercase tracking-wider font-tech flex items-center gap-2 border-b border-slate-100 pb-2">
@@ -406,7 +400,7 @@
 
                         <div class="pt-2 border-t border-slate-100">
                             <span class="font-semibold text-slate-700 block mb-1">Visual Element Toggles:</span>
-                            <div class="grid grid-cols-2 gap-2 text-slate-600">
+                            <div class="grid grid-cols-2 gap-2 text-slate-600" id="visualTogglesContainer">
                                 <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglLogo" checked onchange="updateDocument()"> Business Header</label>
                                 <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglBarcode" checked onchange="updateDocument()"> Barcode</label>
                                 <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="tglQr" checked onchange="updateDocument()"> Payment QR Code</label>
@@ -444,7 +438,7 @@
                 <!-- Document Header -->
                 <div id="docHeaderBox" class="flex justify-between items-start pb-4 mb-4 border-b-2 border-slate-800 gap-2">
                     <div class="flex items-start gap-3">
-                        <img id="companyLogoPreview" class="w-14 h-14 object-contain rounded-lg border border-slate-200 hidden" alt="Logo">
+                        <img id="companyLogoPreview" class="w-14 h-14 object-contain rounded-lg border border-slate-200" src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=120&h=120&fit=crop" alt="Logo">
                         <div>
                             <h2 id="docBizName" class="text-lg sm:text-xl font-bold uppercase text-blue-900">Apex Tech Store</h2>
                             <p id="docBizTagline" class="text-[11px] text-slate-600">Digital Hardware & Retail</p>
@@ -537,81 +531,54 @@
 
     </main>
 
-    <!-- MULTI-LANGUAGE INTERACTIVE USER GUIDE MODAL -->
-    <div id="guideModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
-            <div class="p-4 bg-slate-900 text-white flex justify-between items-center">
-                <h3 class="font-bold text-sm font-tech"><i class="fa-solid fa-book-open text-emerald-400 mr-2"></i> BillMaker Pro Studio - User Manual & Guide</h3>
-                <button onclick="closeGuideModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
-            </div>
-            <div class="p-4 border-b border-slate-200 bg-slate-50 flex items-center gap-3 text-xs">
-                <span class="font-semibold text-slate-700">Select Guide Language:</span>
-                <select id="guideLangSelect" onchange="changeGuideLanguage(this.value)" class="p-2 human-input rounded-lg font-bold text-blue-900">
-                    <option value="en" selected>English</option>
-                    <option value="ur">Urdu (اردو)</option>
-                    <option value="ar">Arabic (العربية)</option>
-                    <option value="hi">Hindi (हिंदी)</option>
-                </select>
-            </div>
-            <div class="p-5 overflow-y-auto space-y-4 text-xs text-slate-700" id="guideContentBox">
-                <!-- Content injected dynamically via JavaScript -->
-            </div>
-            
-            <!-- Legal Terms & Liability Disclaimer Block -->
-            <div class="bg-slate-100 p-3.5 border-t border-slate-200 text-[10px] text-slate-500">
-                <span class="font-bold block text-slate-700 uppercase mb-1">Legal Notice & Website Owner Protection Disclaimer:</span>
-                This application is a local browser tool for creating receipts and invoices. The web platform owner and developer hold zero liability for user-generated contents, financial inaccuracies, tax claims, or legal disputes. Users are strictly responsible for complying with local billing and tax laws.
-            </div>
-
-            <div class="p-3 bg-slate-50 border-t border-slate-200 flex justify-end">
-                <button onclick="closeGuideModal()" class="bg-slate-800 text-white px-4 py-2 rounded-lg text-xs font-semibold">Close Guide</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- POWERFUL ADMIN SETTINGS CONTROL PANEL MODAL -->
+    <!-- MASTER ADMIN PANEL MODAL (FULL GLOBAL CONTROL) -->
     <div id="adminModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl overflow-hidden">
+        <div class="bg-white rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden">
             <div class="p-4 bg-slate-900 text-white flex justify-between items-center">
-                <h3 class="font-bold text-sm font-tech"><i class="fa-solid fa-sliders text-blue-400 mr-2"></i> Master Admin Controls Panel</h3>
+                <h3 class="font-bold text-sm font-tech"><i class="fa-solid fa-sliders text-blue-400 mr-2"></i> Master Admin Control Panel</h3>
                 <button onclick="closeAdminModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
             
-            <!-- Admin Security Login Passkey Screen -->
+            <!-- Admin Login Passkey Screen -->
             <div id="adminLoginScreen" class="p-6 space-y-4 text-xs">
-                <p class="text-slate-600">Enter Admin Security Passkey to access master feature controls:</p>
+                <p class="text-slate-600">Enter Admin Passkey to access global website features control:</p>
                 <div>
                     <input type="password" id="adminPasskeyInput" class="w-full p-2.5 human-input rounded-lg" placeholder="Enter Admin Passkey (Default: admin123)">
                     <span id="adminErrorMsg" class="text-red-600 font-semibold block mt-1 hidden">Invalid Credentials</span>
                 </div>
-                <button onclick="verifyAdminPasskey()" class="w-full bg-blue-900 hover:bg-blue-950 text-white py-2.5 rounded-lg font-bold shadow-sm">Login to Admin Controls</button>
+                <button onclick="verifyAdminPasskey()" class="w-full bg-blue-900 hover:bg-blue-950 text-white py-2.5 rounded-lg font-bold shadow-sm">Login to Master Controls</button>
             </div>
 
             <!-- Admin Master Toggles Screen (Protected) -->
-            <div id="adminControlsScreen" class="p-6 space-y-4 text-xs hidden">
+            <div id="adminControlsScreen" class="p-6 space-y-4 text-xs hidden max-h-[70vh] overflow-y-auto">
                 <div class="bg-blue-50 p-3 rounded-xl border border-blue-100 text-blue-900 font-semibold">
-                    Master Feature Management (Enable / Disable System Modules)
+                    Global Feature Permissions (Website Owner Control)
                 </div>
+                <p class="text-slate-500">Aap yahan se jo feature disable karenge, woh poori website se hide ho jayega aur user ko bhi access nahi milega.</p>
                 <div class="space-y-2.5 text-slate-700">
                     <label class="flex justify-between items-center p-2 rounded bg-slate-50 border border-slate-200">
-                        <span>Allow Financial Breakdown Block</span>
-                        <input type="checkbox" id="adminTglFinancial" checked onchange="toggleAdminFeature('financial')">
+                        <span>Enable Financial Breakdown Summary</span>
+                        <input type="checkbox" id="adminMasterFinancial" checked onchange="saveAdminMasterSettings()">
                     </label>
                     <label class="flex justify-between items-center p-2 rounded bg-slate-50 border border-slate-200">
-                        <span>Allow Digital Signature Module</span>
-                        <input type="checkbox" id="adminTglSignature" checked onchange="toggleAdminFeature('signature')">
+                        <span>Enable Digital Signature Module</span>
+                        <input type="checkbox" id="adminMasterSignature" checked onchange="saveAdminMasterSettings()">
                     </label>
                     <label class="flex justify-between items-center p-2 rounded bg-slate-50 border border-slate-200">
-                        <span>Allow Rubber Stamps Module</span>
-                        <input type="checkbox" id="adminTglStamps" checked onchange="toggleAdminFeature('stamps')">
+                        <span>Enable Rubber Stamp Feature</span>
+                        <input type="checkbox" id="adminMasterStamps" checked onchange="saveAdminMasterSettings()">
                     </label>
                     <label class="flex justify-between items-center p-2 rounded bg-slate-50 border border-slate-200">
-                        <span>Allow Payment QR & Barcode</span>
-                        <input type="checkbox" id="adminTglCodes" checked onchange="toggleAdminFeature('codes')">
+                        <span>Enable Payment QR & Barcode</span>
+                        <input type="checkbox" id="adminMasterCodes" checked onchange="saveAdminMasterSettings()">
+                    </label>
+                    <label class="flex justify-between items-center p-2 rounded bg-slate-50 border border-slate-200">
+                        <span>Enable Logo Upload & Customization</span>
+                        <input type="checkbox" id="adminMasterLogo" checked onchange="saveAdminMasterSettings()">
                     </label>
                 </div>
                 <div class="pt-2">
-                    <button onclick="closeAdminModal()" class="w-full bg-slate-800 text-white py-2 rounded-lg font-semibold">Save & Exit Admin Panel</button>
+                    <button onclick="closeAdminModal()" class="w-full bg-slate-800 text-white py-2.5 rounded-lg font-semibold">Save & Apply Changes</button>
                 </div>
             </div>
         </div>
@@ -619,7 +586,7 @@
 
     <!-- Footer -->
     <footer class="no-print bg-slate-900 text-slate-400 text-xs py-6 border-t border-slate-800 mt-auto text-center">
-        <p>&copy; 2026 BillMaker Pro Studio. All rights reserved. | <a href="javascript:void(0)" onclick="openGuideModal()" class="underline hover:text-white">User Manual, Privacy & Legal Terms</a></p>
+        <p>&copy; 2026 BillMaker Pro Studio. All rights reserved. | Professional Billing Suite</p>
     </footer>
 
     <!-- JavaScript Application Engine -->
@@ -631,37 +598,8 @@
 
         let currentMode = 'INVOICE';
         let customSignatureDataUrl = '';
-        let companyLogoDataUrl = '';
+        let companyLogoDataUrl = 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=120&h=120&fit=crop';
         let loginAttempts = 0;
-
-        const guideTexts = {
-            en: `
-                <h4 class="font-bold text-sm text-slate-900">English User Guide & Feature Index</h4>
-                <p><strong>1. Step-by-Step Wizard:</strong> Use tabs 1 to 4 to enter business info, line items, finance values, and signatures.</p>
-                <p><strong>2. Optional Financial Breakdown Toggles:</strong> In Step 3, you can individually turn off Subtotal, Tax %, Discounts, Old Balances, or Paid amounts as requested.</p>
-                <p><strong>3. Master Admin Panel:</strong> Click "Admin Settings" to lock/unlock key system modules. Default passkey is <code>admin123</code>.</p>
-                <p><strong>4. Direct WhatsApp Sharing:</strong> Click WhatsApp to generate an instant formatted bill summary directly to the client's phone.</p>
-            `,
-            ur: `
-                <h4 class="font-bold text-sm text-slate-900">اردو صارف کی رہنمائی (Urdu Guide)</h4>
-                <p><strong>1۔ ویزارڈ کے مراحل:</strong> 1 سے 4 تک کے بٹنز کے ذریعے کاروباری تفصیلات، اشیاء، فائنانس اور دستخط درج کریں۔</p>
-                <p><strong>2۔ کسٹم مالیاتی آپشنز:</strong> مرحلہ 3 میں آپ اپنی مرضی سے سب ٹوٹل، ٹیکس، ڈسکاؤنٹ، پرانا بقایا، اور رقم کی ادائیگی کے آپشنز آن/آف کر سکتے ہیں۔</p>
-                <p><strong>3۔ ایڈمن کنٹرول پینل:</strong> ویب سائٹ کی تمام صلاحیتوں کو ایڈمن پاس کی <code>admin123</code> کے ذریعے کنٹرول کریں۔</p>
-                <p><strong>4۔ واٹس ایپ شیئر:</strong> ایک کلک میں واٹس ایپ پر رسیپٹ کا مکمل خلاصہ بھیجیں۔</p>
-            `,
-            ar: `
-                <h4 class="font-bold text-sm text-slate-900">دليل المستخدم باللغة العربية (Arabic Guide)</h4>
-                <p><strong>1. خطوات المعالج:</strong> استخدم علامات التبويب من 1 إلى 4 لإدخال معلومات العمل والأسعار والتوقيع.</p>
-                <p><strong>2. التحكم في الفاتورة:</strong> يمكنك إخفاء أو إظهار المجموع الفرعي والخصومات والضرائب والرصيد المتبقي حسب الرغبة.</p>
-                <p><strong>3. لوحة تحكم المسؤول:</strong> انقر على إعدادات المسؤول لإدارة الميزات (كلمة المرور الافتراضية: <code>admin123</code>).</p>
-            `,
-            hi: `
-                <h4 class="font-bold text-sm text-slate-900">हिंदी उपयोगकर्ता निर्देश (Hindi Guide)</h4>
-                <p><strong>1. विज़ार्ड स्टेप्स:</strong> बिज़नेस विवरण, आइटम सूची, फ़ाइनेंस और हस्ताक्षर दर्ज करने के लिए स्टेप 1 से 4 का उपयोग करें।</p>
-                <p><strong>2. वित्तीय विकल्प:</strong> स्टेप 3 में सबटोटल, टैक्स, डिस्काउंट, और बकाया राशि की जानकारी को ऑन या ऑफ करें।</p>
-                <p><strong>3. एडमिन पैनल:</strong> मास्टर सेटिंग्स के लिए एडमिन पासकी <code>admin123</code> का उपयोग करें।</p>
-            `
-        };
 
         function escapeHtml(str) {
             if (!str) return '';
@@ -671,7 +609,6 @@
         window.addEventListener('DOMContentLoaded', () => {
             loadDraft();
             renderItemsEditor();
-            changeGuideLanguage('en');
             updateDocument();
         });
 
@@ -691,22 +628,13 @@
             }
         }
 
-        function openGuideModal() {
-            document.getElementById('guideModal').classList.remove('hidden');
-        }
-        function closeGuideModal() {
-            document.getElementById('guideModal').classList.add('hidden');
-        }
-        function changeGuideLanguage(lang) {
-            document.getElementById('guideContentBox').innerHTML = guideTexts[lang] || guideTexts['en'];
-        }
-
         function openAdminModal() {
             document.getElementById('adminModal').classList.remove('hidden');
         }
         function closeAdminModal() {
             document.getElementById('adminModal').classList.add('hidden');
         }
+
         function verifyAdminPasskey() {
             const pass = document.getElementById('adminPasskeyInput').value;
             const err = document.getElementById('adminErrorMsg');
@@ -726,34 +654,36 @@
             }
         }
 
-        function toggleAdminFeature(feat) {
-            if (feat === 'financial') {
-                const show = document.getElementById('adminTglFinancial').checked;
-                document.getElementById('docFinancialBlock').style.display = show ? 'flex' : 'none';
-            } else if (feat === 'signature') {
-                const show = document.getElementById('adminTglSignature').checked;
-                document.getElementById('signatureBox').style.display = show ? 'block' : 'none';
-            } else if (feat === 'stamps') {
-                const show = document.getElementById('adminTglStamps').checked;
-                document.getElementById('digitalRubberStamp').style.display = show ? 'flex' : 'none';
-            } else if (feat === 'codes') {
-                const show = document.getElementById('adminTglCodes').checked;
-                document.getElementById('qrBox').style.display = show ? 'flex' : 'none';
-                document.getElementById('barcodeBox').style.display = show ? 'flex' : 'none';
-            }
+        function saveAdminMasterSettings() {
+            const finAllowed = document.getElementById('adminMasterFinancial').checked;
+            const sigAllowed = document.getElementById('adminMasterSignature').checked;
+            const stampAllowed = document.getElementById('adminMasterStamps').checked;
+            const codesAllowed = document.getElementById('adminMasterCodes').checked;
+            const logoAllowed = document.getElementById('adminMasterLogo').checked;
+
+            document.getElementById('docFinancialBlock').style.display = finAllowed ? 'flex' : 'none';
+            document.getElementById('userTogglesContainer').parentElement.style.display = finAllowed ? 'block' : 'none';
+            
+            document.getElementById('signatureBox').style.display = sigAllowed ? 'block' : 'none';
+            document.getElementById('digitalRubberStamp').style.display = stampAllowed ? 'flex' : 'none';
+            document.getElementById('qrBox').style.display = codesAllowed ? 'flex' : 'none';
+            document.getElementById('barcodeBox').style.display = codesAllowed ? 'flex' : 'none';
+            
+            document.getElementById('logoFileInput').parentElement.style.display = logoAllowed ? 'block' : 'none';
         }
 
         function convertDocumentType() {
+            const customTitleInput = document.getElementById('customDocTitle');
             if (currentMode === 'INVOICE') {
                 currentMode = 'QUOTATION';
+                customTitleInput.value = 'QUOTATION / ESTIMATE';
                 document.getElementById('convertBtn').innerHTML = '<i class="fa-solid fa-right-left"></i> Invoice';
-                document.getElementById('docBadgeTitle').innerText = 'QUOTATION / ESTIMATE';
                 document.getElementById('docTypeBadge').innerText = 'QUOTATION';
                 document.getElementById('watermarkStamp').innerText = 'QUOTATION';
             } else {
                 currentMode = 'INVOICE';
+                customTitleInput.value = 'TAX INVOICE';
                 document.getElementById('convertBtn').innerHTML = '<i class="fa-solid fa-right-left"></i> Quotation';
-                document.getElementById('docBadgeTitle').innerText = 'TAX INVOICE';
                 document.getElementById('docTypeBadge').innerText = 'TAX INVOICE';
                 document.getElementById('watermarkStamp').innerText = 'TAX INVOICE';
             }
@@ -766,8 +696,9 @@
             const phone = document.getElementById('custPhone').value.trim();
             const grandTotal = document.getElementById('docGrandTotal').innerText;
             const curr = document.getElementById('currencySymbol').value || 'PKR';
+            const docTitle = document.getElementById('customDocTitle').value || 'INVOICE';
 
-            let msg = `*${currentMode === 'INVOICE' ? 'TAX INVOICE' : 'QUOTATION'} - ${biz}*\n\n`;
+            let msg = `*${docTitle} - ${biz}*\n\n`;
             msg += `Hello *${cust}*,\nHere is your bill summary:\n`;
             items.forEach((item, idx) => {
                 msg += `${idx+1}. ${item.name} (x${item.qty}) - ${curr} ${item.qty * item.price}\n`;
@@ -840,6 +771,14 @@
             }
         }
 
+        function removeCompanyLogo() {
+            companyLogoDataUrl = '';
+            const img = document.getElementById('companyLogoPreview');
+            img.src = '';
+            img.classList.add('hidden');
+            document.getElementById('logoFileInput').value = '';
+        }
+
         function updateSignatureInkColor() {
             const img = document.getElementById('sigImagePreview');
             const inkColor = document.getElementById('sigInkColor').value;
@@ -870,19 +809,9 @@
         function saveDraft() {
             const data = {
                 bizName: document.getElementById('bizName').value,
-                bizTagline: document.getElementById('bizTagline').value,
-                bizPhone: document.getElementById('bizPhone').value,
-                bizNtn: document.getElementById('bizNtn').value,
-                bizAddress: document.getElementById('bizAddress').value,
+                customDocTitle: document.getElementById('customDocTitle').value,
                 custName: document.getElementById('custName').value,
                 custPhone: document.getElementById('custPhone').value,
-                currencySymbol: document.getElementById('currencySymbol').value,
-                taxPercent: document.getElementById('taxPercent').value,
-                discountMode: document.getElementById('discountMode').value,
-                discountVal: document.getElementById('discountVal').value,
-                previousBalance: document.getElementById('previousBalance').value,
-                amountPaid: document.getElementById('amountPaid').value,
-                paymentStatus: document.getElementById('paymentStatus').value,
                 items: items
             };
             localStorage.setItem('billmaker_wizard_draft', JSON.stringify(data));
@@ -895,19 +824,9 @@
             try {
                 const data = JSON.parse(saved);
                 if (data.bizName) document.getElementById('bizName').value = data.bizName;
-                if (data.bizTagline) document.getElementById('bizTagline').value = data.bizTagline;
-                if (data.bizPhone) document.getElementById('bizPhone').value = data.bizPhone;
-                if (data.bizNtn) document.getElementById('bizNtn').value = data.bizNtn;
-                if (data.bizAddress) document.getElementById('bizAddress').value = data.bizAddress;
+                if (data.customDocTitle) document.getElementById('customDocTitle').value = data.customDocTitle;
                 if (data.custName) document.getElementById('custName').value = data.custName;
                 if (data.custPhone) document.getElementById('custPhone').value = data.custPhone;
-                if (data.currencySymbol) document.getElementById('currencySymbol').value = data.currencySymbol;
-                if (data.taxPercent) document.getElementById('taxPercent').value = data.taxPercent;
-                if (data.discountMode) document.getElementById('discountMode').value = data.discountMode;
-                if (data.discountVal) document.getElementById('discountVal').value = data.discountVal;
-                if (data.previousBalance) document.getElementById('previousBalance').value = data.previousBalance;
-                if (data.amountPaid) document.getElementById('amountPaid').value = data.amountPaid;
-                if (data.paymentStatus) document.getElementById('paymentStatus').value = data.paymentStatus;
                 if (data.items) items = data.items;
             } catch(e) {}
         }
@@ -917,6 +836,7 @@
 
         function updateDocument() {
             const bizName = document.getElementById('bizName').value;
+            const customTitle = document.getElementById('customDocTitle').value || 'TAX INVOICE';
             const bizTagline = document.getElementById('bizTagline').value;
             const bizPhone = document.getElementById('bizPhone').value;
             const bizNtn = document.getElementById('bizNtn').value;
@@ -933,6 +853,20 @@
             document.getElementById('docCustPhone').innerText = `Ph: ${custPhone}`;
             document.getElementById('stampBiz').innerText = bizName;
             document.getElementById('docStatusBadge').innerText = document.getElementById('paymentStatus').value;
+
+            // Update custom document title everywhere
+            document.getElementById('docBadgeTitle').innerText = customTitle;
+            document.getElementById('docTypeBadge').innerText = customTitle;
+            document.getElementById('watermarkStamp').innerText = customTitle;
+
+            // Logo visibility check
+            const logoImg = document.getElementById('companyLogoPreview');
+            if (companyLogoDataUrl) {
+                logoImg.src = companyLogoDataUrl;
+                logoImg.classList.remove('hidden');
+            } else {
+                logoImg.classList.add('hidden');
+            }
 
             const stampStyle = document.getElementById('stampDesignStyle').value;
             document.getElementById('digitalRubberStamp').className = stampStyle === 'style-2' ? 'stamp-style-2' : 'stamp-style-1';
