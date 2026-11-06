@@ -835,14 +835,14 @@
         function toggleBannerDisplay() { document.getElementById('promoBannerBox').style.display = 'none'; }
 
         function updateDocument() {
-            const bizName = document.getElementById('bizName').value;
-            const customTitle = document.getElementById('customDocTitle').value || 'TAX INVOICE';
-            const bizTagline = document.getElementById('bizTagline').value;
-            const bizPhone = document.getElementById('bizPhone').value;
-            const bizNtn = document.getElementById('bizNtn').value;
-            const bizAddress = document.getElementById('bizAddress').value;
-            const custName = document.getElementById('custName').value;
-            const custPhone = document.getElementById('custPhone').value;
+            const bizName = document.getElementById('bizName').value?;
+            const customTitle = document.getElementById('customDocTitle').value? || 'TAX INVOICE';
+            const bizTagline = document.getElementById('bizTagline').value?;
+            const bizPhone = document.getElementById('bizPhone').value?;
+            const bizNtn = document.getElementById('bizNtn').value?;
+            const bizAddress = document.getElementById('bizAddress').value?;
+            const custName = document.getElementById('custName').value?;
+            const custPhone = document.getElementById('custPhone').value?;
             const curr = document.getElementById('currencySymbol').value || 'PKR';
             
             document.getElementById('docBizName').innerText = bizName;
