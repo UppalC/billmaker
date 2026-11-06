@@ -225,6 +225,7 @@
                         <div>
                             <label class="block text-slate-600 font-medium mb-1">Business Name</label>
                             <input type="text" id="bizName" value="Apex Tech Store" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg">
+<input type="text" id="bizTagline" value="Hardware & Digital Solutions" placeholder="Business Tagline" oninput="updateDocument()" class="w-full p-2.5 human-input rounded-lg mt-2">
                         </div>
                         <div>
                             <label class="block text-slate-600 font-medium mb-1">Phone Number</label>
@@ -837,7 +838,7 @@
         function updateDocument() {
             const bizName = document.getElementById('bizName').value;
             const customTitle = document.getElementById('customDocTitle')?.value || 'TAX INVOICE';
-            const bizTagline = document.getElementById('bizTagline').value;
+            const bizTagline = document.getElementById('bizTagline')?.value || '';
             const bizPhone = document.getElementById('bizPhone').value;
             const bizNtn = document.getElementById('bizNtn').value;
             const bizAddress = document.getElementById('bizAddress').value;
